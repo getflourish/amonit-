@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mouseApp">
+<head>
+	<title></title>
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
+	<script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
+	<script type="text/javascript" src="js/mouse.js"></script>
+</script>
+</head>
+<body ng-controller="MouseAppController">
+<div ng-mousemove="update($event)" style="width:400px; height: 100px; background: #000"></div>
+<div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000"></div>
+<input type="text" ng-model="email" placeholder="Email">
+<input type="password" ng-model="password" placeholder="password">
+<input type="text" ng-model="firstname" placeholder="first name">
+<input type="text" ng-model="lastname" placeholder="last name">
+<button ng-click="createUser(email, password, firstname, lastname)">Sign up</button>
+
+<input type="text" ng-model="email" placeholder="Email">
+<input type="password" ng-model="password" placeholder="password">
+<button ng-click="login(email, password)">Log in</button>
+<button ng-click="logout()">Logout</button>
+
+<span ng-show="user">{{me.first}} {{me.last}}</span>
+<h4>Online</h4>
+<ul>
+	<li ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}</li>
+</ul>
+<ul>
+	<li ng-repeat="cursor in cursors">{{cursor}}</li>
+</ul>
+</body>
+</html>
