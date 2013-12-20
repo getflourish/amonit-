@@ -1,7 +1,7 @@
-var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'focusModule', 'stretchModule', 'imagedropModule', 'ui.sortable',
+var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'stretchModule', 'imagedropModule', 'ui.sortable',
 ]);
 
-feedbackApp.controller("FeedbackController", function($scope, $rootScope, uploadService, $http, $timeout) {
+feedbackApp.controller("FeedbackController", function($firebase, $scope, $rootScope, uploadService, $http, $timeout) {
 	
 	/**
 	 * Scope variables
@@ -57,7 +57,6 @@ feedbackApp.controller("FeedbackController", function($scope, $rootScope, upload
 	
 	// var ref = new Firebase('https://feedbacktool.firebaseio.com');
 	// angularFire(ref, $scope, "images");
-
 
 	/**
 	 * Keyboard Shortcuts
@@ -328,6 +327,11 @@ feedbackApp.controller("FeedbackController", function($scope, $rootScope, upload
 	    $scope.uploadedFile = null;
 	};
 
+	$scope.init = function (id) {
+		$scope.setId(id);
+		$scope.setupFirebase();
+	}
+
 	/**
 	 * Function: load
 	 *
@@ -559,6 +563,26 @@ feedbackApp.controller("FeedbackController", function($scope, $rootScope, upload
 		$scope.currentIndex = index;
 		$scope.save();
 	};
+
+	/**
+	 * Firebase sync
+	 */
+
+	 $scope.setupFirebase = function () {
+	 	console.log("fire")
+	 	var con = new Firebase('https://feedbacktool.firebaseio.com/currentIndex');
+		$scope.indexFirebase = $firebase(con);
+		$scope.indexFirebase.$bind($scope, "currentIndex");
+
+		$scope.indexFirebase.$on("change", function() {
+			$scope.setImage($scope.indexFirebase.$value);
+		});
+	 }
+
+	/**
+	 * Initiates upload via factory
+	 */
+
 
 	$scope.uploadFile = function (file, order) {
 		uploadService.send(file, order, $scope.path);

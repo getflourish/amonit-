@@ -33,7 +33,7 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body ng-controller="FeedbackController" ng-init="setId(<?php echo $id; ?>)">
+<body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)">
 
 	<!-- header -->
 
