@@ -12,6 +12,9 @@
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/keymaster.min.js"></script>
 	<script type="text/javascript" src="js/angular.js"></script>
+	
+	<script type="text/javascript" src="js/processing.js"></script>
+	<script type="text/javascript" src="js/mouse.pde"></script>
 
 	<script type="text/javascript" src="js/modules/center.js"></script>
 	<script type="text/javascript" src="js/modules/contenteditable.js"></script>
@@ -35,6 +38,9 @@
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)">
 
+	<div id="mouseTracker"><div ng-hide="cursor.id==me.id" ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
+	
+
 	<!-- header -->
 
 	<header>
@@ -54,7 +60,7 @@
 					<li ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}</li>
 				</ul>
 
-				<form ng-hide="user" class="form-inline">
+				<form ng-hide="me" class="form-inline">
 					<input class="form-control form-group" type="text" ng-model="newemail" placeholder="Email">
 					<input class="form-control form-group" type="password" ng-model="newpassword" placeholder="Password">
 					<input class="form-control form-group" type="text" ng-model="firstname" placeholder="First name">
@@ -62,12 +68,12 @@
 					<button class="btn btn-primary btn-sm" ng-click="createUser(newemail, newpassword, firstname, lastname)">Sign up</button>
 				</form>
 				
-				<form ng-hide="user" class="form-inline">
+				<form ng-hide="me" class="form-inline">
 					<input class="form-control" type="text" ng-model="email" placeholder="Email">
 					<input class="form-control" type="password" ng-model="password" placeholder="Password">
 					<button class="btn btn-success btn-sm" ng-click="login(email, password)">Log in</button>
 				</form>
-				<button ng-show="user" class="btn btn-danger  btn-sm" ng-click="logout()">Logout</button>
+				<button ng-show="me" class="btn btn-danger  btn-sm" ng-click="logout()">Logout</button>
 			</div>
 		</div>
 
@@ -130,7 +136,5 @@
 	<!-- // end of wrap -->
 
 	<input type="file" id="filepicker" multiple uploader>
-
-	<div id="mouseTracker" ng-controller="AuthController"><div ng-hide="cursor.id==me.id" ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000"></div></div>
 </body>
 </html>

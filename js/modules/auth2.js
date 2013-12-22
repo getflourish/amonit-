@@ -1,11 +1,15 @@
-angular.module('authModule', ['firebase']).controller('AuthController', ['$scope', '$firebase', '$rootScope',
-	function($scope, $firebase, $rootScope) {
+angular.module('authModule', ['firebase', 'cursorModule']).controller('AuthController', ['$scope', '$firebase', 'UserData',
+	function($scope, $firebase, UserData) {
 
 		/**
 		*	Variables
 		*/
 
-		$scope.users = null;
+		$("body").on("mousemove", function(event) {
+			$scope.update(event);
+		})
+
+		$scope.users = userDataService;
 
 		// reference to all available cursors
 		$scope.cursors = [];
@@ -51,7 +55,6 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 				// successfully logged in
 
 				$scope.handleLogin(user);
-				$rootScope.$broadcast("loggedIn", user);
 
 			} else {
 
@@ -175,5 +178,36 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 			auth.logout();
 			$scope.me = null;
 		};
-	}
-]);
+		
+		/**
+		*	Function: update
+		*/
+
+		$scope.update = function(event) {
+			if ($scope.cursorRef) $scope.cursorRef.set({"x":event.offsetX, "y":event.clientY, "id":$scope.me.id});
+		};
+	}]);
+
+/**
+*	todo: module should be directive only
+*
+*	Updates the position of all cursors when a change to the cursors array is detected.
+*/
+
+angular.module('cursorModule', []).
+directive('cursor', ['$document' , function($document) {
+	return {
+		link: function(scope, elm, attrs) {
+			scope.$watch('cursor', function () {
+
+				var startX = scope.cursor.x;
+				var startY = scope.cursor.y;
+
+				elm.css({
+					top:  startY + 'px',
+					left: startX + 'px'
+				});
+			});
+		}
+	};
+}]);

@@ -1,7 +1,8 @@
-var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'stretchModule', 'imagedropModule', 'ui.sortable',
+
+var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'imagedropModule', 'stretchModule',  'ui.sortable',
 ]);
 
-feedbackApp.controller("FeedbackController", function($firebase, $scope, $rootScope, uploadService, $http, $timeout) {
+feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, $rootScope, $timeout, uploadService ) {
 	
 	/**
 	 * Scope variables
@@ -87,6 +88,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $scope, $rootSc
 
 	key('space', function(){ 
 		// toggle all tooltips
+
+		$scope.showingAll = !$scope.showingAll;
 		$scope.showAllAnnotations();
 		return false;
 	});
@@ -116,6 +119,23 @@ feedbackApp.controller("FeedbackController", function($firebase, $scope, $rootSc
 			$scope.addImage(file, $scope.images.length);
 		}
 	});
+
+	/**
+	 * Update mouse cursor
+	 */
+
+	$("body").on("mousemove", function(event) {
+		$scope.updateCursor(event);
+	})
+
+	$rootScope.$on("loggedIn", function (event, user) {
+		$scope.user = user;
+
+		$scope.cursors = $firebase(new Firebase("https://feedbacktool.firebaseio.com/cursors"));
+		
+		$scope.cursorRef = new Firebase("https://feedbacktool.firebaseio.com/cursors/" + user.id);
+		$scope.mycursor = $firebase($scope.cursorRef);
+	})
 
 	/**
 	 * Tooltips
@@ -569,14 +589,28 @@ feedbackApp.controller("FeedbackController", function($firebase, $scope, $rootSc
 	 */
 
 	 $scope.setupFirebase = function () {
-	 	console.log("fire")
+
+	 	// manage index
 	 	var con = new Firebase('https://feedbacktool.firebaseio.com/currentIndex');
 		$scope.indexFirebase = $firebase(con);
 		$scope.indexFirebase.$bind($scope, "currentIndex");
 
+		// set image after change
 		$scope.indexFirebase.$on("change", function() {
 			$scope.setImage($scope.indexFirebase.$value);
 		});
+
+		// get connected id
+		var connectedRef = new Firebase('https://feedbacktool.firebaseio.com/.info/connected');
+		console.log($firebase(connectedRef));
+	 }
+
+	 /** 
+	  * Function: updateCursor
+	  */
+
+	 $scope.updateCursor = function (event) {
+		if ($scope.cursorRef) $scope.cursorRef.set({"x":event.clientX, "y":event.clientY, "id":$scope.user.id});
 	 }
 
 	/**
@@ -951,3 +985,27 @@ feedbackApp.filter('typeFilter', function() {
       return result;
     }
 });
+
+/**
+*	Directive Cursor
+*
+*	Updates the position of all cursors when a change to the cursors array is detected.
+*/
+
+
+feedbackApp.directive('cursor', ['$document' , function($document) {
+	return {
+		link: function(scope, elm, attrs) {
+			scope.$watch('cursor', function () {
+
+				var startX = scope.cursor.x;
+				var startY = scope.cursor.y;
+
+				elm.css({
+					top:  startY + 'px',
+					left: startX + 'px'
+				});
+			});
+		}
+	};
+}]);

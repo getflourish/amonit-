@@ -204,7 +204,7 @@ li {
 
 .tooltip {
      position: absolute;
-     z-index: 10;
+     z-index: 100;
      min-width: 150px;
      background: #fff;
      padding: 10px;
@@ -253,7 +253,7 @@ li {
 .ui-draggable { cursor: move; }
 
 .open {
-	opacity: 1;
+	opacity: 1 !important;
 	visibility: visible;
 	margin-left: 13px;
 }
@@ -635,4 +635,26 @@ input[type="checkbox"]:checked + label {
 	width: 1000px;
 	height: 1000px;
 	z-index: 5;
+	pointer-events: none;
+}
+
+
+.click-to-edit button {
+	width: 100%;
+	display: block;
+	float: left;
+	margin-top: 5px;
+	border: 0;
+	outline: 0;
+	height: 30px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 13px;
+	border-radius: 3px;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+.click-to-edit button:hover {
+	background: #6671C7;
+	cursor: hand;
 }
