@@ -13,7 +13,11 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.addOrder = "before";
 
 	// comment types
-	$scope.commentTypes = [{"type":"idea", "label":"I like it, but…", "typeLabel":"Idea", "show": true, "class":"green"}, {"type":"question", "label":"What’s that?", "typeLabel":"Question", "show": true, "class":"purple"}, {"type":"onit", "label":"Right on!", "typeLabel":"Right on", "show": true, "class":"blue"}];
+	$scope.commentTypes = [
+		{"type":"idea", "label":"I like it, but…", "typeLabel":"Idea", "show": true, "class":"green"}, 
+		{"type":"question", "label":"What’s that?", "typeLabel":"Question", "show": true, "class":"purple"}, 
+		{"type":"onit", "label":"Right on!", "typeLabel":"Right on", "show": true, "class":"blue"}
+	];
 
 	// reference to the currently selected image object
 	$scope.current;
@@ -39,8 +43,14 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// jQuery reference to the main image
 	$scope.imageElement = $("#main img");
 
+	// Fullscreen state
+	$scope.isFullscreen = false;
+
 	// jQuery reference to the image sidebar
 	$scope.overview = $("#left");
+
+	// flag that represents the state of the overview
+	$scope.overviewShowing = true;
 
 	// onit path to images
 	$scope.path;
@@ -51,13 +61,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// flag that indicates whether all tooltips are open
 	$scope.showingAll = false;
 
-
-	/**
-	 * Firebase / Angular Fire
-	 * ///////////////////////////////////////////////////////////////// */
-	
-	// var ref = new Firebase('https://feedbacktool.firebaseio.com');
-	// angularFire(ref, $scope, "images");
 
 	/**
 	 * Keyboard Shortcuts
@@ -88,9 +91,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	key('space', function(){ 
 		// toggle all tooltips
-
 		$scope.showingAll = !$scope.showingAll;
-		$scope.showAllAnnotations();
 		return false;
 	});
 
@@ -152,7 +153,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$rootScope.$on('tooltip:blur', function (event, index) {
 		if ($scope.selectedAnnotation.comment === "") {
-			console.log("blur remove")
 			$scope.removeAnnotation(index);
 		}
 	});
@@ -222,9 +222,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		$scope.setImage(index);
 
 		// use timeout before scrolling to the recently added image
-		$timeout(function () {
-			$("#left").animate({scrollTop: $(".selected").prop("offsetTop")}, "slow");
-		})
+
+		// todo: remove if scrolling works with directive 
+
+		// $timeout(function () {
+		// 	$("#left").animate({scrollTop: $(".selected").prop("offsetTop")}, "slow");
+		// })
 	}
 
 	/**
@@ -272,6 +275,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * only move once after their creation.
 	 */
 
+	 // todo: make use of ng-class
+
 	$scope.disableAnnotationTransition = function () {
 		$timeout(function() {
 			$(".animate").each(function() {
@@ -288,20 +293,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.goFullscreen = function () {
 
-		// hide header, right sidebar
-
-		$("header").toggle();
-		$("#right").toggle();
-
-		// add classes that remove margins etc.
-
-		$("#main").toggleClass("fullscreen");
-		$("#wrap").toggleClass("fullscreen");
-		$("#imgwrapper").toggleClass("fullscreen");
-
-		// trigger resize calculations
-
-		onResize();
+		$scope.isFullscreen = true;
 	}
 
 	/**
@@ -311,9 +303,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.hideAllAnnotations = function () {
-		$(".tooltip").each(function () {
-			$(this).removeClass("open");
-		});
+		$scope.showingAll = true;
 	}
 
 	/**
@@ -323,7 +313,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.hideOverview = function () {
-		$scope.overview.addClass("slideOut");
+		$scope.overviewShowing = false;
 	}
 
 	/**
@@ -476,7 +466,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.removeImage = function (index) {
 		$scope.images.splice(index, 1);
-		if (index == $scope.images.length) index = index-1;
+		if (index == $scope.images.length) index = index - 1;
 		$scope.setImage(index);
 		$scope.save();
 	}
@@ -489,7 +479,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.save = function () {
 		
-		// check whether there is another empty annotation
+		// todo: check whether there is another empty annotation
 		// if so, remove it
 
 		$scope.data.images = $scope.images;
@@ -505,8 +495,11 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.scrollOverview = function () {
-	 	$("#left").stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
-	 	$scope.showOverview();
+
+		// todo: remove if scrollSelected works
+
+	 	// $("#left").stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
+	 	// $scope.overviewShowing = true;
 	}
 
 	/**
@@ -519,9 +512,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 		if($scope.selectedAnnotation == -1) {
 			
-			$(".tooltip").each(function () {
-				$(this).addClass("open");
-			})
+			$scope.showingAll = true;
 			
 		} else {
 			return;
@@ -529,11 +520,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	}
 
 	$scope.showOverview = function () {
-		$scope.overview.removeClass("slideOut");
-	}
-
-	$scope.showTooltip = function () {
-		$scope.find(".tooltip").addClass("open");
+		$scope.overviewShowing = true;
 	}
 	
 	/**
@@ -551,6 +538,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 				}
 			}
 			$scope.selectedAnnotation = index;
+
+			// todo: is this necessary? Should be enought to remove it from the selected one?
 			$timeout(function () {
 				$scope.disableAnnotationTransition();
 			});
@@ -589,6 +578,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	 $scope.setupFirebase = function () {
+
+	 	// todo: add $scope.images to firebase :)
 
 	 	// manage index
 	 	var con = new Firebase('https://feedbacktool.firebaseio.com/currentIndex');
@@ -1005,6 +996,56 @@ feedbackApp.directive('cursor', ['$document' , function($document) {
 					top:  startY + 'px',
 					left: startX + 'px'
 				});
+			});
+		}
+	};
+}]);
+
+/**
+*	Directive selectedScroll
+*
+*	Will scroll the element to the top position of the selected element in the sidebar
+*/
+
+
+feedbackApp.directive('selectedScroll', ['$document' , function($document) {
+	return {
+		link: function(scope, elm, attrs) {
+			scope.$watch('selected', function () {
+				elm.stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
+	 			$scope.overviewShowing = true;
+			});
+		}
+	};
+}]);
+
+/**
+*	Directive fullscreen
+*
+*	Will scroll the element to the top position of the selected element in the sidebar
+*/
+
+
+feedbackApp.directive('fullscreen', ['$document' , function($document) {
+	return {
+		link: function(scope, elm, attrs) {
+			scope.$watch('isFullscreen', function () {
+				
+				// hide header, right sidebar
+
+				$("header").toggle();
+				$("#right").toggle();
+		
+				// add classes that remove margins etc.
+		
+				$("#main").toggleClass("fullscreen");
+				$("#wrap").toggleClass("fullscreen");
+				$("#imgwrapper").toggleClass("fullscreen");
+	
+				// trigger resize calculations
+		
+				$scope.onResize();
+
 			});
 		}
 	};

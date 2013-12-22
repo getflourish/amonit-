@@ -36,10 +36,10 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)">
+<body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
 
 	<div id="mouseTracker"><div ng-hide="cursor.id==me.id" ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
-	
+
 
 	<!-- header -->
 
@@ -89,10 +89,10 @@
 
 		<!-- sidebar -->
 	
-		<aside id="left" ng-class"{foo: true}" class="animated">
+		<aside id="left" ng-class"{foo: true}" class="animated" selectedScroll>
 		<ul>
 			<li class="add-image" filepicker order="before">+</li>
-			<ul id="overview" ui-sortable ng-model="images">
+			<ul id="overview" ui-sortable ng-model="images" ng-class="{slideOut: !overviewShowing}">
 				<li ng-repeat="image in images" ng-click="setImage($index)" ng-class="{selected:$index==currentIndex}"><span click-to-edit="image.filename">{{image.filename}}</span><span ng-click="removeImage($index)">Remove</span><img ng-src="{{image.path}}" /></li>
 			</ul>
 			<li ng-hide="images.length == 0" class="add-image" filepicker order="after">+</li>
@@ -125,7 +125,7 @@
 			<div ng-hide="currentIndex == -1" id="imgwrapper">
 				<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
 				<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}"><div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>
-				<span class="tooltip" ng-class="{open: $index==selectedAnnotation}" ng-keydown="blurTooltip($event, $index)" a="annotation" id="$index" types="commentTypes" tooltip>
+				<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll}" ng-keydown="blurTooltip($event, $index)" a="annotation" id="$index" types="commentTypes" tooltip>
 			</div>
 		</div>
 	
