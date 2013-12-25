@@ -67,7 +67,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * ///////////////////////////////////////////////////////////////// */
 
 	key('f', function(){ 
-		$scope.goFullscreen();
+		$scope.isFullscreen = !$scope.isFullscreen;
 		$scope.$apply();
 		return false;
 	});
@@ -1032,19 +1032,27 @@ feedbackApp.directive('fullscreen', ['$document' , function($document) {
 			scope.$watch('isFullscreen', function () {
 				
 				// hide header, right sidebar
-
-				$("header").toggle();
-				$("#right").toggle();
+				if (scope.isFullscreen) {
+					$("header").hide();
+					$("#right").hide();
+					$("#main").addClass("fullscreen");
+					$("#wrap").addClass("fullscreen");
+					$("#imgwrapper").addClass("fullscreen");
+				} else {
+					$("header").show();
+					$("#right").show();	
+					$("#main").removeClass("fullscreen");
+					$("#wrap").removeClass("fullscreen");
+					$("#imgwrapper").removeClass("fullscreen");
+				}
 		
 				// add classes that remove margins etc.
 		
-				$("#main").toggleClass("fullscreen");
-				$("#wrap").toggleClass("fullscreen");
-				$("#imgwrapper").toggleClass("fullscreen");
+				
 	
 				// trigger resize calculations
 		
-				$scope.onResize();
+				// $scope.onResize();
 
 			});
 		}

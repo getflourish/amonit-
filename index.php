@@ -13,9 +13,6 @@
 	<script type="text/javascript" src="js/keymaster.min.js"></script>
 	<script type="text/javascript" src="js/angular.js"></script>
 	
-	<script type="text/javascript" src="js/processing.js"></script>
-	<script type="text/javascript" src="js/mouse.pde"></script>
-
 	<script type="text/javascript" src="js/modules/center.js"></script>
 	<script type="text/javascript" src="js/modules/contenteditable.js"></script>
 	<script type="text/javascript" src="js/modules/draggable.js"></script>
@@ -30,13 +27,15 @@
 	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
 	
 	<script type="text/javascript" src="js/amonit.js"></script>
+	<script type="text/javascript" src="js/trail.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
+
+
 
 	<div id="mouseTracker"><div ng-hide="cursor.id==me.id" ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
 
@@ -54,7 +53,7 @@
 			Moderator: <strong>Florian Schulz</strong><br>
 			Viewing: 
 
-			<div id="login" ng-controller="AuthController">
+			<div id="login" ng-controller="AuthController" ng-hide="true">
 
 				<ul>
 					<li ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}</li>
@@ -106,7 +105,8 @@
 		<!-- Comments -->
 	
 		<aside id="right" ng-hide="images.length == 0">
-			<h3><span class="icon">w</span>Comments</h3>
+			<div id="feedback-header" class="fill-brown"><h3 class="text-light">Feedback</h3></div>
+			<div class="feedback-title">Start Screen 1/2</div>
 			<ul>
 				<input type="checkbox" ng-repeat-start="filter in commentTypes" ng-model="filter.show" id="filter-{{filter.type}}"><label class="tag" ng-class="{green: filter.type=='idea', purple:filter.type=='question', blue: filter.type=='onit'}" ng-repeat-end for="filter-{{filter.type}}">{{filter.typeLabel}}</label>
 			</ul>
@@ -136,5 +136,6 @@
 	<!-- // end of wrap -->
 
 	<input type="file" id="filepicker" multiple uploader>
+	<canvas id='world'></canvas>
 </body>
 </html>

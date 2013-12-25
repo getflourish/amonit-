@@ -1,5 +1,3 @@
-/* @pjs transparent="true"; */
-
 // Global variables
 float radius = 50.0;
 int X, Y;
