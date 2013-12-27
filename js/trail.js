@@ -6,10 +6,10 @@ var SCREEN_HEIGHT = window.innerHeight;
 var RADIUS = 1;
 
 var RADIUS_SCALE = 1;
-var RADIUS_SCALE_MIN = 1;
+var RADIUS_SCALE_MIN = 5;
 var RADIUS_SCALE_MAX = 100;
 
-var QUANTITY = 1;
+var QUANTITY = 10;
 
 var canvas;
 var context;
@@ -47,7 +47,7 @@ function createParticles() {
 	
 	for (var i = 0; i < QUANTITY; i++) {
 		var particle = {
-			size: 2,
+			size: 1,
 			position: { x: mouseX, y: mouseY },
 			offset: { x: 0, y: 0 },
 			shift: { x: mouseX, y: mouseY },

@@ -8,7 +8,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * Scope variables
 	 * ///////////////////////////////////////////////////////////////// */
 
-
 	// defines whether dropped images are added before or after other images
 	$scope.addOrder = "before";
 
@@ -66,7 +65,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * Keyboard Shortcuts
 	 * ///////////////////////////////////////////////////////////////// */
 
-	key('f', function(){ 
+	key('p', function(){ 
 		$scope.isFullscreen = !$scope.isFullscreen;
 		$scope.$apply();
 		return false;
@@ -99,6 +98,14 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	/**
 	 * Event handlers 
 	 * ///////////////////////////////////////////////////////////////// */
+
+	 /**
+	  * Resize
+	  */
+
+	$rootScope.$on('resize', function () {
+		onResize();
+	});
 	 
 
 	/**
@@ -619,9 +626,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * ///////////////////////////////////////////////////////////////// */
 
 
-	window.onresize = $scope.onResize;
+	window.onresize = onResize;
 
-	$scope.onResize = function() {
+	function onResize() {
+		console.log("res")
     
     	var domElt = document.getElementById('main');
     	scope = angular.element(domElt).scope();
@@ -631,16 +639,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     	});
 
     	var domElt = document.getElementById('left');
-    	scope = angular.element(domElt).scope();
-    	scope.$apply(function() {
-    	    scope.height = window.innerHeight;
-    	});
+    	domElt.height = window.innerHeight;
 
     	var domElt = document.getElementById('right');
-    	scope = angular.element(domElt).scope();
-    	scope.$apply(function() {
-    	    scope.height = window.innerHeight;
-    	});
+    	domElt.height = window.innerHeight;
 
     	var imgwrapper = $("#imgwrapper");
 		var offset = $(window).height()/2 - imgwrapper.height() / 2;
@@ -1008,11 +1010,15 @@ feedbackApp.directive('cursor', ['$document' , function($document) {
 */
 
 
-feedbackApp.directive('selectedScroll', ['$document' , function($document) {
+feedbackApp.directive('selectedscroll', ['$document', '$timeout', function($document, $timeout) {
 	return {
 		link: function(scope, elm, attrs) {
-			scope.$watch('selected', function () {
-				elm.stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
+			scope.$watch('currentIndex', function () {
+				console.log("should scroll")
+				$timeout(function() {
+					elm.stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
+				});
+
 	 			$scope.overviewShowing = true;
 			});
 		}
@@ -1026,7 +1032,7 @@ feedbackApp.directive('selectedScroll', ['$document' , function($document) {
 */
 
 
-feedbackApp.directive('fullscreen', ['$document' , function($document) {
+feedbackApp.directive('fullscreen', ['$document', '$rootScope', function($document, $rootScope) {
 	return {
 		link: function(scope, elm, attrs) {
 			scope.$watch('isFullscreen', function () {
@@ -1051,8 +1057,8 @@ feedbackApp.directive('fullscreen', ['$document' , function($document) {
 				
 	
 				// trigger resize calculations
-		
-				// $scope.onResize();
+
+				// $rootScope.$emit('resize');
 
 			});
 		}

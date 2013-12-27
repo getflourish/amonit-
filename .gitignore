@@ -1,2 +1,10 @@
 
 *.png
+
+.sass-cache/ea88ca78e65253d0c7c11a368bcc22d953377992/style.scssc
+
+*.jpg
+
+*.json
+
+id/391/data.json
