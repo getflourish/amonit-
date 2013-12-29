@@ -1,0 +1,11 @@
+#wrap {
+	background: #ddd;
+	width: 100%;
+	height: 100%;
+	display: -webkit-flex;
+}
+
+.container {
+	background: #ffcc00;
+	-webkit-flex-grow: 1;
+}

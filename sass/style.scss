@@ -11,6 +11,7 @@ $background_color: #edeae2;
 $brown: #38342b;
 $dark_blue: #363d45;
 $light_yellow: #fef0c0;
+$light: #b7b7b7;
 $yellow: #ffcc00;
 
 
@@ -25,9 +26,9 @@ body {
 	font-size: 16px;
 	box-sizing: border-box;
 	color: $dark_blue;
+	-webkit-transform3d: rotateZ(0, 0, 0);
+	-webkit-font-smoothing: antialiased;
 }
-
-
 
 li {
 	font-size: 13px;
@@ -40,8 +41,6 @@ li {
 	color: #ffcc00;	
 	background: #000;
 }
-
-
 
 .selected img {
 	opacity: 1 !important;
@@ -56,6 +55,7 @@ li {
 	-webkit-transition: left 0.2s ease-in-out;
 	overflow: scroll;
 	background: $dark_blue;
+	padding: 20px 0px;
 }
 
 #left ul {
@@ -92,6 +92,11 @@ li {
 	position: absolute; 
 	height: 100%; 
 	width: 100%;
+	display: -webkit-flex;	
+}
+
+.flex {
+	-webkit-flex-grow: 1;
 }
 
 #overview li img:hover {
@@ -101,8 +106,7 @@ li {
 }
 
 #main {
-	height: 100%;
-	padding: 50px 50px 50px 105px;
+	padding: 100px 50px 50px 105px;
 	background: $background_color;
 	overflow: hidden;
 	margin: 0 auto;
@@ -110,7 +114,10 @@ li {
 }
 #main .current-screen {
 	max-width: 100%;
-	
+}
+
+#wrap {
+
 }
 
 
@@ -129,11 +136,14 @@ li {
 
 #right {
 	float: right;
-	width: 320px;
+	min-width: 320px;
 	color: #242424;
 	background: $dark_blue;
 	overflow: scroll;
-	height :100%;
+}
+
+#right ul li {
+	margin-bottom: 15px;
 }
 
 #right ul li:hover .remove {
@@ -466,7 +476,6 @@ h1 {
 .icon {
 	font-family: "pictos";
 	font-size: 16px;
-	color: #242424;
 }
 .icon:hover {
 	opacity: 1;
@@ -485,7 +494,7 @@ h1 {
 	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 1px 0px);
 	border-radius: 8px;
 	position: relative;
-	margin-top: 10px;
+	margin-top: 12px;
 	font-weight: normal;
 	display: inline-block;
 	line-height: 1.5em;
@@ -605,7 +614,7 @@ header {
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.10);
 	width:100%;
 	font-size: 13px;
-	position: relative;
+	position: fixed;
 	height: 40px;
 	z-index: 1000;
 	padding: 0px 10px;
@@ -617,7 +626,7 @@ header span.logo {
 	line-height: 36px;
 }
 
-header span {
+header div {
 	float: left;
 	line-height: 40px;
 }
@@ -744,11 +753,12 @@ canvas {
 }
 
 .light {
-	color: #b7b7b7;
+	color: $light;
 }
 
 #feedback-header {
 	box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.20), inset 0 -4px 6px rgba(0, 0, 0, 0.40);
+	padding-top: 40px;
 }
 
 .feedback-content {
@@ -773,13 +783,13 @@ canvas {
 
 .search {
 	background-color: #ffffff;
-	border: 1px solid #0a1017;
+	border: 1px solid rgba(0, 0, 0, 0.4);
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	border-radius: 100px;
-	-webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.40);
-	-moz-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.40);
-	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.40);
+	-webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.30);
+	-moz-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.30);
+	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.30);
 	padding: 4px 4px 4px 8px;
 	width: 130px;
 	position: absolute;
@@ -834,6 +844,13 @@ canvas {
 	line-height: 48px;
 	text-align: center;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.10);
+	margin-bottom: 20px;
+	margin: 0px 20px 20px 20px;
+	-webkit-transition: color 0.2s;
+
+	&:hover {
+		color: darken(#272d30, 10);
+	}
 }
 
 .removeimage {
@@ -857,4 +874,65 @@ canvas {
 
 #overview li:hover .removeimage {
 	display: block;
+}
+
+header h2 {
+	font-size: 13px;
+	display: inline;
+}
+
+header a {
+	text-decoration: none;
+	color: $light;
+	-webkit-transition: all 0.1s;
+
+	&:hover{
+		color: #242424 !important;
+	}
+}
+
+#actionbar {
+	padding-left: 15px;
+	border-left: 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.form-inline {	
+	display: inline;
+}
+
+.form-control {
+	margin-right: 6px;
+}
+
+header input {
+	height: 24px;
+	line-height: 12px;
+	font-size: 12px;
+	border-radius: 3px;
+	padding: 0px 0px 0px 4px;
+	outline: 0;
+	box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.1);
+	-webkit-appearance: none;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+button {
+	height: 30px;
+	border-radius: 3px;
+	outline: 0;
+	border: 0px;
+	padding: 0px 12px;	
+}
+
+.btn-sm {
+	height: 24px;
+}
+
+.btn-login {
+	background: $yellow;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+	font-weight: bold;
+	font-size: 13px;
 }

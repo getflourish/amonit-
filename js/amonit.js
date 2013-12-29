@@ -66,10 +66,14 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * ///////////////////////////////////////////////////////////////// */
 
 	key('p', function(){ 
-		$scope.isFullscreen = !$scope.isFullscreen;
+		$scope.toggleFullscreen();
 		$scope.$apply();
 		return false;
 	});
+
+	$scope.toggleFullscreen = function () {
+		$scope.isFullscreen = !$scope.isFullscreen;
+	}
 
 	key('up', function(){ 
 		$scope.prev();
@@ -143,7 +147,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		
 		$scope.cursorRef = new Firebase("https://feedbacktool.firebaseio.com/cursors/" + user.id);
 		$scope.mycursor = $firebase($scope.cursorRef);
-	})
+	});
 
 	/**
 	 * Tooltips
@@ -185,8 +189,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		if ($scope.selectedAnnotation == -1) {
 		// convert coordinates to local space
 
-			var x = (globalX - 10) / $scope.imageElement.prop("width");
-			var y = (globalY - 10) / $scope.imageElement.prop("height");
+			var x = (globalX + 10) / $scope.imageElement.prop("width");
+			var y = (globalY + 10) / $scope.imageElement.prop("height");
 	
 			// save annotation 
 	
@@ -310,7 +314,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.hideAllAnnotations = function () {
-		$scope.showingAll = true;
+		$scope.showingAll = false;
 	}
 
 	/**
@@ -1019,7 +1023,7 @@ feedbackApp.directive('selectedscroll', ['$document', '$timeout', function($docu
 					elm.stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
 				});
 
-	 			$scope.overviewShowing = true;
+	 			scope.overviewShowing = true;
 			});
 		}
 	};

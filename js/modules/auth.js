@@ -19,12 +19,40 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 		// reference to logged in user
 		$scope.me = null;
 
+		// cursors: $scope.cursors
+			
+		$scope.cursors = $firebase(new Firebase("https://feedbacktool.firebaseio.com/cursors"));
+
 		/**
 		*	User Reference: $scope.users
 		*/
 
 		var myConnectionsRef = new Firebase('https://feedbacktool.firebaseio.com/users/');
 		$scope.users = $firebase(myConnectionsRef);
+
+		/**
+		 * Presence 
+		 */
+
+		var listRef = new Firebase('https://feedbacktool.firebaseio.com/presence/');
+    	var userRef = listRef.push();
+
+    	// Add ourselves to presence list when online.
+    	var presenceRef = new Firebase('https://feedbacktool.firebaseio.com/.info/connected');
+    	presenceRef.on('value', function (snap) {
+        	if (snap.val()) {
+	            userRef.set(true);
+    	        // Remove ourselves when we disconnect.
+        	    userRef.onDisconnect().remove();
+        	}
+    	});
+
+    	// Number of online users is the number of objects in the presence list.
+    	listRef.on('value', function (snap) {
+        	onlineUsers = snap.numChildren();
+        	console.log(onlineUsers)
+        	$rootScope.$broadcast('onOnlineUser');
+    	});
 
 		/**
 		*	Authentication logic
@@ -60,6 +88,8 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 				console.log("logged out")
 
 				$scope.user = null;
+				$scope.me = null;
+
 				$scope.$apply();
 
 			}
@@ -107,11 +137,11 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 		$scope.handleLogin = function (user) {
 			$scope.user = user;
 			
-			// todo: might be redundant to have 'user' and 'me'
+			// me is only the name!
 			
 			$scope.me = $firebase(new Firebase('https://feedbacktool.firebaseio.com/users/' + user.id + '/name'));
 			$scope.me.id = user.id;
-			
+
 			// cursors: $scope.cursors
 			
 			$scope.cursors = $firebase(new Firebase("https://feedbacktool.firebaseio.com/cursors"));
@@ -139,6 +169,8 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 			connectedRef.on('value', function(snap) {
 
 				if (snap.val() === true) {
+
+					console.log("# of online users = " + snap.numChildren());
 
 					// just connected
 					var con = myConnectionsRef.push(true);
@@ -173,7 +205,6 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 		
 		$scope.logout = function (email, password) {
 			auth.logout();
-			$scope.me = null;
 		};
 	}
 ]);
