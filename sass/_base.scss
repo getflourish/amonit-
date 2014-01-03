@@ -1,0 +1,233 @@
+/* Colors */
+
+.blue {
+	background: #36aad1;
+}
+
+.fill-brown {
+	background: $brown;
+}
+
+.green {
+	background: #81d136;
+}
+
+.grey {
+	color: #b7b7b7;
+}
+
+.light {
+	color: #484337;
+}
+
+.purple {
+	background: #aa70e0;
+}
+
+.text-light {
+	color: #d4d6d9;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 1);
+}
+
+.yellow {
+	color: #ffcc00;
+}
+
+/* Layout */
+
+.flex {
+	-webkit-flex-grow: 1;
+}
+
+.center {
+	text-align: center;
+}
+
+.right {
+	float: right;
+}
+
+.space {
+	margin-right: 15px;
+}
+
+.spacing {
+	padding: 10px;
+}
+
+/* Dimensions */
+
+.sm {
+ 	height: 24px;
+ 	line-height: 24px;
+}
+
+.medium {
+	height: 30px;
+}
+
+/* Style */
+
+.round {
+	border-radius: 3px;
+}
+
+
+.edit {
+	font-size: 11px;
+	margin-left: 5px;
+}
+
+.first {
+	margin-top: 0;
+}
+
+h1 {
+	color: #fff;
+}
+
+h3 {	
+	font-size: 14px;
+}
+
+.semi {
+	opacity: 0.6 !important;
+}
+
+.opaque {
+	opacity: 1 important;
+}
+
+/* Buttons */
+
+button {
+	height: 30px;
+	border-radius: 3px;
+	outline: 0;
+	border: 0px;
+	padding: 0px 12px;
+	font-family: "Helvetica Neue","Arial";
+	font-size: 13px;
+}
+
+.btn-sm {
+	height: 24px;
+}
+
+.btn-login {
+	background: $yellow;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.button-group {
+	padding-left: 15px;
+	border-left: 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.1);
+	display: -webkit-flex;
+}
+
+.splitbutton-left {
+	border-radius: 3px 0px 0px 3px;
+}
+
+.splitbutton-right {
+	border-radius: 0px 3px 3px 0px;
+}
+
+.split-button {
+	line-height: 40px;
+	vertical-align: center;
+	margin-top: 8px;
+	height: 24px;
+}
+
+/* Forms */
+
+.form-inline {	
+	display: inline;
+}
+
+.form-control {
+	margin-right: 6px;
+}
+
+.key {
+	
+	width: 16px;
+	height: 16px;
+
+	display: inline-block;
+	margin: 0px 4px;
+
+	background: #ddd;
+
+	border: 1px solid #ccc;
+	box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5), 0px 1px 0px rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+
+	color: #777;
+	text-align: center;
+	line-height: 16px;
+	font-weight: bold;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);
+	
+}
+
+/* Icons */
+
+.icon {
+	font-family: "pictos";
+	font-size: 16px;
+}
+.icon:hover {
+	opacity: 1;
+}
+
+.icon.before {
+	margin-right: 7px;
+}
+
+/* Inset */
+
+.inset {
+	
+	display: inline-block;
+
+	padding: 0px 0px 0px 4px;
+
+	background: -moz-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
+	background: -ms-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
+	background: -o-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
+	background: -webkit-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
+	background: linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
+
+	border: 1px solid #cfcfcf;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	@include box-shadow(rgba(255, 255, 255, 0.5) 0px 1px 0px);
+
+	color: #333333;
+	font-size: 13px;
+	font-weight: normal;
+	text-align: center;
+	text-decoration: none;
+	line-height: 24px;
+}
+
+.inset-button {
+	background: -moz-linear-gradient(180deg ,#ffffff 0% ,#e8e8e8 100%);
+	background: -ms-linear-gradient(180deg ,#ffffff 0% ,#e8e8e8 100%);
+	background: -o-linear-gradient(180deg ,#ffffff 0% ,#e8e8e8 100%);
+	background: -webkit-linear-gradient(180deg ,#ffffff 0% ,#e8e8e8 100%);
+	background: linear-gradient(180deg ,#ffffff 0% ,#e8e8e8 100%);
+	border: 1px solid #cfcfcf;
+	border-left: none;
+	-webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.50);
+	-moz-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.50);
+	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.50);
+}

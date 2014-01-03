@@ -1,0 +1,51 @@
+#main {
+
+	width: 100%;
+
+	overflow: hidden;
+
+	display: -webkit-flex;
+
+	-webkit-align-content: center;
+	-webkit-justify-content: center;
+	-webkit-flex-direction: column;
+	-webkit-align-items: center;
+
+	margin-top: 40px;
+	padding: 20px;
+
+	background: $background_color;	
+
+	.current-screen {
+		max-width: 100%;
+	}
+}
+
+#imgwrapper {
+
+	display: inline-block;
+	position: relative;
+
+	padding: 15px;
+
+	background: #fff;
+	
+	@include box-shadow(rgba(0, 0, 0, 0.2) 0px 1px 2px);
+	
+	img {
+		display: inline-block;
+	}
+}
+
+.emptystate {
+	padding: 250px;
+	border: 1px dashed #aaa;
+	border-radius: 8px;
+}
+
+#content {
+	position: absolute; 
+	height: 100%; 
+	width: 100%;
+	display: -webkit-flex;
+}

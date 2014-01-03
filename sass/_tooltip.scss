@@ -1,0 +1,115 @@
+.animate {
+	-webkit-transition: all 1s;
+	-webkit-transform: translate3d(0,0,0);
+
+}
+
+.circle {
+	border-radius: 100px;
+}
+.note {
+	width: 12px;
+	height: 12px;
+	opacity: 1;
+	position: absolute;
+	left: 2000px;
+	top: 200px;
+}
+
+.handle {
+	width: 12px;
+	height: 12px;
+	border-radius: 100px;
+	
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+
+	-webkit-transform: translate3d(0,0,0);
+
+	-webkit-animation-name: pulse;
+	-webkit-animation-duration: 0.8s;
+  	animation-duration: 1s;
+  	-webkit-animation-fill-mode: both;
+  	animation-fill-mode: both;
+  	-webkit-animation-direction:alternate;
+ 	-webkit-animation-iteration-count: infinite;
+}
+
+.pulseblue {
+	-webkit-animation-name: pulseblue;
+}
+.pulsegreen {
+	-webkit-animation-name: pulsegreen !important;
+}
+.pulsepurple {
+	-webkit-animation-name: pulsepurple !important;
+}
+
+.tooltip:before {
+    position: absolute;
+    top: 10px;
+    left: -11px;
+    
+    content: '';
+    display: block;
+
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(0, 0, 0, 0.4);
+
+}
+
+.tooltip {
+     position: absolute;
+     z-index: 100;
+     min-width: 150px;
+     background: #fff;
+     padding: 10px;
+     top: -11px;
+     left: 20px;
+     border-radius: 5px;
+     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+     opacity: 0;
+     visibility: hidden;
+     -webkit-transition: all 0.4s;
+     text-align: left;
+     line-height: 1.3em;
+     
+ }
+
+ .tooltip:focus {
+ 	outline: 0;
+ }
+
+.tooltip:after {
+    position: absolute;
+    top: 10px;
+    left: -10px;
+
+    content: '';
+    display: inline-block;
+
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+}
+
+.note {
+	width: 15px;
+	height: 15px;
+	position: relative;
+}
+.large {
+	width: 50px;
+	height: 50px;
+}
+.note-handle:hover {
+	opacity: 1;
+}
+
+.ui-draggable { cursor: move; }
+
+.open {
+	opacity: 1 !important;
+	visibility: visible;
+	margin-left: 13px;
+}
