@@ -40,7 +40,11 @@
 
 	<header>
 		<div>
-			<span class="logo space"><em>Am</em>onit<a class="inset" href="/amonit2/{{data.path}}">amonit.io/{{data.path}}</a></span>
+			<span class="logo space"><em>Am</em>onit</span>
+			<div class="space split-button">
+				<a class="inset splitbutton-left" href="/amonit2/{{data.path}}">amonit.io/{{data.path}}</a>
+				<button class="btn-sm inset-button splitbutton-right">Share</button>
+			</div>
 		</div>
 		<div id="login" ng-controller="AuthController">
 			<span class="space" ng-show="me"><span class="icon grey before">U</span><span class="light">Hello,&nbsp;</span><strong>{{me.first}}!</strong></span>
@@ -67,17 +71,21 @@
 			<h4 ng-show="images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
 			<h5 ng-show="images.length!=0">{{images[currentIndex+1].filename}}</h5>
 		</div>
-		<div id="actionbar" class="right">
+		<div class="button-group right">
 			<div class="space"><span class="icon grey before">b</span><h2 class="light">Make a new one</h2></div>	
-			<div class="space"><span class="icon grey before">G</span><h2 class="light">Invite others<h2></div>	
-			<div class="space"><a href=""><span class="icon before">`</span><h2 ng-click="toggleFullscreen()">Present (P)<h2></a></div>	
+			<div class="space"><span class="icon grey before">G</span><h2 class="light">Invite others</h2></div>	
+			<div class="space"><a href=""><span class="icon before">`</span><h2 ng-click="toggleFullscreen()">Present</h2><span class="key">P</span></a></div>	
+		</div>
+		<div class="button-group right">
+			<div class="space"><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">↑</span></a></div>	
+			<div class="space"><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}">Next</h2><span class="key">↓</span></a></div>	
 		</div>
 
 		<!--
 		<div class="user" ng-show="false">
 			Moderator: <strong>Florian Schulz</strong><br>
 			Viewing: 
-
+↑
 			<div id="login" ng-controller="AuthController" ng-hide="true">
 
 				<ul>
@@ -115,6 +123,7 @@
 		<!-- sidebar -->
 	
 		<aside id="left" class="animated" selectedscroll>
+			<div id="leftspacer"></div>
 		<ul>
 			<li class="add-image upload-icon" filepicker order="before">c</li>
 			<ul id="overview" ui-sortable ng-model="images" ng-class="{slideOut: !overviewShowing}">
@@ -133,7 +142,7 @@
 			<div id="main" class="flex">
 				<div class="emptystate" ng-show="images.length == 0"><h2>Drag & Drop Images Here</h2></div>
 				<div ng-hide="currentIndex == -1" id="imgwrapper">
-					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
+					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.clientX, $event.clientY)" />
 					<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 						<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>
 						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" id="$index" types="commentTypes" tooltip></span>

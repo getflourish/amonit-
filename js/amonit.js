@@ -82,6 +82,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	});
 
 	key('down', function(){ 
+		$scope.flashnext = true;
 		$scope.next();
 		$scope.$apply();
 		return false;
@@ -189,8 +190,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		if ($scope.selectedAnnotation == -1) {
 		// convert coordinates to local space
 
-			var x = (globalX + 10) / $scope.imageElement.prop("width");
-			var y = (globalY + 10) / $scope.imageElement.prop("height");
+			var x = (globalX - 10) / $scope.imageElement.prop("width");
+			var y = (globalY - 10) / $scope.imageElement.prop("height");
 	
 			// save annotation 
 	
@@ -395,8 +396,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 			$scope.selectedAnnotation = -1;
 			$scope.$apply();
 			$scope.scrollOverview();
+			$scope.setImage($scope.currentIndex);
 		}
-		$scope.setImage($scope.currentIndex);
 	}
 
 	/**
@@ -442,6 +443,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.onEsc = function () {
 		if ($scope.selectedAnnotation != -1) {
 			$scope.removeAnnotation($scope.current.annotations.length-1);
+		} else if ($scope.isFullscreen) {
+			$scope.toggleFullscreen();
+			$scope.$apply();
 		}
 		return false;
 	}
@@ -452,8 +456,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 			$scope.selectedAnnotation = -1;
 			$scope.$apply();
 			$scope.scrollOverview();
+			$scope.setImage($scope.currentIndex);
 		}
-		$scope.setImage($scope.currentIndex);
 	}
 
 	/**
@@ -641,16 +645,16 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     	    scope.width = window.innerWidth;
     	    scope.height = window.innerHeight;
     	});
+// 
+    	// var domElt = document.getElementById('left');
+    	// domElt.height = window.innerHeight;
+// 
+    	// var domElt = document.getElementById('right');
+    	// domElt.height = window.innerHeight;
 
-    	var domElt = document.getElementById('left');
-    	domElt.height = window.innerHeight;
-
-    	var domElt = document.getElementById('right');
-    	domElt.height = window.innerHeight;
-
-    	var imgwrapper = $("#imgwrapper");
-		var offset = $(window).height()/2 - imgwrapper.height() / 2;
-    	imgwrapper.css("top", offset);
+    	// var imgwrapper = $("#imgwrapper");
+		// var offset = $(window).height()/2 - imgwrapper.height() / 2;
+    	// imgwrapper.css("top", offset);
 	}
 });
 
@@ -696,7 +700,7 @@ feedbackApp.directive('annotatable', function () {
 
 				var imgwrapper = $("#imgwrapper");
 				var offset = $("#main").height()/2 - imgwrapper.height() / 2 -100;
-    			imgwrapper.css("top", offset);
+    			// imgwrapper.css("top", offset);
 
 				scope.$apply();
 
@@ -786,9 +790,9 @@ feedbackApp.directive("clickToEdit", function() {
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
             '<input ng-keydown="onKeypress($event)" ng-model="view.editableValue">' +
-            '<a href="#" ng-click="save()">Save</a>' +
+            '<button ng-click="save()">Save</button>' +
             ' or ' +
-            '<a ng-click="disableEditor()">cancel</a>.' +
+            '<button ng-click="disableEditor()">cancel</button>.' +
         '</div>' +
     '</div>';
 
@@ -880,9 +884,8 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
             '<textarea ng-keydown="onKeypress($event)" ng-model="annotation.comment" ng-blur="onBlur(id)"></textarea>' +
-            '<a href="#" ng-click="save()">Save</a>' +
-            ' or ' +
-            '<a href="#" ng-click="revert()">cancel</a>.' +
+            '<button class="green" ng-click="save()">Save</button>' +
+            '<button ng-click="revert()">Cancel</button>' +
         '</div>' +
         '<div ng-show="annotation.comment && !view.editorEnabled">{{annotation.comment}}<a href="#" class="right edit icon" ng-click="enableEditor()">p</a><a href="#" class="right edit icon" ng-click="remove()">#</a></div>' +
     '</div>';
