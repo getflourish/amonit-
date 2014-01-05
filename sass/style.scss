@@ -1,6 +1,7 @@
 @import "compass";
 
 @import "_variables.scss";
+@import "_animations.scss";
 @import "_base.scss";
 @import "_clicktoedit.scss";
 @import "_feedback.scss";
@@ -10,11 +11,8 @@
 @import "_navigation.scss";
 @import "_tooltip.scss";
 
-@font-face
-{
-	font-family: "pictos";
-	src: url('../fonts/pictos-web.ttf');
-}
+
+@include font-face("pictos", font-files("../fonts/pictos-web.ttf"));
 
 * {
 	margin: 0;
@@ -24,6 +22,7 @@
 body {
 	
 	margin: 0 auto;
+	background: $dark_blue;
 
 	color: $dark_blue;
 	font-size: 16px;
@@ -77,6 +76,7 @@ body #dropzone {
 	padding: 0 !important;
 	top: 0px !important;
 	margin-top: 0px !important;
+	border: 0px !important;
 }
 
 .clickable {

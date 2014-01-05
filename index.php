@@ -42,12 +42,20 @@
 		<div>
 			<span class="logo space"><em>Am</em>onit</span>
 			<div class="space split-button">
-				<a class="inset splitbutton-left" href="/amonit2/{{data.path}}">amonit.io/{{data.path}}</a>
+				<span class="inset splitbutton-left" href="/amonit2/{{data.path}}">
+					<?php 
+						if($_GET["id"]) {
+							echo "http://". $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+						} else {
+							echo "http://". $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $id;
+						}
+
+						?>{{id}}</span>
 				<button class="btn-sm inset-button splitbutton-right">Share</button>
 			</div>
 		</div>
 		<div id="login" ng-controller="AuthController">
-			<span class="space" ng-show="me"><span class="icon grey before">U</span><span class="light">Hello,&nbsp;</span><strong>{{me.first}}!</strong></span>
+			<span class="space" ng-show="me"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{me.first}}!</strong></span>
 			<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
 
 			<form ng-hide="true" class="form-inline">
@@ -64,7 +72,7 @@
 				<button class="btn-login" ng-click="login(email, password)">Log in</button>
 			</form>
 			<button ng-show="me" class="btn btn-danger btn-sm" ng-click="logout()">Logout</button>
-			<span class="space" ng-hide="users.length == 0"><span class="icon grey before">E</span><span class="light">On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
+			<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
 		</div>
 		<div class="center" ng-show="false">
 			<h5 ng-show="images.length!=0">{{images[currentIndex-1].filename}}</h5>
@@ -72,8 +80,8 @@
 			<h5 ng-show="images.length!=0">{{images[currentIndex+1].filename}}</h5>
 		</div>
 		<div class="button-group right">
-			<div class="space"><span class="icon grey before">b</span><h2 class="light">Make a new one</h2></div>	
-			<div class="space"><span class="icon grey before">G</span><h2 class="light">Invite others</h2></div>	
+			<div class="space"><span class="icon before">b</span><h2>Make a new one</h2></div>	
+			<div class="space"><span class="icon before">G</span><h2>Invite others</h2></div>	
 			<div class="space"><a href=""><span class="icon before">`</span><h2 ng-click="toggleFullscreen()">Present</h2><span class="key">P</span></a></div>	
 		</div>
 		<div class="button-group right">
@@ -122,7 +130,7 @@
 
 		<!-- sidebar -->
 	
-		<aside id="left" class="animated" selectedscroll>
+		<aside id="left" class="animated" selectedscroll ng-hide="images.length == 0">
 			<div id="leftspacer"></div>
 		<ul>
 			<li class="add-image upload-icon" filepicker order="before">c</li>
@@ -139,10 +147,10 @@
 	
 		<!-- main -->
 	
-			<div id="main" class="flex">
-				<div class="emptystate" ng-show="images.length == 0"><h2>Drag & Drop Images Here</h2></div>
-				<div ng-hide="currentIndex == -1" id="imgwrapper">
-					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.clientX, $event.clientY)" />
+			<div id="main">
+				<div filepicker order="before" class="emptystate" ng-show="images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
+				<div ng-hide="images.length==0" id="imgwrapper" class="flex">
+					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
 					<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 						<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>
 						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" id="$index" types="commentTypes" tooltip></span>

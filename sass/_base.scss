@@ -17,7 +17,7 @@
 }
 
 .light {
-	color: #484337;
+	color: $light;
 }
 
 .purple {
@@ -124,8 +124,8 @@ button {
 
 .button-group {
 	padding-left: 15px;
-	border-left: 1px solid rgba(255, 255, 255, 0.5);
-	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.1);
+	border-left: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
 	display: -webkit-flex;
 }
 
@@ -162,17 +162,17 @@ button {
 	display: inline-block;
 	margin: 0px 4px;
 
-	background: #ddd;
+	background: $dark_blue;
 
-	border: 1px solid #ccc;
-	box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.5), 0px 1px 0px rgba(0, 0, 0, 0.1);
+	border: 1px solid #666;
+	box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 2px;
 
-	color: #777;
+	color: #ffcc00;
 	text-align: center;
 	line-height: 16px;
 	font-weight: bold;
-	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3);
+	text-shadow: 0px 1px 0px rgba(0,0,0, 0.8);
 	
 }
 
@@ -196,22 +196,15 @@ button {
 	
 	display: inline-block;
 
-	padding: 0px 0px 0px 4px;
+	padding: 0px 4px;
+	
+	border: rgba(0, 0, 0, 0.2);
 
-	background: -moz-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
-	background: -ms-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
-	background: -o-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
-	background: -webkit-linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
-	background: linear-gradient(90deg ,#f0f0f0 0% ,#e8e8e8 100%);
-
-	border: 1px solid #cfcfcf;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-
+	@include background-image(linear-gradient(#484337, #3b372d));
+	@include border-left-radius(3px);
 	@include box-shadow(rgba(255, 255, 255, 0.5) 0px 1px 0px);
 
-	color: #333333;
+	color: #fff;
 	font-size: 13px;
 	font-weight: normal;
 	text-align: center;

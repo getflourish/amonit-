@@ -22,7 +22,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.current;
 
 	// index of the currently selected image object
-	$scope.currentIndex = 0;
+	$scope.currentIndex;
 
 	// data object that holds information about images and the path
 	$scope.data = {"images":$scope.images, "path":""};
@@ -190,8 +190,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		if ($scope.selectedAnnotation == -1) {
 		// convert coordinates to local space
 
-			var x = (globalX - 10) / $scope.imageElement.prop("width");
-			var y = (globalY - 10) / $scope.imageElement.prop("height");
+			var x = (globalX) / $scope.imageElement.prop("width");
+			var y = (globalY) / $scope.imageElement.prop("height");
 	
 			// save annotation 
 	
@@ -637,7 +637,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	window.onresize = onResize;
 
 	function onResize() {
-		console.log("res")
     
     	var domElt = document.getElementById('main');
     	scope = angular.element(domElt).scope();
@@ -697,11 +696,6 @@ feedbackApp.directive('annotatable', function () {
 		link: function(scope, element, attrs) {   
 			element.bind("load" , function(event){ 
 				scope.imageLoaded = true;
-
-				var imgwrapper = $("#imgwrapper");
-				var offset = $("#main").height()/2 - imgwrapper.height() / 2 -100;
-    			// imgwrapper.css("top", offset);
-
 				scope.$apply();
 
 			});

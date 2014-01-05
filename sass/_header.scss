@@ -9,11 +9,7 @@ header {
 	width:100%;
 	height: 40px;
 
-	background: -moz-linear-gradient(180deg ,#ffd633 0% ,#f7c600 100%);
-	background: -ms-linear-gradient(180deg ,#ffd633 0% ,#f7c600 100%);
-	background: -o-linear-gradient(180deg ,#ffd633 0% ,#f7c600 100%);
-	background: -webkit-linear-gradient(180deg ,#ffd633 0% ,#f7c600 100%);
-	background: linear-gradient(180deg ,#ffd633 0% ,#f7c600 100%);
+	@include background-image(linear-gradient(#ffcc00, #f0b800));
 
 	font-size: 13px;
 	line-height: 40px;
@@ -26,7 +22,7 @@ header {
 
 	a {
 		text-decoration: none;
-		color: $light;
+		color: $dark_blue;
 		-webkit-transition: all 0.1s;
 	
 		&:hover{
