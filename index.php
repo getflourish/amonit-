@@ -40,7 +40,7 @@
 
 	<header>
 		<div>
-			<span class="logo space"><em>Am</em>onit</span>
+			<span class="logo space"><em>Go</em>over</span>
 			<div class="space split-button">
 				<span class="inset splitbutton-left" href="/amonit2/{{data.path}}">
 					<?php 
