@@ -12,7 +12,7 @@
 	-webkit-align-items: center;
 
 	margin: 40px 0px 20px 0px;
-	padding: 20px;
+	padding: 20px 50px;
 
 	.current-screen {
 		max-width: 100%;
@@ -24,16 +24,13 @@
 	display: block;
 
 	position: relative;
-
-	border: 15px solid #fff;
-
-	background: #fff;
-	
-	@include box-shadow(rgba(0, 0, 0, 0.2) 0px 1px 2px);
 	
 	img {
 		display: inline;
 		vertical-align: bottom;
+		border: 8px solid #fff;
+		background: #fff;
+		@include box-shadow(rgba(0, 0, 0, 0.5) 0px 0px 10px);
 	}
 }
 

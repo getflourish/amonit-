@@ -22,7 +22,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.current;
 
 	// index of the currently selected image object
-	$scope.currentIndex;
+	$scope.currentIndex = 0;
 
 	// data object that holds information about images and the path
 	$scope.data = {"images":$scope.images, "path":""};
@@ -222,6 +222,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		
 		// construct image object
 		var newImage = {"filename": file.name, "path": $scope.path + "/" + file.name, "id": $scope.images.length, "annotations":[]};
+		console.log("new image");
+		console.log($scope.images);
 
 		// add to images array
 		if (index == 0) {
@@ -351,7 +353,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.init = function (id) {
 		$scope.setId(id);
-		$scope.setupFirebase();
 	}
 
 	/**
@@ -381,6 +382,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 				$scope.images = data.images;
 				$scope.current = $scope.images[$scope.currentIndex];
 			}
+
+			$scope.setupFirebase();
 		});
 	}
 
@@ -595,6 +598,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 $scope.setupFirebase = function () {
 
 	 	// todo: add $scope.images to firebase :)
+
+		// // manage images
+		// console.log("id" + $scope.id);
+	 	// var con = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images');
+		// $scope.imagesFirebase = $firebase(con);
+		// $scope.imagesFirebase.$bind($scope, "images");
 
 	 	// manage index
 	 	var con = new Firebase('https://feedbacktool.firebaseio.com/currentIndex');
@@ -881,7 +890,7 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             '<button class="green" ng-click="save()">Save</button>' +
             '<button ng-click="revert()">Cancel</button>' +
         '</div>' +
-        '<div ng-show="annotation.comment && !view.editorEnabled">{{annotation.comment}}<a href="#" class="right edit icon" ng-click="enableEditor()">p</a><a href="#" class="right edit icon" ng-click="remove()">#</a></div>' +
+        '<div ng-show="annotation.comment && !view.editorEnabled"><span class="tag" ng-class="{green: annotation.type==\"idea\", purple:annotation.type==\"question\", blue: annotation.type==\"onit\"}">{{annotation.typeLabel}}</span> {{annotation.comment}}<a href="#" class="right edit icon" ng-click="enableEditor()">p</a><a href="#" class="right edit icon" ng-click="remove()">#</a></div>' +
     '</div>';
 
     return {

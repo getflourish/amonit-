@@ -43,8 +43,13 @@
 .feedback-content {
 	margin: 0;
 	opacity: 1;
-	padding: 20px;
+	padding: 10px;
 	background: #fff;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.20);
+
+	&:hover {
+		opacity: 1 !important;
+	}
 }
 
 .feedback-title  {
@@ -67,9 +72,7 @@
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	border-radius: 100px;
-	-webkit-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.30);
-	-moz-box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.30);
-	box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.30), inset 1px 1px 5px rgba(0, 0, 0, 0.30);
+	
 	padding: 4px 4px 4px 8px;
 	width: 130px;
 	position: absolute;

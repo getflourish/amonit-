@@ -8,8 +8,8 @@
 	border-radius: 100px;
 }
 .note {
-	width: 12px;
-	height: 12px;
+	width: 20px;
+	height: 20px;
 	opacity: 1;
 	position: absolute;
 	left: 2000px;
@@ -18,15 +18,16 @@
 
 .handle {
 	width: 12px;
-	height: 12px;
+    height: 12px;
 	border-radius: 100px;
+    border: 5px solid #ffcc00;
 	
 	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
 
 	-webkit-transform: translate3d(0,0,0);
 
 	-webkit-animation-name: pulse;
-	-webkit-animation-duration: 0.8s;
+	-webkit-animation-duration: 1s;
   	animation-duration: 1s;
   	-webkit-animation-fill-mode: both;
   	animation-fill-mode: both;
@@ -44,54 +45,53 @@
 	-webkit-animation-name: pulsepurple !important;
 }
 
-.tooltip:before {
-    position: absolute;
-    top: 10px;
-    left: -11px;
-    
-    content: '';
-    display: block;
-
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid rgba(0, 0, 0, 0.4);
-
-}
-
 .tooltip {
-     position: absolute;
-     z-index: 100;
-     min-width: 150px;
-     background: #fff;
-     padding: 10px;
-     top: -11px;
-     left: 20px;
-     border-radius: 5px;
-     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
-     opacity: 0;
-     visibility: hidden;
-     -webkit-transition: all 0.4s;
-     text-align: left;
-     line-height: 1.3em;
-     
+    position: absolute;
+    z-index: 100;
+    min-width: 150px;
+    display: inline-block;
+    
+    top: 15px;
+    left: -75px;
+    opacity: 0;
+    visibility: hidden;
+
+    -webkit-transition: all 0.4s;   
+
+	padding: 6px 20px 6px 6px;
+	
+	@include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px 2px);
+	border-radius: 8px;
+
+	line-height: 1.5em;
+
+	background-color: #fef0c0;
+
+	color: #5c5c5c;
+	font-family: "Georgia";
+	font-style: italic;
+
+	&:hover {
+		background: #fef0c0;
+	}
+
+	&:before {
+	 	position: absolute;
+    	top: -7px;
+    	left: 75px;
+    
+    	content: '';
+    	display: block;
+	
+    	border-right: 10px solid transparent;
+    	border-left: 10px solid transparent;
+    	border-bottom: 10px solid #fef0c0;
+    }
  }
 
  .tooltip:focus {
  	outline: 0;
  }
-
-.tooltip:after {
-    position: absolute;
-    top: 10px;
-    left: -10px;
-
-    content: '';
-    display: inline-block;
-
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-right: 10px solid white;
-}
 
 .note {
 	width: 15px;
@@ -111,5 +111,5 @@
 .open {
 	opacity: 1 !important;
 	visibility: visible;
-	margin-left: 13px;
+	margin-top: 13px;
 }
