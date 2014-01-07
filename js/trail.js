@@ -9,7 +9,7 @@ var RADIUS_SCALE = 1;
 var RADIUS_SCALE_MIN = 5;
 var RADIUS_SCALE_MAX = 100;
 
-var QUANTITY = 10;
+var QUANTITY = 1;
 
 var canvas;
 var context;

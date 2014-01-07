@@ -127,6 +127,7 @@ button {
 	border-left: 1px solid rgba(255, 255, 255, 0.2);
 	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
 	display: -webkit-flex;
+	overflow: hidden;
 }
 
 .splitbutton-left {
