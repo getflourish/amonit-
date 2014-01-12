@@ -8,8 +8,8 @@
 	overflow: scroll;
 	background: #242424;
 	
-	-webkit-flex-direction: column;
-	-webkit-align-items: center;
+	@include box-align(center);
+  	@include box-direction(column);
 
 	ul {
 		background: #242424;

@@ -1,15 +1,14 @@
 #main {
 
 	width: 100%;
-
 	overflow: scroll;
 
-	display: -webkit-flex;
+	@include display-box;
 
-	-webkit-align-content: stretch;
-	-webkit-justify-content: center;
-	-webkit-flex-direction: column;
-	-webkit-align-items: center;
+  	@include box-orient(horizontal);
+  	@include box-align(vertical);
+  	
+  	@include box-pack(center);
 
 	margin: 40px 0px 20px 0px;
 	padding: 20px 50px;
@@ -54,5 +53,6 @@
 	position: absolute; 
 	height: 100%; 
 	width: 100%;
-	display: -webkit-flex;
+
+	@include display-box;
 }

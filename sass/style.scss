@@ -12,7 +12,7 @@
 @import "_tooltip.scss";
 
 
-@include font-face("pictos", font-files("../fonts/pictos-web.ttf"));
+@include font-face("pictos", font-files("fonts/pictos-web.ttf"));
 
 * {
 	margin: 0;
@@ -28,7 +28,6 @@ body {
 	font-size: 16px;
 	font-family: $SANS;
 
-	box-sizing: border-box;
 	-webkit-transform3d: rotateZ(0, 0, 0);
 	-webkit-font-smoothing: antialiased;
 }

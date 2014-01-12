@@ -35,13 +35,55 @@
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
 	<div id="mouseTracker"><div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
+	<div id="overlay">
+		<div id="brief">
+			<div class="brief-author">
+				<img src="images/me.png">
+				<strong class="brief-name light">Florian</strong><span class="brief-date light">Yesterday</span>
+			</div>
 
+			<h3>Feedback Request</h3>
+			
+			<p>
+				Hello! I need your feedback on a couple of pages that I designed for <strong>CCN’s on Behance.</strong> 
+			</p>
+			<p>
+				It’s supposed to explain the structure of the site and what’s customizable. 
+			</p>
+			<ol>
+				<li>1. What do you think about the header design and the typography?</li>
+				<li>2. Do you think we can implement the maginifying glass without using jQuery?</li>
+				<li>3. Not sure about the copy.</li>
+			</ol>
+			
+			<p>
+				Please feel free to comment on anything that catches your eye!
+			</p>
+
+			<p>
+				Kindly,<br>
+				Florian
+			</p>
+
+			<div class="brief-info">
+				<p>Please note that the following images are the <strong>first draft.</strong> Images are placeholder stock images and will be replaced in the final version.</p>
+			</div>
+
+			<form>
+				<label for="name">What’s your name?</label>
+				<input type="text" placeholder="Your Name" id="name" autofocus="autofocus" />
+				<span class="brief-user">FS</span>
+				<button class="btn-okay form-block">Okay, let’s do this!</button>
+			</form>
+
+		</div>
+	</div>
 	<!-- header -->
 
 	<header>
 		<div>
 			<span class="logo space"><em>Go</em>over</span>
-			<div class="space split-button">
+			<div class="space split-button right">
 				<span class="inset splitbutton-left" href="/amonit2/{{data.path}}">
 					<?php 
 						if($_GET["id"]) {
@@ -79,12 +121,12 @@
 			<h4 ng-show="images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
 			<h5 ng-show="images.length!=0">{{images[currentIndex+1].filename}}</h5>
 		</div>
-		<div class="button-group right">
+		<div class="button-group">
 			<div class="space"><span class="icon before">b</span><h2>Make a new one</h2></div>	
 			<div class="space"><span class="icon before">G</span><h2>Invite others</h2></div>	
 			<div class="space"><a href=""><span class="icon before">`</span><h2 ng-click="toggleFullscreen()">Present</h2><span class="key">P</span></a></div>	
 		</div>
-		<div class="button-group right">
+		<div class="button-group">
 			<div class="space"><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">▲</span></a></div>	
 			<div class="space"><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}">Next</h2><span class="key">▼</span></a></div>	
 		</div>
@@ -149,9 +191,7 @@
 					</div>
 				</ul>
 			</aside>
-		
 			<!-- // end of comments -->
-	
 	</div>
 
 	<!-- // end of wrap -->

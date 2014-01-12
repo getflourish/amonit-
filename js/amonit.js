@@ -890,7 +890,7 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             '<button class="green" ng-click="save()">Save</button>' +
             '<button ng-click="revert()">Cancel</button>' +
         '</div>' +
-        '<div ng-show="annotation.comment && !view.editorEnabled"><span class="tag" ng-class="{green: annotation.type==\"idea\", purple:annotation.type==\"question\", blue: annotation.type==\"onit\"}">{{annotation.typeLabel}}</span> {{annotation.comment}}<a href="#" class="right edit icon" ng-click="enableEditor()">p</a><a href="#" class="right edit icon" ng-click="remove()">#</a></div>' +
+        '<div ng-show="annotation.comment && !view.editorEnabled"><span class="tag" ng-class="{green: annotation.type==\'idea\', purple:annotation.type==\'question\', blue: annotation.type==\'onit\'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<a href="#" class="right edit icon" ng-click="enableEditor()">p</a><a href="#" class="right edit icon" ng-click="remove()">#</a></div>' +
     '</div>';
 
     return {
