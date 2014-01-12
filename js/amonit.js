@@ -11,6 +11,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// defines whether dropped images are added before or after other images
 	$scope.addOrder = "before";
 
+	// Will be set to true after the brief was read
+	$scope.briefRead = false;
+
 	// comment types
 	$scope.commentTypes = [
 		{"type":"idea", "label":"I like it, but…", "typeLabel":"Idea", "show": true, "class":"green"}, 
@@ -59,6 +62,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	// flag that indicates whether all tooltips are open
 	$scope.showingAll = false;
+
+	// User name will be set after the brief was read
+	$scope.username = "";
 
 
 	/**
@@ -195,7 +201,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	
 			// save annotation 
 	
-			$scope.current.annotations.push({"x":x, "y":y, "id":$scope.current.annotations.length + 1, "comment":""})
+			$scope.current.annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.current.annotations.length + 1, "comment":""})
 			$scope.save();
 	
 			// select annotation to open it
@@ -989,6 +995,11 @@ feedbackApp.filter('typeFilter', function() {
     }
 });
 
+$scope.initials = function(element)
+{
+    return "foo";
+};
+
 /**
 *	Directive Cursor
 *
@@ -1012,6 +1023,7 @@ feedbackApp.directive('cursor', ['$document' , function($document) {
 		}
 	};
 }]);
+
 
 /**
 *	Directive selectedScroll

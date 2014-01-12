@@ -35,7 +35,7 @@
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
 	<div id="mouseTracker"><div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
-	<div id="overlay">
+	<div id="overlay" ng-hide="briefRead">
 		<div id="brief">
 			<div class="brief-author">
 				<img src="images/me.png">
@@ -71,9 +71,8 @@
 
 			<form>
 				<label for="name">What’s your name?</label>
-				<input type="text" placeholder="Your Name" id="name" autofocus="autofocus" />
-				<span class="brief-user">FS</span>
-				<button class="btn-okay form-block">Okay, let’s do this!</button>
+				<input type="text" placeholder="Your Name" id="name" ng-model="username" capitalize-first />
+				<button type="submit" ng-class="{btnokay: username!='', btndisabled:username==''}" class="form-block" ng-click="briefRead=true">Okay, let’s do this!</button>
 			</form>
 
 		</div>
@@ -97,7 +96,7 @@
 			</div>
 		</div>
 		<div id="login" ng-controller="AuthController">
-			<span class="space" ng-show="me"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{me.first}}!</strong></span>
+			<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
 			<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
 
 			<form ng-hide="true" class="form-inline">
@@ -176,7 +175,7 @@
 	
 			<!-- Comments -->
 		
-			<aside class="flex" id="right" ng-hide="images.length == 0">
+			<aside id="right" ng-hide="images.length == 0">
 				<div id="feedback-header" class="fill-brown">
 					<h3 class="text-light spacing">Feedback</h3>
 					<input class="search" ng-model="search" placeholder="Search…">
@@ -185,7 +184,7 @@
 					<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
 					<div class="feedback-content">
 						<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
-							<h3 class="light">Florian</h3>
+							<h3 class="light">{{annotation.author}}</h3>
 							<div class="bubble"><span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<span class="remove" ng-click="removeAnnotation($index)">×</span></div>
 						</li>
 					</div>
