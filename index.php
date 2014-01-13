@@ -166,7 +166,7 @@
 					<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 						<div class="handle"></div>
-						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" id="$index" types="commentTypes" tooltip></span>
+						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
 					</div>
 				</div>
 			</div>
@@ -184,8 +184,21 @@
 					<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
 					<div class="feedback-content">
 						<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
-							<h3 class="light">{{annotation.author}}</h3>
+							<div class="brief-author">
+								<img src="images/me.png">
+								<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light"> {{annotation.timestamp}}</span>
+							</div>
 							<div class="bubble"><span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<span class="remove" ng-click="removeAnnotation($index)">×</span></div>
+
+							<ul>
+								<li ng-repeat="reply in annotation.replies">
+									<div class="brief-author">
+										<img src="images/me.png">
+										<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light"> {{reply.timestamp}}</span>
+									</div>
+									{{reply.text}}
+								</li>
+							</ul>
 						</li>
 					</div>
 				</ul>

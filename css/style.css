@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* line 1, ../sass/_animations.scss */
 .animated {
   -webkit-animation-duration: 0.7s;
@@ -439,7 +438,7 @@ input[type="text"]:focus {
   display: inline-block;
   margin: 0px 4px;
   background: #363d45;
-  border: 1px solid #666;
+  border: 1px solid #666666;
   box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 1px 0px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   color: #ffcc00;
@@ -568,34 +567,37 @@ input[type="text"]:focus {
   font-style: italic;
   margin: 20px 0 0 0;
 }
-/* line 326, ../sass/_base.scss */
-#brief .brief-info {
+
+/* line 327, ../sass/_base.scss */
+.brief-info {
   border-bottom: 1px dashed #d9d9d9;
   border-top: 1px dashed #d9d9d9;
   padding-bottom: 20px;
   margin: 30px 0px;
 }
-/* line 333, ../sass/_base.scss */
-#brief .brief-info p {
+/* line 334, ../sass/_base.scss */
+.brief-info p {
   font-style: normal;
 }
-/* line 338, ../sass/_base.scss */
-#brief .brief-author {
+
+/* line 339, ../sass/_base.scss */
+.brief-author {
   font-size: 14px;
 }
-/* line 341, ../sass/_base.scss */
-#brief .brief-author .brief-date {
+/* line 342, ../sass/_base.scss */
+.brief-author .brief-date {
   margin-left: 5px;
   font-size: 12px;
 }
-/* line 347, ../sass/_base.scss */
-#brief .brief-author img {
+/* line 348, ../sass/_base.scss */
+.brief-author img {
   position: relative;
   top: 9px;
   margin-right: 4px;
 }
-/* line 354, ../sass/_base.scss */
-#brief .brief-user {
+
+/* line 355, ../sass/_base.scss */
+.brief-user {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
@@ -898,7 +900,6 @@ header input {
 
 /* line 1, ../sass/_main.scss */
 #main {
-  width: 100%;
   overflow: scroll;
   display: -webkit-box;
   display: -moz-box;
@@ -908,55 +909,72 @@ header input {
   -moz-box-orient: horizontal;
   -ms-box-orient: horizontal;
   box-orient: horizontal;
-  -webkit-box-align: vertical;
-  -moz-box-align: vertical;
-  -ms-box-align: vertical;
-  box-align: vertical;
   -webkit-box-pack: center;
   -moz-box-pack: center;
   -ms-box-pack: center;
   box-pack: center;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+  -webkit-box-lines: single;
+  -moz-box-lines: single;
+  -ms-box-lines: single;
+  box-lines: single;
   margin: 40px 0px 20px 0px;
   padding: 20px 50px;
 }
-/* line 16, ../sass/_main.scss */
+/* line 15, ../sass/_main.scss */
 #main .current-screen {
   max-width: 100%;
 }
 
-/* line 21, ../sass/_main.scss */
+/* line 20, ../sass/_main.scss */
 #imgwrapper {
   display: block;
   position: relative;
 }
-/* line 27, ../sass/_main.scss */
-#imgwrapper img {
+/* line 26, ../sass/_main.scss */
+#imgwrapper > img {
   display: inline;
   vertical-align: bottom;
-  border: 8px solid #fff;
+  border: 8px solid white;
   background: #fff;
   -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
   -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  opacity: 0.5;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+/* line 39, ../sass/_main.scss */
+#imgwrapper > img:hover {
+  opacity: 1;
 }
 
-/* line 36, ../sass/_main.scss */
+/* line 45, ../sass/_main.scss */
 .emptystate {
   border-radius: 8px;
   color: #22262b;
   cursor: pointer;
 }
-/* line 42, ../sass/_main.scss */
+/* line 51, ../sass/_main.scss */
 .emptystate .upload-icon {
   font-size: 120px;
   border: none;
 }
-/* line 47, ../sass/_main.scss */
+/* line 56, ../sass/_main.scss */
 .emptystate h2 {
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1);
 }
 
-/* line 52, ../sass/_main.scss */
+/* line 61, ../sass/_main.scss */
 #content {
   position: absolute;
   height: 100%;
@@ -965,6 +983,14 @@ header input {
   display: -moz-box;
   display: -ms-box;
   display: box;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -ms-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -ms-box-align: stretch;
+  box-align: stretch;
 }
 
 /* line 1, ../sass/_navigation.scss */
@@ -1149,69 +1175,79 @@ header input {
 .tooltip {
   position: absolute;
   z-index: 100;
-  min-width: 150px;
+  padding: 15px 20px 20px 20px;
+  min-width: 300px;
   display: inline-block;
   top: 15px;
-  left: -75px;
+  left: -150px;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: all 0.4s;
-  padding: 6px 20px 6px 6px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 2px;
-  border-radius: 8px;
-  line-height: 1.5em;
-  background-color: #fef0c0;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 12px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 12px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 12px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  line-height: 1.3em;
+  background-color: #fff;
   color: #5c5c5c;
-  font-family: "Georgia";
-  font-style: italic;
+  font-family: "Meta Serif OT";
+  font-size: 14px;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid white;
 }
-/* line 74, ../sass/_tooltip.scss */
-.tooltip:hover {
-  background: #fef0c0;
-}
-/* line 78, ../sass/_tooltip.scss */
+/* line 85, ../sass/_tooltip.scss */
 .tooltip:before {
   position: absolute;
   top: -7px;
-  left: 75px;
+  left: 150px;
   content: '';
   display: block;
   border-right: 10px solid transparent;
   border-left: 10px solid transparent;
-  border-bottom: 10px solid #fef0c0;
+  border-bottom: 10px solid white;
 }
 
-/* line 92, ../sass/_tooltip.scss */
+/* line 99, ../sass/_tooltip.scss */
 .tooltip:focus {
   outline: 0;
 }
 
-/* line 96, ../sass/_tooltip.scss */
+/* line 103, ../sass/_tooltip.scss */
 .note {
   width: 15px;
   height: 15px;
   position: relative;
 }
 
-/* line 101, ../sass/_tooltip.scss */
+/* line 108, ../sass/_tooltip.scss */
 .large {
   width: 50px;
   height: 50px;
 }
 
-/* line 105, ../sass/_tooltip.scss */
+/* line 112, ../sass/_tooltip.scss */
 .note-handle:hover {
   opacity: 1;
 }
 
-/* line 109, ../sass/_tooltip.scss */
+/* line 116, ../sass/_tooltip.scss */
 .ui-draggable {
   cursor: move;
 }
 
-/* line 111, ../sass/_tooltip.scss */
+/* line 118, ../sass/_tooltip.scss */
 .open {
   opacity: 1 !important;
   visibility: visible;

@@ -201,7 +201,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	
 			// save annotation 
 	
-			$scope.current.annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.current.annotations.length + 1, "comment":""})
+			$scope.current.annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.current.annotations.length + 1, "comment":"", "replies": [], "timestamp":new Date().getTime()})
 			$scope.save();
 	
 			// select annotation to open it
@@ -896,7 +896,19 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             '<button class="green" ng-click="save()">Save</button>' +
             '<button ng-click="revert()">Cancel</button>' +
         '</div>' +
-        '<div ng-show="annotation.comment && !view.editorEnabled"><span class="tag" ng-class="{green: annotation.type==\'idea\', purple:annotation.type==\'question\', blue: annotation.type==\'onit\'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<a href="#" class="right edit icon" ng-click="enableEditor()">p</a><a href="#" class="right edit icon" ng-click="remove()">#</a></div>' +
+        '<div ng-show="annotation.comment && !view.editorEnabled">' + 
+        	'<span class="tag" ng-class="{green: annotation.type==\'idea\', purple:annotation.type==\'question\', blue: annotation.type==\'onit\'}">{{annotation.typeLabel}}</span>' +
+        	'<div class="brief-author">' +
+				'<img src="images/me.png">' +
+				'<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light">{{annotation.timestamp}}</span>' +
+			'</div>' +
+        	'{{annotation.comment}}' + 
+        	'<div ng-repeat="reply in annotation.replies">{{reply.text}}</div>' + 
+        	'<a href="#" class="right edit icon" ng-click="enableEditor()">p</a>' +
+        	'<a href="#" class="right edit icon" ng-click="remove()">#</a>' +
+        	'<div><input type="text" placeholder="Comment" ng-model="view.reply" /></div>' +
+        	'<button class="btn-okay" ng-click="reply()">Reply</button>' + 
+
     '</div>';
 
     return {
@@ -906,12 +918,14 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
         scope: {
             annotation: "=a",
             id: "=id",
-            types: "=types"
+            types: "=types",
+            username: "=username"
         },
         controller: function($rootScope, $scope, $timeout) {
             $scope.view = {
                 editableValue: $scope.annotation.comment,
-                editorEnabled: false
+                editorEnabled: false,
+                reply: "",
             };
 
             $scope.enableEditor = function(type) {
@@ -941,6 +955,15 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             		$scope.revert();
             	}
             };
+
+            $scope.reply = function () {
+            	if ($scope.view.reply != "") {
+            		var newreply = {"text":$scope.view.reply, "user":$scope.username, "timestamp":new Date().getTime()};
+            		$scope.annotation.replies.push(newreply);
+            		$scope.view.reply = "";
+            		$scope.save();	
+            	}
+            }
 
             $scope.revert = function () {
             	$scope.annotation.comment = $scope.previousComment;
@@ -995,10 +1018,6 @@ feedbackApp.filter('typeFilter', function() {
     }
 });
 
-$scope.initials = function(element)
-{
-    return "foo";
-};
 
 /**
 *	Directive Cursor

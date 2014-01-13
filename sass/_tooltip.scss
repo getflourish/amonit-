@@ -48,44 +48,51 @@
 .tooltip {
     position: absolute;
     z-index: 100;
-    min-width: 150px;
+    
+    padding: 15px 20px 20px 20px;
+	min-width: 300px;
+
     display: inline-block;
     
     top: 15px;
-    left: -75px;
+    left: -150px;
     opacity: 0;
     visibility: hidden;
 
-    -webkit-transition: all 0.4s;   
+    @include transition-property(all);
+	@include transition-duration(0.5s);  
 
-	padding: 6px 20px 6px 6px;
-	
-	@include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px 2px);
-	border-radius: 8px;
+	@include box-shadow(rgba(0, 0, 0, 0.5) 0px 0px 12px);
+	@include border-radius(5px);
 
-	line-height: 1.5em;
+	line-height: 1.3em;
 
-	background-color: #fef0c0;
+	background-color: #fff;
 
 	color: #5c5c5c;
-	font-family: "Georgia";
-	font-style: italic;
+	font-family: "Meta Serif OT";
+	font-size: 14px;
+
+	width:100%;
+
+	background-color: #ffffff;
+	border: 1px solid #ffffff;
 
 	&:hover {
-		background: #fef0c0;
+		
 	}
 
 	&:before {
 	 	position: absolute;
     	top: -7px;
-    	left: 75px;
+    	left: 150px;
     
     	content: '';
     	display: block;
 	
     	border-right: 10px solid transparent;
     	border-left: 10px solid transparent;
-    	border-bottom: 10px solid #fef0c0;
+    	border-bottom: 10px solid #fff;
     }
  }
 

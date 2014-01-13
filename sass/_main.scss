@@ -1,14 +1,13 @@
 #main {
-
-	width: 100%;
 	overflow: scroll;
 
 	@include display-box;
 
   	@include box-orient(horizontal);
-  	@include box-align(vertical);
   	
   	@include box-pack(center);
+  	@include box-flex(1);
+  	@include box-lines(single);
 
 	margin: 40px 0px 20px 0px;
 	padding: 20px 50px;
@@ -24,12 +23,22 @@
 
 	position: relative;
 	
-	img {
+	> img {
 		display: inline;
 		vertical-align: bottom;
+		
 		border: 8px solid #fff;
+		
 		background: #fff;
 		@include box-shadow(rgba(0, 0, 0, 0.5) 0px 0px 10px);
+		opacity: 0.5;
+
+		@include transition-property(all);
+		@include transition-duration(0.5s);
+
+		&:hover {
+			opacity: 1;
+		}
 	}
 }
 
@@ -55,4 +64,7 @@
 	width: 100%;
 
 	@include display-box;
+
+  	@include box-orient(horizontal);
+  	@include box-align(stretch);
 }
