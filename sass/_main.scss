@@ -3,11 +3,10 @@
 
 	@include display-box;
 
-  	@include box-orient(horizontal);
-  	
+  	@include box-align(center); 	
   	@include box-pack(center);
   	@include box-flex(1);
-  	@include box-lines(single);
+  	
 
 	margin: 40px 0px 20px 0px;
 	padding: 20px 50px;

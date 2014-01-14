@@ -19,6 +19,7 @@
 	<script type="text/javascript" src="js/modules/focus.js"></script>
 	<script type="text/javascript" src="js/modules/imagedrop.js"></script>
 	<script type="text/javascript" src="js/modules/stretch.js"></script>
+	<script type="text/javascript" src="js/modules/timesince.js"></script>
 	<script type="text/javascript" src="js/modules/ui-sortable.js"></script>
 	<script type="text/javascript" src="js/modules/auth.js"></script>
 	
@@ -37,45 +38,49 @@
 	<div id="mouseTracker"><div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
 	<div id="overlay" ng-hide="briefRead">
 		<div id="brief">
-			<div class="brief-author">
-				<img src="images/me.png">
-				<strong class="brief-name light">Florian</strong><span class="brief-date light">Yesterday</span>
+			<div class="brief-content">
+				<div class="brief-author">
+					<img src="images/me.png">
+					<strong class="brief-name light">Florian</strong><span class="brief-date light">Yesterday</span>
+				</div>
+	
+				<h3>Feedback Request</h3>
+				
+				<p>
+					Hello! I need your feedback on a couple of pages that I designed for <strong>CCN’s on Behance.</strong> 
+				</p>
+				<p>
+					It’s supposed to explain the structure of the site and what’s customizable. 
+				</p>
+				<ol>
+					<li>1. What do you think about the header design and the typography?</li>
+					<li>2. Do you think we can implement the maginifying glass without using jQuery?</li>
+					<li>3. Not sure about the copy.</li>
+				</ol>
+				
+				<p>
+					Please feel free to comment on anything that catches your eye!
+				</p>
+	
+				<p>
+					Kindly,<br>
+					Florian
+				</p>
+	
+				<div class="brief-info">
+					<p>Please note that the following images are the <strong>first draft.</strong> Images are placeholder stock images and will be replaced in the final version.</p>
+				</div>
+
+				<div class="brief-footer">
+					<form id="enter-name">
+						<label for="name">Please enter your name to leave some feedback.</label>
+						<input type="text" placeholder="Your Name" id="name" ng-model="username" capitalize-first autofocus />
+						<button type="submit" ng-class="{btnokay: username!='', btndisabled:username==''}" class="form-block" ng-click="briefRead=true">Okay, let’s do this!</button>
+					</form>
+				</div>
 			</div>
-
-			<h3>Feedback Request</h3>
-			
-			<p>
-				Hello! I need your feedback on a couple of pages that I designed for <strong>CCN’s on Behance.</strong> 
-			</p>
-			<p>
-				It’s supposed to explain the structure of the site and what’s customizable. 
-			</p>
-			<ol>
-				<li>1. What do you think about the header design and the typography?</li>
-				<li>2. Do you think we can implement the maginifying glass without using jQuery?</li>
-				<li>3. Not sure about the copy.</li>
-			</ol>
-			
-			<p>
-				Please feel free to comment on anything that catches your eye!
-			</p>
-
-			<p>
-				Kindly,<br>
-				Florian
-			</p>
-
-			<div class="brief-info">
-				<p>Please note that the following images are the <strong>first draft.</strong> Images are placeholder stock images and will be replaced in the final version.</p>
-			</div>
-
-			<form>
-				<label for="name">What’s your name?</label>
-				<input type="text" placeholder="Your Name" id="name" ng-model="username" capitalize-first />
-				<button type="submit" ng-class="{btnokay: username!='', btndisabled:username==''}" class="form-block" ng-click="briefRead=true">Okay, let’s do this!</button>
-			</form>
-
 		</div>
+		
 	</div>
 	<!-- header -->
 
@@ -83,15 +88,7 @@
 		<div>
 			<span class="logo space"><em>Go</em>over</span>
 			<div class="space split-button right">
-				<span class="inset splitbutton-left" href="/amonit2/{{data.path}}">
-					<?php 
-						if($_GET["id"]) {
-							echo "http://". $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-						} else {
-							echo "http://". $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $id;
-						}
-
-						?>{{id}}</span>
+				<input class="inset splitbutton-left" value="{{projectpath}}" disabled />
 				<button class="btn-sm inset-button splitbutton-right">Share</button>
 			</div>
 		</div>
@@ -165,7 +162,7 @@
 					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
 					<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
-						<div class="handle"></div>
+						<div class="handle">{{$index + 1}}</div>
 						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
 					</div>
 				</div>
@@ -186,7 +183,7 @@
 						<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
 							<div class="brief-author">
 								<img src="images/me.png">
-								<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light"> {{annotation.timestamp}}</span>
+								<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
 							</div>
 							<div class="bubble"><span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<span class="remove" ng-click="removeAnnotation($index)">×</span></div>
 
@@ -194,7 +191,7 @@
 								<li ng-repeat="reply in annotation.replies">
 									<div class="brief-author">
 										<img src="images/me.png">
-										<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light"> {{reply.timestamp}}</span>
+										<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
 									</div>
 									{{reply.text}}
 								</li>

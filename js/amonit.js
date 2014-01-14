@@ -1,5 +1,5 @@
 
-var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'imagedropModule', 'stretchModule',  'ui.sortable',
+var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'imagedropModule', 'stretchModule',  'timeSince', 'ui.sortable',
 ]);
 
 feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, $rootScope, $timeout, uploadService ) {
@@ -12,7 +12,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.addOrder = "before";
 
 	// Will be set to true after the brief was read
-	$scope.briefRead = false;
+	$scope.briefRead = true;
 
 	// comment types
 	$scope.commentTypes = [
@@ -56,6 +56,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	// onit path to images
 	$scope.path;
+
+	// project path
+	$scope.projectpath = "";
 
 	// index of selected annotation
 	$scope.selectedAnnotation = -1;
@@ -385,10 +388,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 				$scope.data.path = data.path;
 				$scope.path = data.path;
+				$scope.id = data.path;
 				$scope.images = data.images;
 				$scope.current = $scope.images[$scope.currentIndex];
+				$scope.briefRead = false;
 			}
-
+			$scope.setPath();
 			$scope.setupFirebase();
 		});
 	}
@@ -524,6 +529,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	 	// $("#left").stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
 	 	// $scope.overviewShowing = true;
+	}
+
+	$scope.setPath = function () {
+		$http.get('getpath.php').success(function(data) {
+			$scope.projectpath = data + "/?id=" + $scope.id.substr(3);
+		});
 	}
 
 	/**
@@ -900,14 +911,26 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
         	'<span class="tag" ng-class="{green: annotation.type==\'idea\', purple:annotation.type==\'question\', blue: annotation.type==\'onit\'}">{{annotation.typeLabel}}</span>' +
         	'<div class="brief-author">' +
 				'<img src="images/me.png">' +
-				'<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light">{{annotation.timestamp}}</span>' +
+				'<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>' +
 			'</div>' +
         	'{{annotation.comment}}' + 
-        	'<div ng-repeat="reply in annotation.replies">{{reply.text}}</div>' + 
+        	
+			'<ul class="indent">' +
+				'<li ng-repeat="reply in annotation.replies">' +
+					'<div class="brief-author">' +
+						'<img src="images/me.png">' +
+						'<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>' +
+					'</div>' +
+					'{{reply.text}}' +
+				'</li>' +
+			'</ul>' +
+
         	'<a href="#" class="right edit icon" ng-click="enableEditor()">p</a>' +
         	'<a href="#" class="right edit icon" ng-click="remove()">#</a>' +
-        	'<div><input type="text" placeholder="Comment" ng-model="view.reply" /></div>' +
-        	'<button class="btn-okay" ng-click="reply()">Reply</button>' + 
+        	'<form>' +
+        		'<div><input type="text" placeholder="Comment" ng-model="view.reply" /></div>' +
+        		'<button class="btn-okay" ng-click="reply()" type="submit">Reply</button>' + 
+        	'</form>'+
 
     '</div>';
 

@@ -17,15 +17,21 @@
 }
 
 .handle {
-	width: 12px;
-    height: 12px;
+	width: 20px;
+    height: 20px;
 	border-radius: 100px;
-    border: 5px solid #ffcc00;
+	background: #000;
+    border: 2px solid #fff;
+    font-weight: bold;
+    color: #ffcc00;
+    text-align: center;
 	
 	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
 
 	-webkit-transform: translate3d(0,0,0);
 
+
+	/*
 	-webkit-animation-name: pulse;
 	-webkit-animation-duration: 1s;
   	animation-duration: 1s;
@@ -33,6 +39,8 @@
   	animation-fill-mode: both;
   	-webkit-animation-direction:alternate;
  	-webkit-animation-iteration-count: infinite;
+ 	*/
+
 }
 
 .pulseblue {
@@ -93,6 +101,15 @@
     	border-right: 10px solid transparent;
     	border-left: 10px solid transparent;
     	border-bottom: 10px solid #fff;
+    }
+
+    ul {
+    	max-height: 200px;
+    	overflow: scroll;
+    }
+
+    form {
+    	margin-top: 20px;
     }
  }
 

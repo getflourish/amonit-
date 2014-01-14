@@ -384,31 +384,32 @@ button {
 /* line 157, ../sass/_base.scss */
 .splitbutton-left {
   border-radius: 3px 0px 0px 3px;
+  min-width: 250px;
 }
 
-/* line 161, ../sass/_base.scss */
+/* line 163, ../sass/_base.scss */
 .splitbutton-right {
   border-radius: 0px 3px 3px 0px;
 }
 
 /* Forms */
-/* line 171, ../sass/_base.scss */
+/* line 173, ../sass/_base.scss */
 .form-inline {
   display: inline;
 }
 
-/* line 175, ../sass/_base.scss */
+/* line 177, ../sass/_base.scss */
 .form-block {
   display: block;
   margin-top: 10px;
 }
 
-/* line 180, ../sass/_base.scss */
+/* line 182, ../sass/_base.scss */
 .form-control {
   margin-right: 6px;
 }
 
-/* line 184, ../sass/_base.scss */
+/* line 186, ../sass/_base.scss */
 label {
   display: block;
   margin-bottom: 10px;
@@ -417,7 +418,7 @@ label {
   line-height: 12px;
 }
 
-/* line 192, ../sass/_base.scss */
+/* line 194, ../sass/_base.scss */
 input[type="text"] {
   border: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 3px;
@@ -426,12 +427,12 @@ input[type="text"] {
   padding: 6px 12px 6px 12px;
   font-size: 14px;
 }
-/* line 199, ../sass/_base.scss */
+/* line 201, ../sass/_base.scss */
 input[type="text"]:focus {
   outline: 0;
 }
 
-/* line 204, ../sass/_base.scss */
+/* line 206, ../sass/_base.scss */
 .key {
   width: 16px;
   height: 16px;
@@ -449,24 +450,24 @@ input[type="text"]:focus {
 }
 
 /* Icons */
-/* line 228, ../sass/_base.scss */
+/* line 230, ../sass/_base.scss */
 .icon {
   font-family: "pictos";
   font-size: 16px;
 }
 
-/* line 232, ../sass/_base.scss */
+/* line 234, ../sass/_base.scss */
 .icon:hover {
   opacity: 1;
 }
 
-/* line 236, ../sass/_base.scss */
+/* line 238, ../sass/_base.scss */
 .icon.before {
   margin-right: 7px;
 }
 
 /* Inset */
-/* line 242, ../sass/_base.scss */
+/* line 244, ../sass/_base.scss */
 .inset {
   display: inline-block;
   padding: 0px 4px;
@@ -493,7 +494,7 @@ input[type="text"]:focus {
   line-height: 24px;
 }
 
-/* line 262, ../sass/_base.scss */
+/* line 264, ../sass/_base.scss */
 .inset-button {
   background: -moz-linear-gradient(180deg, white 0%, #e8e8e8 100%);
   background: -ms-linear-gradient(180deg, white 0%, #e8e8e8 100%);
@@ -508,7 +509,7 @@ input[type="text"]:focus {
 }
 
 /* Overlay */
-/* line 276, ../sass/_base.scss */
+/* line 278, ../sass/_base.scss */
 #overlay {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -534,8 +535,20 @@ input[type="text"]:focus {
   box-pack: center;
 }
 
-/* line 291, ../sass/_base.scss */
+/* line 293, ../sass/_base.scss */
 #brief {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-box;
+  display: box;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -ms-box-align: start;
+  box-align: start;
   background-color: #ffffff;
   padding: 50px;
   width: 512px;
@@ -546,57 +559,65 @@ input[type="text"]:focus {
   font-weight: normal;
   line-height: 1.4em;
 }
-/* line 306, ../sass/_base.scss */
+/* line 311, ../sass/_base.scss */
+#brief .brief-content {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-box-flex: 1;
+  box-flex: 1;
+}
+/* line 316, ../sass/_base.scss */
 #brief ol {
   list-style-position: inside;
 }
-/* line 309, ../sass/_base.scss */
+/* line 319, ../sass/_base.scss */
 #brief ol li {
   font-size: 18px;
   margin-bottom: 10px;
 }
-/* line 314, ../sass/_base.scss */
+/* line 324, ../sass/_base.scss */
 #brief h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 40px 0px;
 }
-/* line 320, ../sass/_base.scss */
+/* line 330, ../sass/_base.scss */
 #brief p, #brief ol {
   font-family: "Meta Serif OT";
   font-style: italic;
   margin: 20px 0 0 0;
 }
 
-/* line 327, ../sass/_base.scss */
+/* line 339, ../sass/_base.scss */
 .brief-info {
   border-bottom: 1px dashed #d9d9d9;
   border-top: 1px dashed #d9d9d9;
   padding-bottom: 20px;
   margin: 30px 0px;
 }
-/* line 334, ../sass/_base.scss */
+/* line 346, ../sass/_base.scss */
 .brief-info p {
   font-style: normal;
 }
 
-/* line 339, ../sass/_base.scss */
+/* line 351, ../sass/_base.scss */
 .brief-author {
   font-size: 14px;
+  margin-bottom: 8px;
 }
-/* line 342, ../sass/_base.scss */
+/* line 355, ../sass/_base.scss */
 .brief-author .brief-date {
   margin-left: 5px;
   font-size: 12px;
 }
-/* line 348, ../sass/_base.scss */
+/* line 361, ../sass/_base.scss */
 .brief-author img {
   position: relative;
   top: 9px;
   margin-right: 4px;
 }
 
-/* line 355, ../sass/_base.scss */
+/* line 368, ../sass/_base.scss */
 .brief-user {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -611,9 +632,15 @@ input[type="text"]:focus {
   font-size: 13px;
 }
 
-/* line 365, ../sass/_base.scss */
+/* line 379, ../sass/_base.scss */
 #name {
   text-transform: capitalize;
+}
+
+/* line 383, ../sass/_base.scss */
+.indent {
+  margin-top: 8px;
+  border-top: 1px solid #cccccc;
 }
 
 /* line 1, ../sass/_clicktoedit.scss */
@@ -643,7 +670,7 @@ input[type="text"]:focus {
   margin-top: 40px;
   overflow: scroll;
   width: 400px;
-  background: #edeae2;
+  background: #fff;
   color: #242424;
 }
 /* line 13, ../sass/_feedback.scss */
@@ -905,10 +932,10 @@ header input {
   display: -moz-box;
   display: -ms-box;
   display: box;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -ms-box-orient: horizontal;
-  box-orient: horizontal;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-box-align: center;
+  box-align: center;
   -webkit-box-pack: center;
   -moz-box-pack: center;
   -ms-box-pack: center;
@@ -917,24 +944,20 @@ header input {
   -moz-box-flex: 1;
   -ms-box-flex: 1;
   box-flex: 1;
-  -webkit-box-lines: single;
-  -moz-box-lines: single;
-  -ms-box-lines: single;
-  box-lines: single;
   margin: 40px 0px 20px 0px;
   padding: 20px 50px;
 }
-/* line 15, ../sass/_main.scss */
+/* line 14, ../sass/_main.scss */
 #main .current-screen {
   max-width: 100%;
 }
 
-/* line 20, ../sass/_main.scss */
+/* line 19, ../sass/_main.scss */
 #imgwrapper {
   display: block;
   position: relative;
 }
-/* line 26, ../sass/_main.scss */
+/* line 25, ../sass/_main.scss */
 #imgwrapper > img {
   display: inline;
   vertical-align: bottom;
@@ -953,28 +976,28 @@ header input {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 39, ../sass/_main.scss */
+/* line 38, ../sass/_main.scss */
 #imgwrapper > img:hover {
   opacity: 1;
 }
 
-/* line 45, ../sass/_main.scss */
+/* line 44, ../sass/_main.scss */
 .emptystate {
   border-radius: 8px;
   color: #22262b;
   cursor: pointer;
 }
-/* line 51, ../sass/_main.scss */
+/* line 50, ../sass/_main.scss */
 .emptystate .upload-icon {
   font-size: 120px;
   border: none;
 }
-/* line 56, ../sass/_main.scss */
+/* line 55, ../sass/_main.scss */
 .emptystate h2 {
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1);
 }
 
-/* line 61, ../sass/_main.scss */
+/* line 60, ../sass/_main.scss */
 #content {
   position: absolute;
   height: 100%;
@@ -1141,37 +1164,43 @@ header input {
 
 /* line 19, ../sass/_tooltip.scss */
 .handle {
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   border-radius: 100px;
-  border: 5px solid #ffcc00;
+  background: #000;
+  border: 2px solid white;
+  font-weight: bold;
+  color: #ffcc00;
+  text-align: center;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
   -webkit-transform: translate3d(0, 0, 0);
-  -webkit-animation-name: pulse;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-direction: alternate;
-  -webkit-animation-iteration-count: infinite;
+  	/*
+  	-webkit-animation-name: pulse;
+  	-webkit-animation-duration: 1s;
+    	animation-duration: 1s;
+    	-webkit-animation-fill-mode: both;
+    	animation-fill-mode: both;
+    	-webkit-animation-direction:alternate;
+   	-webkit-animation-iteration-count: infinite;
+   	*/
 }
 
-/* line 38, ../sass/_tooltip.scss */
+/* line 46, ../sass/_tooltip.scss */
 .pulseblue {
   -webkit-animation-name: pulseblue;
 }
 
-/* line 41, ../sass/_tooltip.scss */
+/* line 49, ../sass/_tooltip.scss */
 .pulsegreen {
   -webkit-animation-name: pulsegreen !important;
 }
 
-/* line 44, ../sass/_tooltip.scss */
+/* line 52, ../sass/_tooltip.scss */
 .pulsepurple {
   -webkit-animation-name: pulsepurple !important;
 }
 
-/* line 48, ../sass/_tooltip.scss */
+/* line 56, ../sass/_tooltip.scss */
 .tooltip {
   position: absolute;
   z-index: 100;
@@ -1207,7 +1236,7 @@ header input {
   background-color: #ffffff;
   border: 1px solid white;
 }
-/* line 85, ../sass/_tooltip.scss */
+/* line 93, ../sass/_tooltip.scss */
 .tooltip:before {
   position: absolute;
   top: -7px;
@@ -1218,36 +1247,45 @@ header input {
   border-left: 10px solid transparent;
   border-bottom: 10px solid white;
 }
+/* line 106, ../sass/_tooltip.scss */
+.tooltip ul {
+  max-height: 200px;
+  overflow: scroll;
+}
+/* line 111, ../sass/_tooltip.scss */
+.tooltip form {
+  margin-top: 20px;
+}
 
-/* line 99, ../sass/_tooltip.scss */
+/* line 116, ../sass/_tooltip.scss */
 .tooltip:focus {
   outline: 0;
 }
 
-/* line 103, ../sass/_tooltip.scss */
+/* line 120, ../sass/_tooltip.scss */
 .note {
   width: 15px;
   height: 15px;
   position: relative;
 }
 
-/* line 108, ../sass/_tooltip.scss */
+/* line 125, ../sass/_tooltip.scss */
 .large {
   width: 50px;
   height: 50px;
 }
 
-/* line 112, ../sass/_tooltip.scss */
+/* line 129, ../sass/_tooltip.scss */
 .note-handle:hover {
   opacity: 1;
 }
 
-/* line 116, ../sass/_tooltip.scss */
+/* line 133, ../sass/_tooltip.scss */
 .ui-draggable {
   cursor: move;
 }
 
-/* line 118, ../sass/_tooltip.scss */
+/* line 135, ../sass/_tooltip.scss */
 .open {
   opacity: 1 !important;
   visibility: visible;
@@ -1268,7 +1306,7 @@ header input {
 /* line 22, ../sass/style.scss */
 body {
   margin: 0 auto;
-  background: #363d45;
+  background: #f2efe4;
   color: #363d45;
   font-size: 16px;
   font-family: "Helvetica Neue", "Arial", sans-serif;
