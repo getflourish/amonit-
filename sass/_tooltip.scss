@@ -20,7 +20,7 @@
 	width: 20px;
     height: 20px;
 	border-radius: 100px;
-	background: #000;
+	background: rgba(0, 0, 0, 0.9);
     border: 2px solid #fff;
     font-weight: bold;
     color: #ffcc00;
@@ -78,7 +78,7 @@
 	background-color: #fff;
 
 	color: #5c5c5c;
-	font-family: "Meta Serif OT";
+	font-family: $SERIF;
 	font-size: 14px;
 
 	width:100%;

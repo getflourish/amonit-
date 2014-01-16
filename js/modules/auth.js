@@ -50,7 +50,6 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
     	// Number of online users is the number of objects in the presence list.
     	listRef.on('value', function (snap) {
         	onlineUsers = snap.numChildren();
-        	console.log(onlineUsers)
         	$rootScope.$broadcast('onOnlineUser');
     	});
 
@@ -74,7 +73,6 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 				}
 
 			} else if (user) {
-				console.log("logged in")
 
 				// successfully logged in
 
@@ -84,8 +82,6 @@ angular.module('authModule', ['firebase']).controller('AuthController', ['$scope
 			} else {
 
 				// user logged out
-
-				console.log("logged out")
 
 				$scope.user = null;
 				$scope.me = null;

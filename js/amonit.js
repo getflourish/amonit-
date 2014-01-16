@@ -28,7 +28,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.currentIndex = 0;
 
 	// data object that holds information about images and the path
-	$scope.data = {"images":$scope.images, "path":""};
+	$scope.data = {"images":"", "path":""};
 
 	// flag used to indicate whether a tooltip is being edited
 	$scope.editing = false;
@@ -36,8 +36,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// grabbed from href and used to decide whether to create a new folder or use an existing one
 	$scope.id;
 
+	$scope.project = {"images":[]};
+
 	// most important object. contains information about images and their annotations
-	$scope.images = [];	
+	
 
 	// used on loading (could be replaced with the path?)
 	$scope.image_directory = "";
@@ -138,7 +140,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		if (order == "before") {
 			$scope.addImage(file, 0);
 		} else {
-			$scope.addImage(file, $scope.images.length);
+			$scope.addImage(file, $scope.project.images.length);
 		}
 	});
 
@@ -203,6 +205,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 			var y = (globalY) / $scope.imageElement.prop("height");
 	
 			// save annotation 
+
+			if(!$scope.current.annotations) $scope.current.annotations = [];
 	
 			$scope.current.annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.current.annotations.length + 1, "comment":"", "replies": [], "timestamp":new Date().getTime()})
 			$scope.save();
@@ -230,15 +234,13 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.addImage = function (file, index) {
 		
 		// construct image object
-		var newImage = {"filename": file.name, "path": $scope.path + "/" + file.name, "id": $scope.images.length, "annotations":[]};
-		console.log("new image");
-		console.log($scope.images);
+		var newImage = {"filename": file.name, "path": $scope.path + "/" + file.name, "id": $scope.project.images.length, "annotations":[]};
 
 		// add to images array
 		if (index == 0) {
-			$scope.images.unshift(newImage);
+			$scope.project.images.unshift(newImage);
 		} else {
-			$scope.images.push(newImage);
+			$scope.project.images.push(newImage);
 		}	
 		
 		// set the new image as current
@@ -389,8 +391,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 				$scope.data.path = data.path;
 				$scope.path = data.path;
 				$scope.id = data.path;
-				$scope.images = data.images;
-				$scope.current = $scope.images[$scope.currentIndex];
+				$scope.project.images = data.images;
+				$scope.current = $scope.project.images[$scope.currentIndex];
 				$scope.briefRead = false;
 			}
 			$scope.setPath();
@@ -405,7 +407,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.next = function () {
-		if ($scope.currentIndex < $scope.images.length - 1) {
+		if ($scope.currentIndex < $scope.project.images.length - 1) {
 			$scope.currentIndex++;
 			$scope.selectedAnnotation = -1;
 			$scope.$apply();
@@ -494,8 +496,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.removeImage = function (index) {
-		$scope.images.splice(index, 1);
-		if (index == $scope.images.length) index = index - 1;
+		$scope.project.images.splice(index, 1);
+		if (index == $scope.project.images.length) index = index - 1;
 		$scope.setImage(index);
 		$scope.save();
 	}
@@ -511,7 +513,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		// todo: check whether there is another empty annotation
 		// if so, remove it
 
-		$scope.data.images = $scope.images;
+		$scope.data.images = $scope.project.images;
+		$scope.project.$save();
 
 		$http.post('save.php?path=' + $scope.path,$scope.data).success(function(data) {
 		});		
@@ -602,8 +605,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * Jumps to the given image with the given id
 	 */
 
-	$scope.setImage = function (index) {
-		$scope.current = $scope.images[index];
+	$scope.setImage = function (index) {	
+		$scope.current = $scope.project.images[index];
 		$scope.currentIndex = index;
 		$scope.save();
 	};
@@ -618,8 +621,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 		// // manage images
 		// console.log("id" + $scope.id);
-	 	// var con = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images');
-		// $scope.imagesFirebase = $firebase(con);
+	 	var imageRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id);
+		$scope.project = $firebase(imageRef);
+		$scope.project.images = [];
+
 		// $scope.imagesFirebase.$bind($scope, "images");
 
 	 	// manage index
@@ -634,7 +639,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 		// get connected id
 		var connectedRef = new Firebase('https://feedbacktool.firebaseio.com/.info/connected');
-		console.log($firebase(connectedRef));
 	 }
 
 	 /** 
@@ -670,6 +674,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     	    scope.width = window.innerWidth;
     	    scope.height = window.innerHeight;
     	});
+    	
+
 // 
     	// var domElt = document.getElementById('left');
     	// domElt.height = window.innerHeight;
@@ -690,7 +696,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 feedbackApp.directive('annotation', ['$document' , function($document) {
 	return {
 		link: function(scope, elm, attrs) {	
-			scope.$watch('width', function () {
+			scope.$watch('[width, isFullscreen]', function () {
 
 				var startX = scope.annotation.x;
 				var startY = scope.annotation.y;
@@ -710,7 +716,7 @@ feedbackApp.directive('annotation', ['$document' , function($document) {
 
 					elm.removeClass("animate");
 				});
-			})
+			}, true)
 		}
 	};
 }]);
@@ -765,7 +771,6 @@ feedbackApp.factory('uploadService', ['$rootScope', function ($rootScope) {
 
             // When the request starts.
             xhr.onloadstart = function () {
-            	console.log('Factory: upload started: ', file.name);
             	$rootScope.$emit('upload:loadstart', xhr);
             };
 
@@ -776,16 +781,13 @@ feedbackApp.factory('uploadService', ['$rootScope', function ($rootScope) {
 
             // Send to server, where we can then access it with $_FILES['file].
             data.append('file', file, file.name);
-            console.log("path: " + path)
-            console.log($rootScope)
+            
             data.append('path', path);
             xhr.open('POST', 'upload.php');
             xhr.send(data);
 
             xhr.onload = function (e) {
             	if (xhr.status === 200) {
-            		console.log('all done: ' + xhr.status);
-            		console.log(file)
             		$rootScope.$emit('upload:success', file, order);
             	} else {
             		console.log('Something went terribly wrong...');
@@ -830,7 +832,6 @@ feedbackApp.directive("clickToEdit", function() {
             };
 
             $scope.onKeypress = function (event) {
-            	console.log(event.keyCode)
             	$scope.value = $scope.view.editableValue;
             	if (event.keyCode == 13) {
             		event.preventDefault();
@@ -840,7 +841,6 @@ feedbackApp.directive("clickToEdit", function() {
             };
 
             $scope.enableEditor = function() {
-            	console.log($scope)
                 $scope.view.editorEnabled = true;
                 $scope.view.editableValue = $scope.value;
             };
@@ -898,46 +898,10 @@ feedbackApp.directive("uploader", function () {
  */
 
 feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope) {
-    var tooltipTemplate = '<div class="click-to-edit">' +
-        '<div ng-hide="view.editorEnabled || annotation.comment">' +
-        '<button ng-repeat="type in types" ng-click="enableEditor(type)" class="{{type.class}}">{{type.label}}</button>' +
-        '</div>' +
-        '<div ng-show="view.editorEnabled">' +
-            '<textarea ng-keydown="onKeypress($event)" ng-model="annotation.comment" ng-blur="onBlur(id)"></textarea>' +
-            '<button class="green" ng-click="save()">Save</button>' +
-            '<button ng-click="revert()">Cancel</button>' +
-        '</div>' +
-        '<div ng-show="annotation.comment && !view.editorEnabled">' + 
-        	'<span class="tag" ng-class="{green: annotation.type==\'idea\', purple:annotation.type==\'question\', blue: annotation.type==\'onit\'}">{{annotation.typeLabel}}</span>' +
-        	'<div class="brief-author">' +
-				'<img src="images/me.png">' +
-				'<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>' +
-			'</div>' +
-        	'{{annotation.comment}}' + 
-        	
-			'<ul class="indent">' +
-				'<li ng-repeat="reply in annotation.replies">' +
-					'<div class="brief-author">' +
-						'<img src="images/me.png">' +
-						'<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>' +
-					'</div>' +
-					'{{reply.text}}' +
-				'</li>' +
-			'</ul>' +
-
-        	'<a href="#" class="right edit icon" ng-click="enableEditor()">p</a>' +
-        	'<a href="#" class="right edit icon" ng-click="remove()">#</a>' +
-        	'<form>' +
-        		'<div><input type="text" placeholder="Comment" ng-model="view.reply" /></div>' +
-        		'<button class="btn-okay" ng-click="reply()" type="submit">Reply</button>' + 
-        	'</form>'+
-
-    '</div>';
-
     return {
         restrict: "A",
         replace: false,
-        template: tooltipTemplate,
+        templateUrl: "templates/tooltipTemplate.html",
         scope: {
             annotation: "=a",
             id: "=id",
@@ -1078,7 +1042,6 @@ feedbackApp.directive('selectedscroll', ['$document', '$timeout', function($docu
 	return {
 		link: function(scope, elm, attrs) {
 			scope.$watch('currentIndex', function () {
-				console.log("should scroll")
 				$timeout(function() {
 					elm.stop().animate({scrollTop: $(".selected").prop("offsetTop") }, "slow");
 				});
@@ -1096,7 +1059,7 @@ feedbackApp.directive('selectedscroll', ['$document', '$timeout', function($docu
 */
 
 
-feedbackApp.directive('fullscreen', ['$document', '$rootScope', function($document, $rootScope) {
+feedbackApp.directive('fullscreen', ['$document', '$timeout', '$rootScope', function($document, $timeout, $rootScope) {
 	return {
 		link: function(scope, elm, attrs) {
 			scope.$watch('isFullscreen', function () {
@@ -1115,15 +1078,6 @@ feedbackApp.directive('fullscreen', ['$document', '$rootScope', function($docume
 					$("#wrap").removeClass("fullscreen");
 					$("#imgwrapper").removeClass("fullscreen");
 				}
-		
-				// add classes that remove margins etc.
-		
-				
-	
-				// trigger resize calculations
-
-				// $rootScope.$emit('resize');
-
 			});
 		}
 	};

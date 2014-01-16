@@ -30,6 +30,9 @@
 	<script type="text/javascript" src="js/amonit.js"></script>
 	<script type="text/javascript" src="js/trail.js"></script>
 
+	<script type="text/javascript" src="//use.typekit.net/qxg4wno.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,14 +116,13 @@
 			<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
 		</div>
 		<div class="center" ng-show="false">
-			<h5 ng-show="images.length!=0">{{images[currentIndex-1].filename}}</h5>
-			<h4 ng-show="images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
-			<h5 ng-show="images.length!=0">{{images[currentIndex+1].filename}}</h5>
+			<h5 ng-show="project.images.length!=0">{{images[currentIndex-1].filename}}</h5>
+			<h4 ng-show="project.images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
+			<h5 ng-show="project.images.length!=0">{{images[currentIndex+1].filename}}</h5>
 		</div>
 		<div class="button-group">
-			<div class="space"><span class="icon before">b</span><h2>Make a new one</h2></div>	
-			<div class="space"><span class="icon before">G</span><h2>Invite others</h2></div>	
-			<div class="space"><a href=""><span class="icon before">`</span><h2 ng-click="toggleFullscreen()">Present</h2><span class="key">P</span></a></div>	
+			<div class="space"><a href=""><span class="icon before">b</span><h2>New Set</h2></a></div>	
+			<div class="space"><button class="btn btnokay" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></button></div>	
 		</div>
 		<div class="button-group">
 			<div class="space"><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">▲</span></a></div>	
@@ -139,14 +141,14 @@
 
 		<!-- sidebar -->
 	
-		<aside id="left" class="animated" selectedscroll ng-hide="images.length == 0">
+		<aside id="left" class="animated" selectedscroll ng-hide="project.images.length == 0">
 			<div id="leftspacer"></div>
 		<ul>
 			<li class="add-image upload-icon" filepicker order="before">c</li>
-			<ul id="overview" ui-sortable ng-model="images" ng-class="{slideOut: !overviewShowing}">
-				<li ng-repeat="image in images" ng-click="setImage($index)" ng-class="{selected:$index==currentIndex}"><img ng-src="{{image.path}}" /><span ng-click="removeImage($index)" class="icon light removeimage">y</span></li>
+			<ul id="overview" ui-sortable ng-model="project.images" ng-class="{slideOut: !overviewShowing}">
+				<li ng-repeat="image in project.images" ng-click="setImage($index)" ng-class="{selected:$index==currentIndex}"><img ng-src="{{image.path}}" /><span ng-click="removeImage($index)" class="icon light removeimage">y</span></li>
 			</ul>
-			<li ng-hide="images.length == 0" class="add-image upload-icon" filepicker order="after">c</li>
+			<li ng-hide="project.images.length == 0" class="add-image upload-icon" filepicker order="after">c</li>
 		</ul>
 		</aside>
 	
@@ -157,8 +159,8 @@
 		<!-- main -->
 	
 			<div id="main">
-				<div filepicker order="before" class="emptystate" ng-show="images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
-				<div ng-hide="images.length==0" id="imgwrapper" class="flex">
+				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
+				<div ng-hide="project.images.length==0" id="imgwrapper" class="flex">
 					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
 					<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
@@ -172,12 +174,12 @@
 	
 			<!-- Comments -->
 		
-			<aside id="right" ng-hide="images.length == 0">
-				<div id="feedback-header" class="fill-brown">
-					<h3 class="text-light spacing">Feedback</h3>
+			<aside id="right" ng-hide="project.images.length == 0">
+				<div id="feedback-header">
+					<h3 class="spacing">Feedback</h3>
 					<input class="search" ng-model="search" placeholder="Search…">
 				</div>
-				<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations.length == 0" ng-repeat="image in images | filter:search" ng-click="setImage($index)">
+				<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations.length == 0" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
 					<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
 					<div class="feedback-content">
 						<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">

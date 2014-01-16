@@ -2,11 +2,7 @@ header {
 	
 	position: fixed;
 	z-index: 1000;
-	
-	@include display-box;
-  	@include box-orient(horizontal);
-  	@include box-align(stretch);
-
+	display: -webkit-flex;
 	overflow: hidden;
 
 	padding: 0px 10px;
@@ -14,15 +10,15 @@ header {
 	width:100%;
 	height: 40px;
 
-	@include background-image(linear-gradient(#ffe030, #f1b903));
+	@include background-image(linear-gradient(#ffcc00, #f0b800));
 
 	font-size: 13px;
 	line-height: 40px;
 
-	@include box-shadow(rgba(0, 0, 0, 0.3) 0px 1px 1px);
+	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 1px 1px);
 
 	div {
-		
+		display: -webkit-flex;
 	}
 
 	a {

@@ -1,0 +1,50 @@
+<div class="click-to-edit">
+    <div ng-hide="view.editorEnabled || annotation.comment">
+        <button ng-repeat="type in types" ng-click="enableEditor(type)" class="{{type.class}}">
+            {{type.label}}
+        </button>
+    </div> 
+    <div ng-show="view.editorEnabled">
+        <textarea ng-keydown="onKeypress($event)" ng-model="annotation.comment" ng-blur="onBlur(id)"></textarea>
+        <button class="green" ng-click="save()">Save</button>
+        <button ng-click="revert()">Cancel</button>
+    </div>
+    <div ng-show="annotation.comment && !view.editorEnabled">
+        <span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">
+            {{annotation.typeLabel}}
+        </span>
+        <div class="brief-author">
+			<img src="images/me.png">
+			<strong class="brief-name light">
+                {{annotation.author}}
+            </strong>
+            <span class="brief-date light" time-since="annotation.timestamp"></span>
+	    </div>
+
+        {{annotation.comment}}
+        	
+	    <ul class="indent">
+	   	    <li ng-repeat="reply in annotation.replies">
+	   	   	    <div class="brief-author">
+                    <img src="images/me.png">
+                    <strong class="brief-name light">
+                        {{reply.user}}
+                    </strong>
+                    <span class="brief-date light" time-since="reply.timestamp"></span>
+                </div>
+                {{reply.text}}
+            </li>
+        </ul>
+    
+        <a href="#" class="right edit icon" ng-click="enableEditor()">p</a>
+        <a href="#" class="right edit icon" ng-click="remove()">#</a>
+        <form>
+        	<div>
+                <input type="text" placeholder="Comment" ng-model="view.reply" />
+            </div>
+        	<button class="btn-okay" ng-click="reply()" type="submit">
+                Reply
+            </button> 
+        </form>
+    </div>
+</div>
