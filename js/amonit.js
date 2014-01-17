@@ -22,10 +22,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	];
 
 	// reference to the currently selected image object
-	$scope.current;
+	// $scope.project.images[$scope.currentIndex] = null;
 
 	// index of the currently selected image object
-	$scope.currentIndex = 0;
+	// $scope.project.images[$scope.currentIndex]Index = 0;
 
 	// data object that holds information about images and the path
 	$scope.data = {"images":"", "path":""};
@@ -36,7 +36,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// grabbed from href and used to decide whether to create a new folder or use an existing one
 	$scope.id;
 
-	$scope.project = {"images":[]};
+	$scope.project = {"images":[], "current":null, "currentIndex":0};
 
 	// most important object. contains information about images and their annotations
 	
@@ -198,27 +198,33 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.addAnnotation = function (globalX, globalY) {
 
+		console.log("add")
+
 		if ($scope.selectedAnnotation == -1) {
 		// convert coordinates to local space
 
 			var x = (globalX) / $scope.imageElement.prop("width");
 			var y = (globalY) / $scope.imageElement.prop("height");
 	
-			// save annotation 
+			// save annotation 	
 
-			if(!$scope.current.annotations) $scope.current.annotations = [];
+			if(!$scope.project.images[$scope.currentIndex].annotations) {
+				console.log("new shit");
+				$scope.project.images[$scope.currentIndex].annotations = [];
+			}
+			
+			$scope.project.images[$scope.currentIndex].annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.project.images[$scope.currentIndex].annotations.length + 1, "comment":"", "replies": [], "timestamp":new Date().getTime()})
 	
-			$scope.current.annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.current.annotations.length + 1, "comment":"", "replies": [], "timestamp":new Date().getTime()})
-			$scope.save();
+			// $scope.save();
 	
 			// select annotation to open it
 			
-			$scope.setActive($scope.current.annotations.length-1);
+			$scope.setActive($scope.project.images[$scope.currentIndex].annotations.length-1);
 	
 		} else {
 			// close currently open annotation
 			if ($scope.selectedAnnotation.comment === "") {
-				$scope.removeAnnotation($scope.current.annotations.length-1)
+				$scope.removeAnnotation($scope.project.images[$scope.currentIndex].annotations.length-1)
 			}
 			$scope.save();
 			$scope.selectedAnnotation = -1;
@@ -245,6 +251,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		
 		// set the new image as current
 		$scope.setImage(index);
+		$scope.save();
 
 		// use timeout before scrolling to the recently added image
 
@@ -374,25 +381,30 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.load = function () {
 
+		var foo = 'load.php?image_directory=' + $scope.image_directory;
+		console.log(foo)
+
 		$http.get('load.php?image_directory=' + $scope.image_directory).success(function(data) {
 
 			if (data.images == undefined) {
-				
-				// this is a new stack
-
+			// 	
+			// 	// this is a new stack
+// 
 				$scope.path = data;
 				$scope.data.path = data;
 				$scope.id = data;
-
+				console.log("dont exist")
+// 
 			} else {
-
-				// this is an existing stack
-
+// 
+			// 	// this is an existing stack
+// 
 				$scope.data.path = data.path;
 				$scope.path = data.path;
 				$scope.id = data.path;
-				$scope.project.images = data.images;
-				$scope.current = $scope.project.images[$scope.currentIndex];
+
+				console.log("exist")
+			// 	$scope.project.images = data.images;
 				$scope.briefRead = false;
 			}
 			$scope.setPath();
@@ -458,7 +470,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.onEsc = function () {
 		if ($scope.selectedAnnotation != -1) {
-			$scope.removeAnnotation($scope.current.annotations.length-1);
+			$scope.removeAnnotation($scope.project.images[$scope.currentIndex].annotations.length-1);
 		} else if ($scope.isFullscreen) {
 			$scope.toggleFullscreen();
 			$scope.$apply();
@@ -483,7 +495,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.removeAnnotation = function(index){
-		$scope.current.annotations.splice(index, 1);
+		$scope.project.images[$scope.currentIndex].annotations.splice(index, 1);
 		$scope.setActive(-1);
 		$scope.save();
 	}
@@ -569,7 +581,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	$scope.setActive = function (index) {
 		if (!$scope.editing) {
-			var a = $scope.current.annotations[$scope.selectedAnnotation];
+			var a = $scope.project.images[$scope.currentIndex].annotations[$scope.selectedAnnotation];
 			if (index == -1 && a) {
 				if (a.comment === "") {
 					$scope.removeAnnotation(index);
@@ -606,7 +618,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 */
 
 	$scope.setImage = function (index) {	
-		$scope.current = $scope.project.images[index];
 		$scope.currentIndex = index;
 		$scope.save();
 	};
@@ -621,9 +632,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 		// // manage images
 		// console.log("id" + $scope.id);
+
 	 	var imageRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id);
 		$scope.project = $firebase(imageRef);
-		$scope.project.images = [];
+		if (!$scope.project.images) $scope.project.images = [];
 
 		// $scope.imagesFirebase.$bind($scope, "images");
 
@@ -729,7 +741,6 @@ feedbackApp.directive('annotatable', function () {
 			element.bind("load" , function(event){ 
 				scope.imageLoaded = true;
 				scope.$apply();
-
 			});
 
 		}
@@ -946,7 +957,13 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             $scope.reply = function () {
             	if ($scope.view.reply != "") {
             		var newreply = {"text":$scope.view.reply, "user":$scope.username, "timestamp":new Date().getTime()};
-            		$scope.annotation.replies.push(newreply);
+            		
+            		if ($scope.annotation.replies) {
+            			$scope.annotation.replies.push(newreply);
+            		} else {
+            			$scope.annotation.replies = [];
+            			$scope.annotation.replies.push(newreply);
+            		}
             		$scope.view.reply = "";
             		$scope.save();	
             	}

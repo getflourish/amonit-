@@ -116,9 +116,9 @@
 			<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
 		</div>
 		<div class="center" ng-show="false">
-			<h5 ng-show="project.images.length!=0">{{images[currentIndex-1].filename}}</h5>
+			<h5 ng-show="project.images.length!=0">{{project.images[currentIndex-1].filename}}</h5>
 			<h4 ng-show="project.images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
-			<h5 ng-show="project.images.length!=0">{{images[currentIndex+1].filename}}</h5>
+			<h5 ng-show="project.images.length!=0">{{project.images[currentIndex+1].filename}}</h5>
 		</div>
 		<div class="button-group">
 			<div class="space"><a href=""><span class="icon before">b</span><h2>New Set</h2></a></div>	
@@ -161,8 +161,8 @@
 			<div id="main">
 				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
 				<div ng-hide="project.images.length==0" id="imgwrapper" class="flex">
-					<img annotatable ng-src="{{current.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
-					<div draggable handle=".handle" annotation ng-repeat="annotation in current.annotations" ng-if="imageLoaded" class="circle note" ng-class="{animate:$index!=selectedAnnotation, large:$index==selectedAnnotation}" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
+					<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
+					<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 						<div class="handle">{{$index + 1}}</div>
 						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
@@ -179,7 +179,7 @@
 					<h3 class="spacing">Feedback</h3>
 					<input class="search" ng-model="search" placeholder="Search…">
 				</div>
-				<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations.length == 0" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
+				<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
 					<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
 					<div class="feedback-content">
 						<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
