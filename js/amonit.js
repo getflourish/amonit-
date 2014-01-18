@@ -683,8 +683,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     	var domElt = document.getElementById('main');
     	scope = angular.element(domElt).scope();
     	scope.$apply(function() {
-    	    scope.width = window.innerWidth;
-    	    scope.height = window.innerHeight;
+    	    scope.width = $(window).width()/2;
+    	    scope.height = $(window).height()/2;
     	});
     	
 
@@ -692,12 +692,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     	// var domElt = document.getElementById('left');
     	// domElt.height = window.innerHeight;
 // 
-    	// var domElt = document.getElementById('right');
-    	// domElt.height = window.innerHeight;
+    	//var domElt = document.getElementById('right');
+    	//domElt.height = window.innerHeight;
+//
 
-    	// var imgwrapper = $("#imgwrapper");
-		// var offset = $(window).height()/2 - imgwrapper.height() / 2;
-    	// imgwrapper.css("top", offset);
 	}
 });
 

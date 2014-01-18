@@ -5,7 +5,6 @@ directive('center' ,function () {
 		link: function (scope, element, attrs) {
 			scope.$watch(element.width(), function () {
 				element.css({
-					position: 'relative',
 					top: element.parent().height() / 2 - $(element).height(),
 				});
 			});

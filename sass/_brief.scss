@@ -1,0 +1,106 @@
+
+/* Overlay */
+#overlay {
+	background: rgba(0, 0, 0, 0.5);
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	z-index: 3333;
+
+	@include display-box;
+
+  	@include box-orient(vertical);
+  	@include box-align(center);
+  	@include box-pack(center);
+}
+
+#brief {
+	@include display-box;
+  	@include box-orient(vertical);
+  	@include box-align(start);
+
+	background-color: #ffffff;
+	padding: 50px;
+	width: 512px;
+	max-height: 80%;
+
+	overflow: scroll;
+
+	color: #363636;
+	font-size: 18px;
+	
+	font-weight: normal;
+	line-height: 1.4em;
+
+	.brief-content {
+		@include box-flex(1);
+		
+	}
+
+	ol {
+		list-style-position: inside;
+	}
+	ol li {
+		font-size: 18px;	
+		margin-bottom: 10px;
+	}
+
+	h3 {
+		font-size: 18px;
+		font-weight: bold;
+		margin: 40px 0px;
+	}
+
+	p, ol {
+		font-family: "Meta Serif OT";
+		font-style: italic;
+		margin: 20px 0 0 0;
+	}
+}
+
+
+
+.brief-info {
+
+		border-bottom: 1px dashed #d9d9d9;
+		border-top: 1px dashed #d9d9d9;
+		padding-bottom: 20px;
+		margin: 30px 0px;
+
+		p {
+			font-style: normal;
+		}
+	}
+
+.brief-author {
+	font-size: 14px;
+	margin-bottom: 8px;
+
+	.brief-date {
+		margin-left: 5px;
+		font-size: 12px;
+	}
+
+
+	img {
+		position: relative;
+		top: 9px;
+		margin-right: 4px;
+	}
+}
+
+.brief-user {
+	@include border-radius(50%);
+	background: #ffcc00;
+	padding: 5px;
+
+	color: #fff;
+	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+	font-weight: bold;
+	font-size: 13px;
+}
+
+#name {
+	text-transform: capitalize;
+}

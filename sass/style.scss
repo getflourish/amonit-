@@ -3,6 +3,7 @@
 @import "_variables.scss";
 @import "_animations.scss";
 @import "_base.scss";
+@import "_brief.scss";
 @import "_clicktoedit.scss";
 @import "_feedback.scss";
 @import "_header.scss";
@@ -12,7 +13,11 @@
 @import "_tooltip.scss";
 
 
-@include font-face("pictos", font-files("fonts/pictos-web.ttf"));
+@font-face
+{
+	font-family: "pictos";
+	src: url(fonts/pictos-web.ttf);
+}
 
 * {
 	margin: 0;

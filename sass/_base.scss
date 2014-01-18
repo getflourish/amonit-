@@ -39,6 +39,9 @@
 	text-align: center;
 }
 
+.left {
+	float: left;
+}
 .right {
 	float: right;
 }
@@ -97,9 +100,7 @@ h3 {
 /* Buttons */
 
 button {
-	height: 30px;
 	@include border-radius(3px);
-
 	outline: 0;
 	border: 0px;
 	padding: 0px 12px;
@@ -110,7 +111,7 @@ button {
 
 .btnokay {
 	@include background-image(linear-gradient(#addb39, #91ba2b));
-	border: 1px solid rgba(0, 0, 0, 0.20);
+	border: 1px solid rgba(0, 0, 0, 0.15);
 	padding: 6px 12px 6px 12px;
 	text-shadow: 0 1px 0 rgba(13, 0, 0, 0.30);
 	color: #fff;
@@ -146,27 +147,36 @@ button {
 }
 
 .button-group {
+	line-height: 46px;
+	display: inline-block;
+	overflow: hidden;
+
 	padding-left: 15px;
 	border-left: 1px solid rgba(255, 255, 255, 0.2);
 	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
-	@include display-box;
-	overflow: hidden;
+
 }
 
 .splitbutton-left {
 	border-radius: 3px 0px 0px 3px;
-	min-width: 250px;
-	float: left;
+	min-width: 250px;	
+	display: inline-block;
+
 
 }
 
 .splitbutton-right {
 	border-radius: 0px 3px 3px 0px;
-	float: right;
+	display: inline-block;
+	position: relative;
+	top: -1px;
+	left: -3px;
 }
 
 .split-button {
-	line-height: 20px;
+	vertical-align:middle;
+	display: inline-block;
+
 }
 
 /* Forms */
@@ -243,9 +253,6 @@ input[type="text"] {
 /* Inset */
 
 .inset {
-	
-	display: inline-block;
-
 	padding: 0px 4px;
 	
 	border: rgba(0, 0, 0, 0.2);
@@ -259,7 +266,6 @@ input[type="text"] {
 	font-weight: normal;
 	text-align: center;
 	text-decoration: none;
-	line-height: 24px;
 }
 
 .inset-button {
@@ -267,117 +273,18 @@ input[type="text"] {
 	@include background-image(linear-gradient(#ffffff, #e8e8e8));
 	border: 1px solid #cfcfcf;
 	border-left: none;
-
-	@include box-shadow(rgba(0, 0, 0, 0.2) 0px 1px 1px);
-}
-
-/* Overlay */
-#overlay {
-	background: rgba(0, 0, 0, 0.5);
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	z-index: 3333;
-
-	@include display-box;
-
-  	@include box-orient(vertical);
-  	@include box-align(center);
-  	@include box-pack(center);
-}
-
-#brief {
-	@include display-box;
-  	@include box-orient(vertical);
-  	@include box-align(start);
-
-	background-color: #ffffff;
-	padding: 50px;
-	width: 512px;
-	max-height: 80%;
-
-	overflow: scroll;
-
-	color: #363636;
-	font-size: 18px;
-	
-	font-weight: normal;
-	line-height: 1.4em;
-
-	.brief-content {
-		@include box-flex(1);
-		
-	}
-
-	ol {
-		list-style-position: inside;
-	}
-	ol li {
-		font-size: 18px;	
-		margin-bottom: 10px;
-	}
-
-	h3 {
-		font-size: 18px;
-		font-weight: bold;
-		margin: 40px 0px;
-	}
-
-	p, ol {
-		font-family: "Meta Serif OT";
-		font-style: italic;
-		margin: 20px 0 0 0;
-	}
-}
-
-
-
-.brief-info {
-
-		border-bottom: 1px dashed #d9d9d9;
-		border-top: 1px dashed #d9d9d9;
-		padding-bottom: 20px;
-		margin: 30px 0px;
-
-		p {
-			font-style: normal;
-		}
-	}
-
-.brief-author {
-	font-size: 14px;
-	margin-bottom: 8px;
-
-	.brief-date {
-		margin-left: 5px;
-		font-size: 12px;
-	}
-
-
-	img {
-		position: relative;
-		top: 9px;
-		margin-right: 4px;
-	}
-}
-
-.brief-user {
-	@include border-radius(50%);
-	background: #ffcc00;
-	padding: 5px;
-
-	color: #fff;
-	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
-	font-weight: bold;
-	font-size: 13px;
-}
-
-#name {
-	text-transform: capitalize;
 }
 
 .indent {
 	margin-top: 8px;
 	border-top: 1px solid #ccc;
+}
+
+#outer {
+	width: 100%;
+  	position: absolute;
+ 	 top: 0px;
+  	bottom: 0;
+  	left: 0;
+ 	background: red;
 }
