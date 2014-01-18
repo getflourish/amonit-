@@ -146,17 +146,6 @@ button {
 	font-size: 13px;
 }
 
-.button-group {
-	line-height: 46px;
-	display: inline-block;
-	overflow: hidden;
-
-	padding-left: 15px;
-	border-left: 1px solid rgba(255, 255, 255, 0.2);
-	box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
-
-}
-
 .splitbutton-left {
 	border-radius: 3px 0px 0px 3px;
 	min-width: 250px;	
@@ -278,13 +267,4 @@ input[type="text"] {
 .indent {
 	margin-top: 8px;
 	border-top: 1px solid #ccc;
-}
-
-#outer {
-	width: 100%;
-  	position: absolute;
- 	 top: 0px;
-  	bottom: 0;
-  	left: 0;
- 	background: red;
 }

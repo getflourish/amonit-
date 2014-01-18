@@ -85,62 +85,60 @@
 		</div>
 		
 	</div>
-	<!-- header -->
-
-	<header>
-		<span class="logo space"><em>Go</em>over</span>
-				<div class="space split-button button-group">
-					<input class="inset splitbutton-left" value="{{projectpath}}" disabled />
-					<button class="btn-sm inset-button splitbutton-right">Share</button>
-				</div>
-			
-
-
-		<div class="button-group">
-			<div id="login" ng-controller="AuthController">
-				<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
-				<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
-	
-				<form ng-hide="true" class="form-inline">
-					<input class="form-control form-group" type="text" ng-model="newemail" placeholder="Email">
-					<input class="form-control form-group" type="password" ng-model="newpassword" placeholder="Password">
-					<input class="form-control form-group" type="text" ng-model="firstname" placeholder="First name">
-					<input class="form-control form-group" type="text" ng-model="lastname" placeholder="Last name">
-					<button class="btn btn-primary btn-sm" ng-click="createUser(newemail, newpassword, firstname, lastname)">Sign up</button>
-				</form>
-				
-				<form ng-hide="true" class="form-inline">
-					<input class="form-control" type="text" ng-model="email" placeholder="Email">
-					<input class="form-control" type="password" ng-model="password" placeholder="Password">
-					<button class="btn-login" ng-click="login(email, password)">Log in</button>
-				</form>
-				<button ng-show="me" class="btn btn-danger btn-sm" ng-click="logout()">Logout</button>
-				<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
-			</div>
-		</div>
-
-		<div class="center" ng-show="false">
-			<h5 ng-show="project.images.length!=0">{{project.images[currentIndex-1].filename}}</h5>
-			<h4 ng-show="project.images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
-			<h5 ng-show="project.images.length!=0">{{project.images[currentIndex+1].filename}}</h5>
-		</div>
-
-		<ul>
-			<li><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">▲</span></a></li>	
-			<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}">Next</h2><span class="key">▼</span></a></li>	
-			<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
-			<li><button class="btn btnokay" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></button></li>
-		</ul>
-
-	</header>
-
-	<!-- // end of header -->
 
 	<div imagedrop id="dropzone" on-image-drop="imageDropped()"><h1 center>Drop Images to Upload</h1></div>
 
 	<!-- wrap -->
 
 	<div id="wrap">
+
+		<!-- header -->
+	
+		<header>
+			<span class="logo space"><em>Go</em>over</span>
+			<div class="space split-button button-group">
+				<input class="inset splitbutton-left" value="{{projectpath}}" disabled />
+				<button class="btn-sm inset-button splitbutton-right">Share</button>
+			</div>
+			<div class="button-group">
+				<div id="login" ng-controller="AuthController">
+					<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
+					<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
+		
+					<form ng-hide="true" class="form-inline">
+						<input class="form-control form-group" type="text" ng-model="newemail" placeholder="Email">
+						<input class="form-control form-group" type="password" ng-model="newpassword" placeholder="Password">
+						<input class="form-control form-group" type="text" ng-model="firstname" placeholder="First name">
+						<input class="form-control form-group" type="text" ng-model="lastname" placeholder="Last name">
+						<button class="btn btn-primary btn-sm" ng-click="createUser(newemail, newpassword, firstname, lastname)">Sign up</button>
+					</form>
+					
+					<form ng-hide="true" class="form-inline">
+						<input class="form-control" type="text" ng-model="email" placeholder="Email">
+						<input class="form-control" type="password" ng-model="password" placeholder="Password">
+						<button class="btn-login" ng-click="login(email, password)">Log in</button>
+					</form>
+					<button ng-show="me" class="btn btn-danger btn-sm" ng-click="logout()">Logout</button>
+					<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
+				</div>
+			</div>
+	
+			<div class="center" ng-show="false">
+				<h5 ng-show="project.images.length!=0">{{project.images[currentIndex-1].filename}}</h5>
+				<h4 ng-show="project.images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
+				<h5 ng-show="project.images.length!=0">{{project.images[currentIndex+1].filename}}</h5>
+			</div>
+	
+			<ul>
+				<li><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">▲</span></a></li>	
+				<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}">Next</h2><span class="key">▼</span></a></li>	
+				<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
+				<li><button class="btn btnokay" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></button></li>
+			</ul>
+	
+		</header>
+	
+		<!-- // end of header -->
 
 		<!-- sidebar -->
 	
@@ -156,58 +154,52 @@
 		</aside>
 	
 		<!-- // end of sidebar -->
-
-		<div id="outer">
-
-			<!-- Comments -->
+		<!-- Comments -->
 		
-			<aside id="right" ng-hide="project.images.length == 0">
-				<div id="feedback-header">
-					<h3 class="spacing">Feedback</h3>
-					<input class="search" ng-model="search" placeholder="Search…">
+		<aside id="right" ng-hide="project.images.length == 0">
+			<div id="feedback-header">
+				<h3 class="spacing">Feedback</h3>
+				<input class="search" ng-model="search" placeholder="Search…">
+			</div>
+			<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
+				<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
+				<div class="feedback-content">
+					<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
+						<div class="brief-author">
+							<img src="images/me.png">
+							<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
+						</div>
+						<div class="bubble"><span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<span class="remove" ng-click="removeAnnotation($index)">×</span></div>
+						<ul>
+							<li ng-repeat="reply in annotation.replies">
+								<div class="brief-author">
+									<img src="images/me.png">
+									<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
+								</div>
+								{{reply.text}}
+							</li>
+						</ul>
+					</li>
 				</div>
-				<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
-					<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
-					<div class="feedback-content">
-						<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
-							<div class="brief-author">
-								<img src="images/me.png">
-								<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
-							</div>
-							<div class="bubble"><span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<span class="remove" ng-click="removeAnnotation($index)">×</span></div>
+			</ul>
+		</aside>
+		<!-- // end of comments -->
+	
+		<!-- main -->
 
-							<ul>
-								<li ng-repeat="reply in annotation.replies">
-									<div class="brief-author">
-										<img src="images/me.png">
-										<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
-									</div>
-									{{reply.text}}
-								</li>
-							</ul>
-						</li>
-					</div>
-				</ul>
-			</aside>
-			<!-- // end of comments -->
-	
-			<!-- main -->
-	
-			<div id="main" >
-				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
-				<div ng-hide="project.images.length==0" id="imgwrapper">
-					<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)"  />
-					<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
-						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
-						<div class="handle">{{$index + 1}}</div>
-						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
-					</div>
+		<div id="main" >
+			<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
+			<div ng-hide="project.images.length==0" id="imgwrapper">
+				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)"  />
+				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
+					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
+					<div class="handle">{{$index + 1}}</div>
+					<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
 				</div>
 			</div>
-		
-			<!-- // end of main -->	
 		</div>
-		<!-- // end of outer -->	
+	
+		<!-- // end of main -->	
 	</div>
 
 	<!-- // end of wrap -->

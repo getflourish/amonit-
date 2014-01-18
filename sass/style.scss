@@ -95,3 +95,12 @@ body #dropzone {
 	z-index: 5;
 	pointer-events: none;
 }
+
+#wrap {
+	width: 100%;
+  	position: absolute;
+  	top: 0px;
+  	bottom: 0;
+  	left: 0;
+  	overflow: hidden;
+}

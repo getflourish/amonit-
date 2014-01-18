@@ -367,23 +367,13 @@ button {
 }
 
 /* line 149, ../sass/_base.scss */
-.button-group {
-  line-height: 46px;
-  display: inline-block;
-  overflow: hidden;
-  padding-left: 15px;
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
-}
-
-/* line 160, ../sass/_base.scss */
 .splitbutton-left {
   border-radius: 3px 0px 0px 3px;
   min-width: 250px;
   display: inline-block;
 }
 
-/* line 168, ../sass/_base.scss */
+/* line 157, ../sass/_base.scss */
 .splitbutton-right {
   border-radius: 0px 3px 3px 0px;
   display: inline-block;
@@ -392,30 +382,30 @@ button {
   left: -3px;
 }
 
-/* line 176, ../sass/_base.scss */
+/* line 165, ../sass/_base.scss */
 .split-button {
   vertical-align: middle;
   display: inline-block;
 }
 
 /* Forms */
-/* line 184, ../sass/_base.scss */
+/* line 173, ../sass/_base.scss */
 .form-inline {
   display: inline;
 }
 
-/* line 188, ../sass/_base.scss */
+/* line 177, ../sass/_base.scss */
 .form-block {
   display: block;
   margin-top: 10px;
 }
 
-/* line 193, ../sass/_base.scss */
+/* line 182, ../sass/_base.scss */
 .form-control {
   margin-right: 6px;
 }
 
-/* line 197, ../sass/_base.scss */
+/* line 186, ../sass/_base.scss */
 label {
   display: block;
   margin-bottom: 10px;
@@ -424,7 +414,7 @@ label {
   line-height: 12px;
 }
 
-/* line 205, ../sass/_base.scss */
+/* line 194, ../sass/_base.scss */
 input[type="text"] {
   border: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 3px;
@@ -433,12 +423,12 @@ input[type="text"] {
   padding: 6px 12px 6px 12px;
   font-size: 14px;
 }
-/* line 212, ../sass/_base.scss */
+/* line 201, ../sass/_base.scss */
 input[type="text"]:focus {
   outline: 0;
 }
 
-/* line 217, ../sass/_base.scss */
+/* line 206, ../sass/_base.scss */
 .key {
   width: 16px;
   height: 16px;
@@ -456,24 +446,24 @@ input[type="text"]:focus {
 }
 
 /* Icons */
-/* line 241, ../sass/_base.scss */
+/* line 230, ../sass/_base.scss */
 .icon {
   font-family: "pictos";
   font-size: 16px;
 }
 
-/* line 245, ../sass/_base.scss */
+/* line 234, ../sass/_base.scss */
 .icon:hover {
   opacity: 1;
 }
 
-/* line 249, ../sass/_base.scss */
+/* line 238, ../sass/_base.scss */
 .icon.before {
   margin-right: 7px;
 }
 
 /* Inset */
-/* line 255, ../sass/_base.scss */
+/* line 244, ../sass/_base.scss */
 .inset {
   padding: 0px 4px;
   border: rgba(0, 0, 0, 0.2);
@@ -498,7 +488,7 @@ input[type="text"]:focus {
   text-decoration: none;
 }
 
-/* line 271, ../sass/_base.scss */
+/* line 260, ../sass/_base.scss */
 .inset-button {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e8e8e8));
   background-image: -webkit-linear-gradient(#ffffff, #e8e8e8);
@@ -509,20 +499,10 @@ input[type="text"]:focus {
   border-left: none;
 }
 
-/* line 278, ../sass/_base.scss */
+/* line 267, ../sass/_base.scss */
 .indent {
   margin-top: 8px;
   border-top: 1px solid #ccc;
-}
-
-/* line 283, ../sass/_base.scss */
-#outer {
-  width: 100%;
-  position: absolute;
-  top: 0px;
-  bottom: 0;
-  left: 0;
-  background: red;
 }
 
 /* Overlay */
@@ -678,38 +658,37 @@ input[type="text"]:focus {
 
 /* line 1, ../sass/_feedback.scss */
 #right {
-  overflow: scroll;
   width: 300px;
-  float: right;
   height: 100%;
-  background: yellow;
+  float: right;
   background: #fff;
+  overflow: scroll;
   color: #242424;
 }
-/* line 15, ../sass/_feedback.scss */
+/* line 13, ../sass/_feedback.scss */
 #right h5 {
   margin-bottom: 10px;
   padding: 0px 0px;
 }
-/* line 20, ../sass/_feedback.scss */
+/* line 18, ../sass/_feedback.scss */
 #right ul {
   padding: 5px 15px;
 }
-/* line 24, ../sass/_feedback.scss */
+/* line 22, ../sass/_feedback.scss */
 #right ul li {
   margin-bottom: 15px;
 }
-/* line 28, ../sass/_feedback.scss */
+/* line 26, ../sass/_feedback.scss */
 #right ul li:hover .remove {
   opacity: 0.5;
 }
-/* line 32, ../sass/_feedback.scss */
+/* line 30, ../sass/_feedback.scss */
 #right .remove:hover {
   opacity: 1;
   color: red;
 }
 
-/* line 39, ../sass/_feedback.scss */
+/* line 37, ../sass/_feedback.scss */
 #feedback-header {
   padding: 15px 0px;
   border-bottom: 1px solid #e3e3e3;
@@ -720,7 +699,7 @@ input[type="text"]:focus {
   display: box;
 }
 
-/* line 46, ../sass/_feedback.scss */
+/* line 44, ../sass/_feedback.scss */
 .feedback-content {
   margin: 0;
   opacity: 1;
@@ -728,12 +707,12 @@ input[type="text"]:focus {
   background: #fff;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
-/* line 53, ../sass/_feedback.scss */
+/* line 51, ../sass/_feedback.scss */
 .feedback-content:hover {
   opacity: 1 !important;
 }
 
-/* line 58, ../sass/_feedback.scss */
+/* line 56, ../sass/_feedback.scss */
 .feedback-title {
   -webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 white;
   -moz-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -747,7 +726,7 @@ input[type="text"]:focus {
   overflow: hidden;
 }
 
-/* line 72, ../sass/_feedback.scss */
+/* line 70, ../sass/_feedback.scss */
 .search {
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
@@ -763,7 +742,7 @@ input[type="text"]:focus {
   float: right;
   font-family: "Helvetica Neue", Arial;
 }
-/* line 85, ../sass/_feedback.scss */
+/* line 83, ../sass/_feedback.scss */
 .search:focus {
   outline: 0;
   border: 1px solid #0db4ff;
@@ -772,7 +751,7 @@ input[type="text"]:focus {
   box-shadow: #0db4ff 0px 0px 5px;
 }
 
-/* line 92, ../sass/_feedback.scss */
+/* line 90, ../sass/_feedback.scss */
 .bubble {
   position: relative;
   margin-top: 12px;
@@ -788,11 +767,11 @@ input[type="text"]:focus {
   font-family: "Georgia";
   font-style: italic;
 }
-/* line 111, ../sass/_feedback.scss */
+/* line 109, ../sass/_feedback.scss */
 .bubble:hover {
   background: #fef0c0;
 }
-/* line 115, ../sass/_feedback.scss */
+/* line 113, ../sass/_feedback.scss */
 .bubble:before {
   position: absolute;
   top: -7px;
@@ -804,7 +783,7 @@ input[type="text"]:focus {
   border-bottom: 10px solid #fef0c0;
 }
 
-/* line 129, ../sass/_feedback.scss */
+/* line 127, ../sass/_feedback.scss */
 .remove {
   color: #000;
   opacity: 0;
@@ -818,7 +797,7 @@ input[type="text"]:focus {
   background: #fff;
 }
 
-/* line 142, ../sass/_feedback.scss */
+/* line 140, ../sass/_feedback.scss */
 .tag {
   background: #38342b;
   border-radius: 100px;
@@ -831,13 +810,13 @@ input[type="text"]:focus {
   font-family: "Helvetica Neue";
 }
 
-/* line 154, ../sass/_feedback.scss */
+/* line 152, ../sass/_feedback.scss */
 input[type="checkbox"] {
   visibility: hidden;
   display: none;
 }
 
-/* line 159, ../sass/_feedback.scss */
+/* line 157, ../sass/_feedback.scss */
 input[type="checkbox"] + label {
   opacity: 0.5;
   margin-right: 5px;
@@ -845,19 +824,16 @@ input[type="checkbox"] + label {
   display: inline-block;
 }
 
-/* line 165, ../sass/_feedback.scss */
+/* line 163, ../sass/_feedback.scss */
 input[type="checkbox"]:checked + label {
   opacity: 1;
 }
 
 /* line 1, ../sass/_header.scss */
 header {
-  position: fixed;
-  z-index: 1000;
-  top: 0px;
   padding: 0px 10px;
-  overflow: hidden;
   width: 100%;
+  overflow: hidden;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffcc00), color-stop(100%, #f0b800));
   background-image: -webkit-linear-gradient(#ffcc00, #f0b800);
   background-image: -moz-linear-gradient(#ffcc00, #f0b800);
@@ -873,37 +849,46 @@ header {
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
 }
-/* line 23, ../sass/_header.scss */
+/* line 18, ../sass/_header.scss */
+header .button-group {
+  line-height: 46px;
+  display: inline-block;
+  overflow: hidden;
+  padding-left: 15px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
+}
+/* line 29, ../sass/_header.scss */
 header ul {
   display: inline-block;
 }
-/* line 26, ../sass/_header.scss */
+/* line 32, ../sass/_header.scss */
 header ul li {
   display: inline;
   margin-right: 30px;
 }
-/* line 32, ../sass/_header.scss */
+/* line 38, ../sass/_header.scss */
 header a {
   text-decoration: none;
   color: #363d45;
   -webkit-transition: all 0.1s;
 }
-/* line 37, ../sass/_header.scss */
+/* line 43, ../sass/_header.scss */
 header a:hover {
   color: #242424 !important;
 }
-/* line 42, ../sass/_header.scss */
+/* line 48, ../sass/_header.scss */
 header span.logo {
   font-weight: bold;
   font-size: 18px;
 }
-/* line 46, ../sass/_header.scss */
+/* line 52, ../sass/_header.scss */
 header span.logo em {
   font-weight: normal;
   font-style: normal;
   padding-left: 5px;
 }
-/* line 53, ../sass/_header.scss */
+/* line 59, ../sass/_header.scss */
 header h2 {
   font-size: 13px;
   display: inline;
@@ -913,11 +898,11 @@ header h2 {
   animation-fill-mode: both;
   -webkit-animation-direction: alternate;
 }
-/* line 64, ../sass/_header.scss */
+/* line 70, ../sass/_header.scss */
 header h5 {
   color: #333;
 }
-/* line 68, ../sass/_header.scss */
+/* line 74, ../sass/_header.scss */
 header input {
   -webkit-appearance: none;
   outline: 0;
@@ -947,24 +932,22 @@ header input {
 
 /* line 1, ../sass/_main.scss */
 #main {
-  margin: 0px 300px 0px auto;
-  padding: 50px 50px;
-  text-align: center;
   height: 100%;
   width: 100%;
-  background: blue;
+  overflow: scroll;
+  margin: 0px 300px 0px 0px;
 }
-/* line 12, ../sass/_main.scss */
+/* line 11, ../sass/_main.scss */
 #main .current-screen {
   max-width: 100%;
 }
 
-/* line 17, ../sass/_main.scss */
+/* line 16, ../sass/_main.scss */
 #imgwrapper {
   display: block;
-  position: absolute;
+  position: relative;
 }
-/* line 21, ../sass/_main.scss */
+/* line 20, ../sass/_main.scss */
 #imgwrapper > img {
   display: inline;
   vertical-align: bottom;
@@ -978,23 +961,23 @@ header input {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 30, ../sass/_main.scss */
+/* line 29, ../sass/_main.scss */
 #imgwrapper > img:hover {
   opacity: 1;
 }
 
-/* line 36, ../sass/_main.scss */
+/* line 35, ../sass/_main.scss */
 .emptystate {
   border-radius: 8px;
   color: #22262b;
   cursor: pointer;
 }
-/* line 42, ../sass/_main.scss */
+/* line 41, ../sass/_main.scss */
 .emptystate .upload-icon {
   font-size: 120px;
   border: none;
 }
-/* line 47, ../sass/_main.scss */
+/* line 46, ../sass/_main.scss */
 .emptystate h2 {
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1);
 }
@@ -1351,4 +1334,14 @@ body #dropzone {
   height: 1000px;
   z-index: 5;
   pointer-events: none;
+}
+
+/* line 99, ../sass/style.scss */
+#wrap {
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
 }

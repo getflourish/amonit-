@@ -1,13 +1,8 @@
 header {
-	
-	position: fixed;
-	z-index: 1000;
-	top: 0px;
 	padding: 0px 10px;
-	overflow: hidden;
-
 	width:100%;
 
+	overflow: hidden;
 
 	@include background-image(linear-gradient(#ffcc00, #f0b800));
 	@include background-image(linear-gradient(#fff, #eee));
@@ -19,6 +14,17 @@ header {
 	div {
 		
 	}
+
+	.button-group {
+		line-height: 46px;
+		display: inline-block;
+		overflow: hidden;
+	
+		padding-left: 15px;
+		border-left: 1px solid rgba(255, 255, 255, 0.2);
+		box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.15);
+
+}
 
 	ul {
 		display: inline-block;
