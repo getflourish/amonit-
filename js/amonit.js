@@ -215,7 +215,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 			
 			$scope.project.images[$scope.currentIndex].annotations.push({"x":x, "y":y, "author":$scope.username, "id":$scope.project.images[$scope.currentIndex].annotations.length + 1, "comment":"", "replies": [], "timestamp":new Date().getTime()})
 	
-			// $scope.save();
+			$scope.save();
 	
 			// select annotation to open it
 			

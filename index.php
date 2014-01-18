@@ -39,7 +39,7 @@
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
 	<div id="mouseTracker"><div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
-	<div id="overlay" ng-hide="briefRead">
+	<div id="overlay" ng-hide="true">
 		<div id="brief">
 			<div class="brief-content">
 				<div class="brief-author">
@@ -90,7 +90,7 @@
 	<header>
 		<div>
 			<span class="logo space"><em>Go</em>over</span>
-			<div class="space split-button right">
+			<div class="space split-button">
 				<input class="inset splitbutton-left" value="{{projectpath}}" disabled />
 				<button class="btn-sm inset-button splitbutton-right">Share</button>
 			</div>
@@ -154,24 +154,8 @@
 	
 		<!-- // end of sidebar -->
 
-		<div id="content">
-	
-		<!-- main -->
-	
-			<div id="main">
-				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
-				<div ng-hide="project.images.length==0" id="imgwrapper" class="flex">
-					<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
-					<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
-						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
-						<div class="handle">{{$index + 1}}</div>
-						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
-					</div>
-				</div>
-			</div>
-		
-			<!-- // end of main -->
-	
+		<div id="content" verticalstretch>
+
 			<!-- Comments -->
 		
 			<aside id="right" ng-hide="project.images.length == 0">
@@ -203,11 +187,31 @@
 				</ul>
 			</aside>
 			<!-- // end of comments -->
+	
+		<!-- main -->
+	
+			<div id="main">
+				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
+				<div ng-hide="project.images.length==0" id="imgwrapper">
+					<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)" />
+					<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
+						<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
+						<div class="handle">{{$index + 1}}</div>
+						<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
+					</div>
+				</div>
+			</div>
+		
+			<!-- // end of main -->
+	
+			
+		</div>
 	</div>
 
 	<!-- // end of wrap -->
 
 	<input type="file" id="filepicker" multiple uploader>
 	<!--<canvas id='world'></canvas>-->
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>

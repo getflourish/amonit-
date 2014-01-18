@@ -7,9 +7,6 @@
 	-webkit-transition: left 0.2s ease-in-out;
 	overflow: scroll;
 	background: #242424;
-	
-	@include box-align(center);
-  	@include box-direction(column);
 
 	ul {
 		background: #242424;

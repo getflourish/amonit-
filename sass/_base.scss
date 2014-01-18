@@ -35,10 +35,6 @@
 
 /* Layout */
 
-.flex {
-	@include box-flex(1);
-}
-
 .center {
 	text-align: center;
 }
@@ -160,15 +156,17 @@ button {
 .splitbutton-left {
 	border-radius: 3px 0px 0px 3px;
 	min-width: 250px;
+	float: left;
 
 }
 
 .splitbutton-right {
 	border-radius: 0px 3px 3px 0px;
+	float: right;
 }
 
 .split-button {
-	
+	line-height: 20px;
 }
 
 /* Forms */
