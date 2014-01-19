@@ -6,7 +6,7 @@
 <html lang="en" ng-app="feedbackApp">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Amonit – What do you think?</title>
+	<title>TeeBeeDee</title>
 
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -92,9 +92,9 @@
 	<!-- header -->
 	
 		<header>
-			<span class="logo space"><em>Go</em>over</span>
+			<span class="logo space"><img src="images/logo.png" /></span>
 			<div class="space split-button button-group">
-				<input class="inset splitbutton-left" value="{{projectpath}}" disabled />
+				<input type="text" class="inset splitbutton-left" value="{{projectpath}}" onClick="this.select();" ng-keypress="$event.preventDefault()"/>
 				<button class="btn-sm inset-button splitbutton-right">Share</button>
 			</div>
 			<div class="button-group">
@@ -186,10 +186,10 @@
 	
 		<!-- main -->
 
-		<div id="main" >
-			<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
-			<div ng-hide="project.images.length==0" id="imgwrapper">
-				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event.offsetX, $event.offsetY)"  />
+		<div id="main" ng-class="{hasimages:project.images.length != 0}" >
+			<div id="imgwrapper">
+				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
+				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
 				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}</div>

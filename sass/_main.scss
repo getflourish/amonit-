@@ -1,25 +1,34 @@
 #main {
 	height: 100%;
 
-	background: red;
-		overflow-x: hidden;
+	overflow-x: hidden;
 	overflow-y: scroll;
-  	margin: 0px 300px 0px 0px;
   	
   	text-align:center;
+
+  	@include transition-property(all);
+  	@include transition-duration(0.5s);
+  	@include transition-timing-function(ease-in-out);
   
 	.current-screen {
 		max-width: 100%;
 	}
 }
 
+.hasimages {
+	margin: 0px 300px 0px 0px;
+}
+
 #imgwrapper {
+
 	display: inline-block;
 	position: relative;
-	
+	max-width: 100%;
+	white-space: nowrap;	
+
 	> img {
-		display: inline;
-		vertical-align: bottom;
+		display: inline-block;
+		max-height: 100%;
 		
 		background: #fff;
 
@@ -35,6 +44,8 @@
 .emptystate {
 	border-radius: 8px;
 	color: #22262b;
+	
+	display: inline-block;
 
 	cursor: pointer;
 

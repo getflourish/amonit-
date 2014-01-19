@@ -196,15 +196,21 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	 * Adds annotation to given x/y coordinates
 	 */
 
-	$scope.addAnnotation = function (globalX, globalY) {
+	$scope.addAnnotation = function (event) {
 
 		console.log("add")
 
 		if ($scope.selectedAnnotation == -1) {
 		// convert coordinates to local space
 
+			
+			var globalX  = (event.offsetX || event.clientX - $(event.target).offset().left);
+			var globalY  = (event.offsetY || event.clientY - $(event.target).offset().top);
+			
+
 			var x = (globalX) / $scope.imageElement.prop("width");
 			var y = (globalY) / $scope.imageElement.prop("height");
+			console.log(globalX);
 	
 			// save annotation 	
 
@@ -511,7 +517,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		$scope.project.images.splice(index, 1);
 		if (index == $scope.project.images.length) index = index - 1;
 		$scope.setImage(index);
-		$scope.save();
 	}
 
 	/**
@@ -691,7 +696,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         var offset = main.height() / 2  - imgwrapper.height() / 2;
         if (offset < 0) offset = 0;
         imgwrapper.css("top", offset);
-
 	}
 });
 
@@ -702,7 +706,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 feedbackApp.directive('annotation', ['$document' , function($document) {
 	return {
 		link: function(scope, elm, attrs) {	
-			scope.$watch('[width, isFullscreen]', function () {
+			scope.$watch('[width, height, isFullscreen]', function () {
 
 				var startX = scope.annotation.x;
 				var startY = scope.annotation.y;
@@ -729,17 +733,17 @@ feedbackApp.directive('annotation', ['$document' , function($document) {
 
 // attaches load listener to annotatable element and fires an event so tooltips can be positioned properly
 
-feedbackApp.directive('annotatable', function () {       
+feedbackApp.directive('annotatable', ["$rootScope", function ($rootScope) {       
 	return {
 		link: function(scope, element, attrs) {   
 			element.bind("load" , function(event){ 
 				scope.imageLoaded = true;
 				scope.$apply();
+				$rootScope.$emit('resize');
 			});
-
 		}
 	}
-});
+}]);
 
 feedbackApp.directive('ngFocus', function($timeout) {
 	return {
@@ -1077,14 +1081,14 @@ feedbackApp.directive('fullscreen', ['$document', '$timeout', '$rootScope', func
 				
 				// hide header, right sidebar
 				if (scope.isFullscreen) {
-					$("header").hide();
-					$("#right").hide();
+					$("header").addClass("fs");
+					$("#right").addClass("fs");
 					$("#main").addClass("fullscreen");
 					$("#wrap").addClass("fullscreen");
 					$("#imgwrapper").addClass("fullscreen");
 				} else {
-					$("header").show();
-					$("#right").show();	
+					$("header").removeClass("fs");
+					$("#right").removeClass("fs");
 					$("#main").removeClass("fullscreen");
 					$("#wrap").removeClass("fullscreen");
 					$("#imgwrapper").removeClass("fullscreen");

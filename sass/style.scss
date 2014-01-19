@@ -76,8 +76,6 @@ body #dropzone {
 
 
 .fullscreen {
-	padding: 0 !important;
-	top: 0px !important;
 	margin: 0px !important;
 	border: 0px !important;
 }
@@ -99,8 +97,14 @@ body #dropzone {
 #wrap {
 	width: 100%;
   	position: absolute;
-  	top: 48px;
+  	top: 50px;
   	bottom: 0;
   	overflow: hidden;
+  	@include transition-property(all);
+  	@include transition-duration(0.5s);
+  	@include transition-timing-function(ease-in-out);
 
+  	&.fullscreen {
+  		top: 0px !important;
+  	}
 }

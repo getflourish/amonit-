@@ -1,17 +1,27 @@
+header.fs {
+	top: -50px !important;
+}
 header {
-	padding: 0px 10px;
+	top: 0px;
 	width:100%;
 	height: 50px; 
-	line-height: 50px;
+	z-index: 999;
+	position: fixed;
+
+	white-space: nowrap; 
 
 	overflow: hidden;
 
 	@include background-image(linear-gradient(#ffcc00, #f0b800));
-	@include background-image(linear-gradient(#fff, #eee));
+	@include background(image-url("stripes.png"),linear-gradient(#fff, #eee));
 
 	font-size: 13px;
 
 	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 1px 1px);
+
+	@include transition-property(all);
+  	@include transition-duration(0.5s);
+  	@include transition-timing-function(ease-in-out);
 
 	div {
 		
@@ -19,7 +29,6 @@ header {
 
 	.button-group {
 		display: inline-block;
-		overflow: hidden;
 	
 		padding-left: 15px;
 		border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -28,7 +37,6 @@ header {
 
 	ul {
 		display: inline-block;
-		float: right;
 		height: 100%;
 
 		li {
@@ -54,6 +62,10 @@ header {
 	}
 
 	span.logo {
+
+		vertical-align: middle;
+		display: inline-block;
+		margin-left: 20px;
 		font-weight: bold;
 		font-size: 18px;
 
@@ -79,21 +91,14 @@ header {
 		color: #333;
 	}
 
-	input {
+	input[type="text"] {
 
 		-webkit-appearance: none;
 		outline: 0;
 
-		height: 24px;
-
 		padding: 0px 0px 0px 4px;
-
-		line-height:24px;
-		font-size: 12px;
-
-		border: 1px solid rgba(0, 0, 0, 0.2);
-		border-radius: 3px;
-
-		box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.1);
+		height: 100%;
+		vertical-align: middle;
+		font-size: 13px;
 	}
 }
