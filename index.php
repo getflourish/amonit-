@@ -89,10 +89,7 @@
 	<div imagedrop id="dropzone" on-image-drop="imageDropped()"><h1 center>Drop Images to Upload</h1></div>
 
 	<!-- wrap -->
-
-	<div id="wrap">
-
-		<!-- header -->
+	<!-- header -->
 	
 		<header>
 			<span class="logo space"><em>Go</em>over</span>
@@ -139,6 +136,8 @@
 		</header>
 	
 		<!-- // end of header -->
+
+	<div id="wrap">
 
 		<!-- sidebar -->
 	

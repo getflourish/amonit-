@@ -1,12 +1,12 @@
 #main {
-
 	height: 100%;
-  	width: 100%;
 
-
-  	overflow: scroll;
-
+	background: red;
+		overflow-x: hidden;
+	overflow-y: scroll;
   	margin: 0px 300px 0px 0px;
+  	
+  	text-align:center;
   
 	.current-screen {
 		max-width: 100%;
@@ -14,7 +14,7 @@
 }
 
 #imgwrapper {
-	display: block;
+	display: inline-block;
 	position: relative;
 	
 	> img {

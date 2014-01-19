@@ -620,6 +620,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.setImage = function (index) {	
 		$scope.currentIndex = index;
 		$scope.save();
+		onResize();
 	};
 
 	/**
@@ -680,21 +681,16 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 	function onResize() {
     
-    	var domElt = document.getElementById('main');
-    	scope = angular.element(domElt).scope();
+    	var main = $("#main");
+    	scope = angular.element(main).scope();
     	scope.$apply(function() {
     	    scope.width = $(window).width()/2;
     	    scope.height = $(window).height()/2;
     	});
-    	
-
-// 
-    	// var domElt = document.getElementById('left');
-    	// domElt.height = window.innerHeight;
-// 
-    	//var domElt = document.getElementById('right');
-    	//domElt.height = window.innerHeight;
-//
+    	var imgwrapper = $("#imgwrapper");
+        var offset = main.height() / 2  - imgwrapper.height() / 2;
+        if (offset < 0) offset = 0;
+        imgwrapper.css("top", offset);
 
 	}
 });
