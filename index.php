@@ -94,8 +94,7 @@
 		<header>
 			<span class="logo space"><img src="images/logo.png" /></span>
 			<div class="space split-button button-group">
-				<input type="text" class="inset splitbutton-left" value="{{projectpath}}" onClick="this.select();" ng-keypress="$event.preventDefault()"/>
-				<button class="btn-sm inset-button splitbutton-right">Share</button>
+				<input type="text" class="inset splitbutton-left" value="{{projectpath}}" onClick="this.select();" ng-keypress="$event.preventDefault()"/><button class="btn-sm inset-button splitbutton-right">Share</button>
 			</div>
 			<div class="button-group">
 				<div id="login" ng-controller="AuthController">

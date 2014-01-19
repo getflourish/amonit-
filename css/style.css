@@ -372,18 +372,20 @@ button {
 .splitbutton-left {
   border-radius: 3px 0px 0px 3px !important;
   min-width: 250px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-/* line 156, ../sass/_base.scss */
+/* line 157, ../sass/_base.scss */
 .splitbutton-right {
   border-radius: 0px 3px 3px 0px;
 }
 
-/* line 160, ../sass/_base.scss */
+/* line 161, ../sass/_base.scss */
 .split-button {
   vertical-align: middle;
   display: inline-block;
-  white-space: nowrap;
   height: 24px;
   line-height: 13px;
 }
@@ -865,11 +867,11 @@ header {
   background-image: -moz-linear-gradient(#ffcc00, #f0b800);
   background-image: -o-linear-gradient(#ffcc00, #f0b800);
   background-image: linear-gradient(#ffcc00, #f0b800);
-  background: url('/images/stripes.png?1390140343'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
-  background: url('/images/stripes.png?1390140343'), -webkit-linear-gradient(#ffffff, #eeeeee);
-  background: url('/images/stripes.png?1390140343'), -moz-linear-gradient(#ffffff, #eeeeee);
-  background: url('/images/stripes.png?1390140343'), -o-linear-gradient(#ffffff, #eeeeee);
-  background: url('/images/stripes.png?1390140343'), linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/stripes.png'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
+  background: url('/images/stripes.png'), -webkit-linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/stripes.png'), -moz-linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/stripes.png'), -o-linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/stripes.png'), linear-gradient(#ffffff, #eeeeee);
   font-size: 13px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
@@ -952,7 +954,7 @@ header input[type="text"] {
   -webkit-appearance: none;
   outline: 0;
   padding: 0px 0px 0px 4px;
-  height: 100%;
+  height: 24px;
   vertical-align: middle;
   font-size: 13px;
 }
@@ -1333,9 +1335,12 @@ body {
   font-family: "proxima-nova", "jaf-facitweb", "Helvetica Neue", "Arial", sans-serif;
   -webkit-transform3d: rotateZ(0, 0, 0);
   -webkit-font-smoothing: antialiased;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-/* line 39, ../sass/style.scss */
+/* line 41, ../sass/style.scss */
 canvas {
   background: transparent;
   opacity: 1;
@@ -1345,7 +1350,7 @@ canvas {
   pointer-events: none;
 }
 
-/* line 48, ../sass/style.scss */
+/* line 50, ../sass/style.scss */
 li {
   font-size: 13px;
   list-style-type: none;
@@ -1353,13 +1358,13 @@ li {
   cursor: pointer;
 }
 
-/* line 55, ../sass/style.scss */
+/* line 57, ../sass/style.scss */
 body.dragOver #dropzone {
   display: block;
 }
 
 /* During drag */
-/* line 56, ../sass/style.scss */
+/* line 58, ../sass/style.scss */
 body #dropzone {
   z-index: 1000;
   position: fixed;
@@ -1375,18 +1380,18 @@ body #dropzone {
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* line 78, ../sass/style.scss */
+/* line 80, ../sass/style.scss */
 .fullscreen {
   margin: 0px !important;
   border: 0px !important;
 }
 
-/* line 83, ../sass/style.scss */
+/* line 85, ../sass/style.scss */
 .clickable {
   cursor: pointer;
 }
 
-/* line 87, ../sass/style.scss */
+/* line 89, ../sass/style.scss */
 #mouseTracker {
   top: 0px;
   position: fixed;
@@ -1397,7 +1402,7 @@ body #dropzone {
   pointer-events: none;
 }
 
-/* line 97, ../sass/style.scss */
+/* line 99, ../sass/style.scss */
 #wrap {
   width: 100%;
   position: absolute;
@@ -1417,7 +1422,7 @@ body #dropzone {
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-/* line 107, ../sass/style.scss */
+/* line 109, ../sass/style.scss */
 #wrap.fullscreen {
   top: 0px !important;
 }

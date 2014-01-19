@@ -34,6 +34,8 @@ body {
 
 	-webkit-transform3d: rotateZ(0, 0, 0);
 	-webkit-font-smoothing: antialiased;
+
+	@include box-sizing(border-box);
 }
 
 canvas {
