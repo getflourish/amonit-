@@ -6,7 +6,7 @@
 <html lang="en" ng-app="feedbackApp">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>TeeBeeDee</title>
+	<title>Goover</title>
 
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -39,7 +39,7 @@
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
 	<div id="mouseTracker"><div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
-	<div id="overlay" ng-hide="true">
+	<div id="overlay" ng-hide="briefRead">
 		<div id="brief">
 			<div class="brief-content">
 				<div class="brief-author">
@@ -92,9 +92,9 @@
 	<!-- header -->
 	
 		<header>
-			<span class="logo space"><img src="images/logo.png" /></span>
-			<div class="space split-button button-group">
-				<input type="text" class="inset splitbutton-left" value="{{projectpath}}" onClick="this.select();"/><button class="btn-sm inset-button splitbutton-right">Share</button>
+			<span class="logo space">Goover</span>
+			<div class="space button-group">
+				<a href="{{projectpath}}" class="button">Okay, let’s goover!</a>
 			</div>
 			<div class="button-group">
 				<div id="login" ng-controller="AuthController">
@@ -129,7 +129,7 @@
 				<li><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">▲</span></a></li>	
 				<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}">Next</h2><span class="key">▼</span></a></li>	
 				<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
-				<li><button class="btn btnokay" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></button></li>
+				<li><a class="" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></a></li>
 			</ul>
 	
 		</header>
@@ -189,11 +189,7 @@
 			<div id="imgwrapper">
 				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
 				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
-<<<<<<< HEAD
 				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}" a="annotation" image="imageElement">
-=======
-				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}" a="annotation">
->>>>>>> 7b9d12d6731ff0f561d8983e44f295e1f4f15d30
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}</div>
 					<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>

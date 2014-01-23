@@ -1,17 +1,10 @@
 angular.module('draggableModule', []).
 directive('draggable', ['$document', '$rootScope' , function($document, $rootScope) {
     return {
-<<<<<<< HEAD
         restrict: 'A',
         scope: {
             annotation: "=a",
             imageElement: "=image"
-=======
-        restrict: "A",
-        replace: false,
-        scope: {
-            annotation: "=a",
->>>>>>> 7b9d12d6731ff0f561d8983e44f295e1f4f15d30
         },
         link: function(scope, elm, attrs) {
             var startX, startY, initialMouseX, initialMouseY;
@@ -42,24 +35,16 @@ directive('draggable', ['$document', '$rootScope' , function($document, $rootSco
                     left: x + 'px',
                 });
 
-<<<<<<< HEAD
-                
                 scope.annotation.x = x / scope.imageElement.prop("width");
                 scope.annotation.y = y / scope.imageElement.prop("height");
 
-=======
->>>>>>> 7b9d12d6731ff0f561d8983e44f295e1f4f15d30
                 return false;
             }
 
             function mouseup($event) {
                 $document.unbind('mousemove', mousemove);
                 $document.unbind('mouseup', mouseup);
-<<<<<<< HEAD
                 $rootScope.$emit("dragstop");
-=======
-                $rootScope.$emit('annotation:dragstop', $event);
->>>>>>> 7b9d12d6731ff0f561d8983e44f295e1f4f15d30
             }
         }
     };

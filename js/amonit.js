@@ -122,36 +122,14 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$rootScope.$on('resize', function () {
 		onResize();
 	});
-<<<<<<< HEAD
-	
-	/**
-	  * Drag Stop > Save
-	  */
-
-	$rootScope.$on('dragstop', function () {
-		$scope.save();
-	}); 
-=======
 
 	/**
 	  * Save
 	  */
 
-	$rootScope.$on('annotation:dragstop', function (event) {
-
-		console.log(event)
-
-		var globalX  = (event.offsetX || event.clientX - $(event.target).offset().left);
-		var globalY  = (event.offsetY || event.clientY - $(event.target).offset().top);
-
-		alert(globalX);
-
-		scope.annotation.x = x / scope.imageElement.prop("width");
-        scope.annotation.y = y / scope.imageElement.prop("height");
+	$rootScope.$on('dragstop', function () {
 		$scope.save();
 	});
-	 
->>>>>>> 7b9d12d6731ff0f561d8983e44f295e1f4f15d30
 
 	/**
 	 * Upload
