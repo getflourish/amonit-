@@ -122,7 +122,14 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$rootScope.$on('resize', function () {
 		onResize();
 	});
-	 
+	
+	/**
+	  * Drag Stop > Save
+	  */
+
+	$rootScope.$on('dragstop', function () {
+		$scope.save();
+	}); 
 
 	/**
 	 * Upload
