@@ -376,6 +376,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	};
 
 	$scope.init = function (id) {
+		$scope.resize();
 		$scope.setId(id);
 	}
 
@@ -625,7 +626,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	$scope.setImage = function (index) {	
 		$scope.currentIndex = index;
 		$scope.save();
-		onResize();
+		$scope.resize();
 	};
 
 	/**
@@ -697,6 +698,16 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         if (offset < 0) offset = 0;
         imgwrapper.css("top", offset);
 	}
+
+	$scope.resize = function() {
+		var main = $("#main");
+    	var imgwrapper = $("#imgwrapper");
+
+        var offset = main.height() / 2  - imgwrapper.height() / 2;
+
+        if (offset < 0) offset = 0;
+        imgwrapper.css("top", offset);
+	}
 });
 
 /**
@@ -733,13 +744,14 @@ feedbackApp.directive('annotation', ['$document' , function($document) {
 
 // attaches load listener to annotatable element and fires an event so tooltips can be positioned properly
 
-feedbackApp.directive('annotatable', ["$rootScope", function ($rootScope) {       
+feedbackApp.directive('annotatable', ["$rootScope", function ($rootScope, $timeout) {       
 	return {
 		link: function(scope, element, attrs) {   
 			element.bind("load" , function(event){ 
 				scope.imageLoaded = true;
+				$rootScope.$emit("resize");
 				scope.$apply();
-				$rootScope.$emit('resize');
+				
 			});
 		}
 	}
