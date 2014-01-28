@@ -13,7 +13,7 @@ header {
 	overflow: hidden;
 
 	@include background-image(linear-gradient(#ffcc00, #f0b800));
-	@include background(image-url("stripes.png"),linear-gradient(#fff, #eee));
+	@include background(image-url("../images/stripes.png"),linear-gradient(#fff, #eee));
 
 	font-size: 13px;
 

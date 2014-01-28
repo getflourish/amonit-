@@ -866,11 +866,11 @@ header {
   background-image: -moz-linear-gradient(#ffcc00, #f0b800);
   background-image: -o-linear-gradient(#ffcc00, #f0b800);
   background-image: linear-gradient(#ffcc00, #f0b800);
-  background: url('/images/stripes.png'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
-  background: url('/images/stripes.png'), -webkit-linear-gradient(#ffffff, #eeeeee);
-  background: url('/images/stripes.png'), -moz-linear-gradient(#ffffff, #eeeeee);
-  background: url('/images/stripes.png'), -o-linear-gradient(#ffffff, #eeeeee);
-  background: url('/images/stripes.png'), linear-gradient(#ffffff, #eeeeee);
+  background: url('../images/../images/stripes.png?1390140343'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
+  background: url('../images/../images/stripes.png?1390140343'), -webkit-linear-gradient(#ffffff, #eeeeee);
+  background: url('../images/../images/stripes.png?1390140343'), -moz-linear-gradient(#ffffff, #eeeeee);
+  background: url('../images/../images/stripes.png?1390140343'), -o-linear-gradient(#ffffff, #eeeeee);
+  background: url('../images/../images/stripes.png?1390140343'), linear-gradient(#ffffff, #eeeeee);
   font-size: 13px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
