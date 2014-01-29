@@ -192,7 +192,7 @@ label {
 	line-height: 12px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
 	border: 1px solid rgba(0, 0, 0, 0.20);
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

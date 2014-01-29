@@ -47,12 +47,6 @@ canvas {
 	pointer-events: none;
 }
 
-li {
-	font-size: 13px;
-	list-style-type: none;
-	line-height: 1.2em;
-	cursor: pointer;
-}
 
 body.dragOver #dropzone {display:block;} /* During drag */
 body #dropzone {

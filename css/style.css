@@ -416,7 +416,7 @@ label {
 }
 
 /* line 195, ../sass/_base.scss */
-input[type="text"] {
+input[type="text"], input[type="password"] {
   border: 1px solid rgba(0, 0, 0, 0.2);
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -425,7 +425,7 @@ input[type="text"] {
   font-size: 14px;
 }
 /* line 202, ../sass/_base.scss */
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="password"]:focus {
   outline: 0;
 }
 
@@ -553,7 +553,7 @@ input[type="text"]:focus {
   max-height: 80%;
   overflow: scroll;
   color: #363636;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.4em;
 }
@@ -584,38 +584,43 @@ input[type="text"]:focus {
   font-family: "Meta Serif OT";
   font-style: italic;
   margin: 20px 0 0 0;
+  color: #666;
+}
+/* line 62, ../sass/_brief.scss */
+#brief p strong {
+  color: #242424;
 }
 
-/* line 64, ../sass/_brief.scss */
+/* line 69, ../sass/_brief.scss */
 .brief-info {
   border-bottom: 1px dashed #d9d9d9;
   border-top: 1px dashed #d9d9d9;
   padding-bottom: 20px;
   margin: 30px 0px;
 }
-/* line 71, ../sass/_brief.scss */
+/* line 76, ../sass/_brief.scss */
 .brief-info p {
   font-style: normal;
 }
 
-/* line 76, ../sass/_brief.scss */
+/* line 81, ../sass/_brief.scss */
 .brief-author {
   font-size: 14px;
   margin-bottom: 8px;
 }
-/* line 80, ../sass/_brief.scss */
+/* line 85, ../sass/_brief.scss */
 .brief-author .brief-date {
   margin-left: 5px;
   font-size: 12px;
 }
-/* line 86, ../sass/_brief.scss */
+/* line 91, ../sass/_brief.scss */
 .brief-author img {
   position: relative;
   top: 9px;
   margin-right: 4px;
 }
 
-/* line 93, ../sass/_brief.scss */
+/* line 98, ../sass/_brief.scss */
 .brief-user {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -630,7 +635,7 @@ input[type="text"]:focus {
   font-size: 13px;
 }
 
-/* line 104, ../sass/_brief.scss */
+/* line 109, ../sass/_brief.scss */
 #name {
   text-transform: capitalize;
 }
@@ -866,11 +871,11 @@ header {
   background-image: -moz-linear-gradient(#ffcc00, #f0b800);
   background-image: -o-linear-gradient(#ffcc00, #f0b800);
   background-image: linear-gradient(#ffcc00, #f0b800);
-  background: url('../images/../images/stripes.png?1390140343'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
-  background: url('../images/../images/stripes.png?1390140343'), -webkit-linear-gradient(#ffffff, #eeeeee);
-  background: url('../images/../images/stripes.png?1390140343'), -moz-linear-gradient(#ffffff, #eeeeee);
-  background: url('../images/../images/stripes.png?1390140343'), -o-linear-gradient(#ffffff, #eeeeee);
-  background: url('../images/../images/stripes.png?1390140343'), linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/../images/stripes.png'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #eeeeee));
+  background: url('/images/../images/stripes.png'), -webkit-linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/../images/stripes.png'), -moz-linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/../images/stripes.png'), -o-linear-gradient(#ffffff, #eeeeee);
+  background: url('/images/../images/stripes.png'), linear-gradient(#ffffff, #eeeeee);
   font-size: 13px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
@@ -968,9 +973,42 @@ header input[type="text"] {
   line-height: 1.3em;
 }
 
-/* line 14, ../sass/_login.scss */
-#login input {
+/* line 10, ../sass/_login.scss */
+#auth, #uploadarea {
+  background: #ccc;
+  width: 400px;
+  text-align: left;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* line 18, ../sass/_login.scss */
+#auth input {
   width: 100px;
+}
+
+/* line 23, ../sass/_login.scss */
+#auth form input {
+  display: block;
+}
+
+/* line 27, ../sass/_login.scss */
+#auth h2, #uploadarea h2 {
+  margin: 20px 0px;
+}
+
+/* line 30, ../sass/_login.scss */
+#auth {
+  float: left;
+}
+/* line 33, ../sass/_login.scss */
+#auth form {
+  float: left;
+}
+
+/* line 38, ../sass/_login.scss */
+#uploadarea {
+  float: left;
 }
 
 /* line 1, ../sass/_main.scss */
@@ -1349,21 +1387,13 @@ canvas {
   pointer-events: none;
 }
 
-/* line 50, ../sass/style.scss */
-li {
-  font-size: 13px;
-  list-style-type: none;
-  line-height: 1.2em;
-  cursor: pointer;
-}
-
-/* line 57, ../sass/style.scss */
+/* line 51, ../sass/style.scss */
 body.dragOver #dropzone {
   display: block;
 }
 
 /* During drag */
-/* line 58, ../sass/style.scss */
+/* line 52, ../sass/style.scss */
 body #dropzone {
   z-index: 1000;
   position: fixed;
@@ -1379,18 +1409,18 @@ body #dropzone {
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* line 80, ../sass/style.scss */
+/* line 74, ../sass/style.scss */
 .fullscreen {
   margin: 0px !important;
   border: 0px !important;
 }
 
-/* line 85, ../sass/style.scss */
+/* line 79, ../sass/style.scss */
 .clickable {
   cursor: pointer;
 }
 
-/* line 89, ../sass/style.scss */
+/* line 83, ../sass/style.scss */
 #mouseTracker {
   top: 0px;
   position: fixed;
@@ -1401,7 +1431,7 @@ body #dropzone {
   pointer-events: none;
 }
 
-/* line 99, ../sass/style.scss */
+/* line 93, ../sass/style.scss */
 #wrap {
   width: 100%;
   position: absolute;
@@ -1421,7 +1451,7 @@ body #dropzone {
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-/* line 109, ../sass/style.scss */
+/* line 103, ../sass/style.scss */
 #wrap.fullscreen {
   top: 0px !important;
 }

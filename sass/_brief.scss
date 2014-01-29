@@ -28,7 +28,7 @@
 	overflow: scroll;
 
 	color: #363636;
-	font-size: 18px;
+	font-size: 16px;
 	
 	font-weight: normal;
 	line-height: 1.4em;
@@ -56,6 +56,11 @@
 		font-family: "Meta Serif OT";
 		font-style: italic;
 		margin: 20px 0 0 0;
+		color: #666;
+	}
+
+	p strong {
+		color: #242424;
 	}
 }
 

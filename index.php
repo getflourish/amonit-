@@ -39,27 +39,30 @@
 </head>
 <body ng-controller="FeedbackController" ng-init="init(<?php echo $id; ?>)" fullscreen>
 	<div id="mouseTracker"><div ng-repeat="cursor in cursors" cursor style="position: absolute;width:10px; height: 10px; background: #ff0000; z-index: 2000"></div></div>
-	<div id="overlay" ng-hide="briefRead">
+
+	<!-- start edit brief -->
+
+	<div id="overlay" ng-show="editBrief == true">
 		<div id="brief">
 			<div class="brief-content">
-				<div class="brief-author">
+				<div class="brief-author" ng-hide="true">
 					<img src="images/me.png">
 					<strong class="brief-name light">Florian</strong><span class="brief-date light">Yesterday</span>
 				</div>
 	
-				<h3>Feedback Request</h3>
+				<h3>Edit your brief</h3>
+				<input type="text" ng-model="project.title" placeholder="Your project title" />
+				<input type="text" ng-model="project.owner" placeholder="Your name" />
 				
 				<p>
-					Hello! I need your feedback on a couple of pages that I designed for <strong>CCN’s on Behance.</strong> 
+					Hello! I need your feedback on a couple of pages that I designed for <strong>{{project.title}}</strong> 
 				</p>
-				<p>
-					It’s supposed to explain the structure of the site and what’s customizable. 
-				</p>
-				<ol>
-					<li>1. What do you think about the header design and the typography?</li>
-					<li>2. Do you think we can implement the maginifying glass without using jQuery?</li>
-					<li>3. Not sure about the copy.</li>
+				<ol ng-repeat="image in project.images">
+					<li ng-repeat="annotation in image.annotations">{{annotation.comment}}</li>
 				</ol>
+				<select ng-repeat="image in project.images" ng-hide="image.annotations.length == 0">
+					<option ng-repeat="annotation in image.annotations">{{annotation.comment}}</option>
+				</select>
 				
 				<p>
 					Please feel free to comment on anything that catches your eye!
@@ -67,7 +70,51 @@
 	
 				<p>
 					Kindly,<br>
-					Florian
+					<strong>{{project.owner}}</strong>
+				</p>
+	
+				<div class="brief-info">
+					<p>Please note that the following images are the <strong>first draft.</strong> Images are placeholder stock images and will be replaced in the final version.</p>
+				</div>
+
+				<button ng-click="saveBrief()">Share</button>
+				<span ng-show="project.hasBrief">{{projectpath}}</span>
+
+			</div>
+		</div>
+	</div>
+	<!-- end edit brief -->
+
+
+	<!-- start read brief -->
+
+	<div id="overlay" ng-hide="briefRead">
+		<div id="brief">
+			<div class="brief-content">
+				<div class="brief-author">
+					<img src="images/me.png">
+					<strong class="brief-name light">{{project.owner}}</strong><span class="brief-date light">Yesterday</span>
+				</div>
+	
+				<h3>Feedback Request</h3>
+				
+				<p>
+					Hello! I need your feedback on a couple of pages that I designed for <strong>{{project.title}}</strong> 
+				</p>
+				<ol ng-repeat="image in project.images">
+					<li ng-repeat="annotation in image.annotations">{{annotation.comment}}</li>
+				</ol>
+				<select ng-repeat="image in project.images" ng-hide="image.annotations.length == 0">
+					<option ng-repeat="annotation in image.annotations">{{annotation.comment}}</option>
+				</select>
+				
+				<p>
+					Please feel free to comment on anything that catches your eye!
+				</p>
+	
+				<p>
+					Kindly,<br>
+					<strong>{{project.owner}}</strong>
 				</p>
 	
 				<div class="brief-info">
@@ -83,8 +130,9 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
+
+	<!-- end read brief -->
 
 	<div imagedrop id="dropzone" on-image-drop="imageDropped()"><h1 center>Drop Images to Upload</h1></div>
 
@@ -94,28 +142,12 @@
 		<header>
 			<span class="logo space">Goover</span>
 			<div class="space button-group">
-				<a href="{{projectpath}}" class="button">Okay, let’s goover!</a>
+				<a ng-click="editBrief = true" class="button">Okay, let’s goover!</a>
+
 			</div>
 			<div class="button-group">
 				<div id="login" ng-controller="AuthController">
 					<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
-					<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
-		
-					<form ng-hide="true" class="form-inline">
-						<input class="form-control form-group" type="text" ng-model="newemail" placeholder="Email">
-						<input class="form-control form-group" type="password" ng-model="newpassword" placeholder="Password">
-						<input class="form-control form-group" type="text" ng-model="firstname" placeholder="First name">
-						<input class="form-control form-group" type="text" ng-model="lastname" placeholder="Last name">
-						<button class="btn btn-primary btn-sm" ng-click="createUser(newemail, newpassword, firstname, lastname)">Sign up</button>
-					</form>
-					
-					<form ng-hide="true" class="form-inline">
-						<input class="form-control" type="text" ng-model="email" placeholder="Email">
-						<input class="form-control" type="password" ng-model="password" placeholder="Password">
-						<button class="btn-login" ng-click="login(email, password)">Log in</button>
-					</form>
-					<button ng-show="me" class="btn btn-danger btn-sm" ng-click="logout()">Logout</button>
-					<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
 				</div>
 			</div>
 	
@@ -159,6 +191,12 @@
 				<h3 class="spacing">Feedback</h3>
 				<input class="search" ng-model="search" placeholder="Search…">
 			</div>
+			<div id="users">
+				<button ng-show="me" class="btn btn-danger btn-sm" ng-click="logout()">Logout</button>
+				<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
+				<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
+				<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
+			</div>
 			<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
 				<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
 				<div class="feedback-content">
@@ -186,8 +224,35 @@
 		<!-- main -->
 
 		<div id="main" ng-class="{hasimages:project.images.length != 0}" >
+			<div id="landing" ng-hide="project.images.length != 0">
+				<div id="uploadarea" ng-controller="AuthController">
+					<h2>Start now</h2>
+					<p>Use Goover for free to share what you are working on and get feedback from friends, colleagues and the rest of the world. </p>
+					<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
+				</div>
+	
+				<div id="auth" ng-controller="AuthController">
+					<p>Sign up if you want to create private projects and only share with those you invite.</p>
+					<h2>Sign up</h2>
+					<form>
+						<input class="form-control form-group" type="text" ng-model="newemail" placeholder="Email">
+						<input class="form-control form-group" type="password" ng-model="newpassword" placeholder="Password">
+						<input class="form-control form-group" type="text" ng-model="firstname" placeholder="First name">
+						<input class="form-control form-group" type="text" ng-model="lastname" placeholder="Last name">
+						<button class="btn btn-primary btn-sm" ng-click="createUser(newemail, newpassword, firstname, lastname)">Sign up</button>
+					</form>
+					<h2>Login</h2>
+					
+					<form class="form-inline">
+						<input class="form-control" type="text" ng-model="email" placeholder="Email">
+						<input class="form-control" type="password" ng-model="password" placeholder="Password">
+						<button class="btn-login" ng-click="login(email, password)">Log in</button>
+					</form>
+			
+				</div>
+			</div>
+
 			<div id="imgwrapper">
-				<div filepicker order="before" class="emptystate" ng-show="project.images.length == 0"><div class="add-image upload-icon">c</div><h2>Drag & Drop Images Here</h2></div>
 				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
 				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->

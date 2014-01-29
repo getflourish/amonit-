@@ -7,11 +7,34 @@
 	line-height: 1.3em;
 }
 
-#login {
-
+#auth, #uploadarea {
+	background: #ccc;
+	width: 400px;
+	text-align: left;
+	margin: 20px;
+	padding: 20px;
 }
 
-#login input {
+#auth input {
 	width: 100px;
 }
 
+
+#auth form input {
+	display: block;
+}
+
+#auth h2, #uploadarea h2 {
+	margin: 20px 0px;
+}
+#auth {
+	float: left;
+
+	form {
+
+		float: left;
+	}
+}
+#uploadarea {
+	float: left;
+}

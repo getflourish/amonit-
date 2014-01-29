@@ -33,10 +33,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// flag used to indicate whether a tooltip is being edited
 	$scope.editing = false;
 
+	$scope.editBrief = false;
+
 	// grabbed from href and used to decide whether to create a new folder or use an existing one
 	$scope.id;
 
-	$scope.project = {"images":[], "current":null, "currentIndex":0};
+	$scope.project = {"images":[], "brief":null, "current":null, "currentIndex":0, "hasBrief":false, "title":"untitled"};
 
 	// most important object. contains information about images and their annotations
 	
@@ -543,6 +545,22 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
 		$http.post('save.php?path=' + $scope.path,$scope.data).success(function(data) {
 		});		
+	}
+
+	/**
+	 * Function: saveBrief
+	 *
+	 * Saves a Brief
+	 */
+
+	$scope.saveBrief = function () {
+		
+		// todo: check whether there is another empty annotation
+		// if so, remove it
+
+		$scope.project.hasBrief = true;
+
+		$scope.save();
 	}
 
 	/**
