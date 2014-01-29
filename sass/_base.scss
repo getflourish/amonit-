@@ -1,3 +1,4 @@
+import compass 
 /* Colors */
 
 .blue {
@@ -268,4 +269,29 @@ input[type="text"], input[type="password"] {
 .indent {
 	margin-top: 8px;
 	border-top: 1px solid #ccc;
+}
+
+@-webkit-keyframes spin{
+	0%{-webkit-transform: rotate(0deg);}
+	100%{-webkit-transform: rotate(720deg);}
+}
+@keyframes spin{
+	0%{transform: rotate(0deg);}
+	100%{transform: rotate(720deg);}
+}
+.loading{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	display: block;
+	width: 27px;
+	height: 27px;
+	margin: auto;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #0066cc transparent transparent transparent;
+	border-radius: 14px;
+	-webkit-animation: spin 1.5s linear infinite;
+	animation: spin 1.5s linear infinite;
 }

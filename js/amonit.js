@@ -1,5 +1,5 @@
 
-var feedbackApp = angular.module('feedbackApp', ['authModule', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'imagedropModule', 'stretchModule',  'timeSince', 'ui.sortable',
+var feedbackApp = angular.module('feedbackApp', ['authModule', 'monospaced.elastic', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'imagedropModule', 'stretchModule',  'timeSince', 'ui.sortable',
 ]);
 
 feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, $rootScope, $timeout, uploadService ) {
@@ -38,7 +38,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 	// grabbed from href and used to decide whether to create a new folder or use an existing one
 	$scope.id;
 
-	$scope.project = {"images":[], "brief":null, "current":null, "currentIndex":0, "hasBrief":false, "title":"untitled"};
+	$scope.project = {"images":[], "brief":"", "current":null, "currentIndex":0, "hasBrief":false, "title":"untitled"};
 
 	// most important object. contains information about images and their annotations
 	
@@ -598,6 +598,17 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		} else {
 			return;
 		}
+	}
+
+	$scope.showBrief = function () {
+		$scope.project.brief = "Dear friend, \n\nI need your feedback on a couple of mockups I designed. Can you please go over it and let me know what you think?\n\n";
+		$scope.editBrief = true;
+		 $timeout(function(){
+		 	var theBrief = $("#theBrief")
+			var strLength = theBrief.val().length;
+			theBrief.focus();
+			theBrief[0].setSelectionRange(strLength, strLength);
+		}, 0);
 	}
 
 	$scope.showOverview = function () {

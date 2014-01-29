@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="js/modules/center.js"></script>
 	<script type="text/javascript" src="js/modules/contenteditable.js"></script>
 	<script type="text/javascript" src="js/modules/draggable.js"></script>
+	<script type="text/javascript" src="js/modules/elastic.js"></script>
 	<script type="text/javascript" src="js/modules/focus.js"></script>
 	<script type="text/javascript" src="js/modules/imagedrop.js"></script>
 	<script type="text/javascript" src="js/modules/stretch.js"></script>
@@ -50,25 +51,14 @@
 					<strong class="brief-name light">Florian</strong><span class="brief-date light">Yesterday</span>
 				</div>
 	
-				<h3>Edit your brief</h3>
-				<input type="text" ng-model="project.title" placeholder="Your project title" />
-				<input type="text" ng-model="project.owner" placeholder="Your name" />
+				<h3>Write your brief</h3>
+				<label for="ownerName">Let others know who you are</label>
+				<input id="ownerName" type="text" ng-model="project.owner" placeholder="Your name e.g. Tim Cook" />
 				
-				<p>
-					Hello! I need your feedback on a couple of pages that I designed for <strong>{{project.title}}</strong> 
-				</p>
-				<ol ng-repeat="image in project.images">
-					<li ng-repeat="annotation in image.annotations">{{annotation.comment}}</li>
-				</ol>
-				<select ng-repeat="image in project.images" ng-hide="image.annotations.length == 0">
-					<option ng-repeat="annotation in image.annotations">{{annotation.comment}}</option>
-				</select>
-				
-				<p>
-					Please feel free to comment on anything that catches your eye!
-				</p>
+				<textarea id="theBrief" msd-elastic ng-model="project.brief" autofocus="true"></textarea>
+			
 	
-				<p>
+				<p ng-show="project.owner">
 					Kindly,<br>
 					<strong>{{project.owner}}</strong>
 				</p>
@@ -93,23 +83,15 @@
 			<div class="brief-content">
 				<div class="brief-author">
 					<img src="images/me.png">
-					<strong class="brief-name light">{{project.owner}}</strong><span class="brief-date light">Yesterday</span>
+					<strong class="brief-name light">{{project.owner}}</strong> (Online)<span class="brief-date light">Yesterday</span>
 				</div>
+
 	
 				<h3>Feedback Request</h3>
 				
+				<div ng-show="!project.brief" class="loading"></div>
 				<p>
-					Hello! I need your feedback on a couple of pages that I designed for <strong>{{project.title}}</strong> 
-				</p>
-				<ol ng-repeat="image in project.images">
-					<li ng-repeat="annotation in image.annotations">{{annotation.comment}}</li>
-				</ol>
-				<select ng-repeat="image in project.images" ng-hide="image.annotations.length == 0">
-					<option ng-repeat="annotation in image.annotations">{{annotation.comment}}</option>
-				</select>
-				
-				<p>
-					Please feel free to comment on anything that catches your eye!
+					{{project.brief}}
 				</p>
 	
 				<p>
@@ -142,7 +124,7 @@
 		<header>
 			<span class="logo space">Goover</span>
 			<div class="space button-group">
-				<a ng-click="editBrief = true" class="button">Okay, let’s goover!</a>
+				<a ng-click="showBrief()" class="button">Okay, let’s goover!</a>
 
 			</div>
 			<div class="button-group">

@@ -52,7 +52,7 @@
 		margin: 40px 0px;
 	}
 
-	p, ol {
+	p, ol, textarea {
 		font-family: "Meta Serif OT";
 		font-style: italic;
 		margin: 20px 0 0 0;
@@ -61,6 +61,20 @@
 
 	p strong {
 		color: #242424;
+	}
+
+	textarea {
+		font-size: 16px;
+		border: 0;
+		resize: none;
+		min-width: 100%;
+
+		&:focus {
+			border: 0;
+			outline: 0;
+			width: 100%;
+		}
+
 	}
 }
 
