@@ -7,36 +7,54 @@
 @import "_clicktoedit.scss";
 @import "_feedback.scss";
 @import "_header.scss";
+@import "_headings.scss";
 @import "_login.scss";
 @import "_main.scss";
+@import "_mixins.scss";
 @import "_navigation.scss";
 @import "_tooltip.scss";
 
 
-@font-face
-{
-	font-family: "pictos";
-	src: url(fonts/pictos-web.ttf);
-}
-
 * {
 	margin: 0;
 	padding: 0;
+	@include box-sizing(border-box);
 }
+
 body {
 	
 	margin: 0 auto;
-	background: #f2efe4;
+
+	background: #f2f2f2;
 
 	color: $dark_blue;
-	font-size: 16px;
+	font-size: $font_size_normal;
 	font-family: $SANS;
 
-	-webkit-transform3d: rotateZ(0, 0, 0);
+	
 	-webkit-font-smoothing: antialiased;
 
 	@include box-sizing(border-box);
 }
+
+.wrap {
+  	position: absolute;
+  	top: 50px;
+  	bottom: 0;
+
+  	width: 100%;
+  	
+  	overflow: hidden;
+
+  	@include transition-property(all);
+  	@include transition-duration(0.5s);
+  	@include transition-timing-function(ease-in-out);
+
+  	&.fullscreen {
+  		top: 0px !important;
+  	}
+}
+
 
 canvas {
 	background: transparent;
@@ -88,19 +106,4 @@ body #dropzone {
 	height: 1000px;
 	z-index: 5;
 	pointer-events: none;
-}
-
-#wrap {
-	width: 100%;
-  	position: absolute;
-  	top: 50px;
-  	bottom: 0;
-  	overflow: hidden;
-  	@include transition-property(all);
-  	@include transition-duration(0.5s);
-  	@include transition-timing-function(ease-in-out);
-
-  	&.fullscreen {
-  		top: 0px !important;
-  	}
 }

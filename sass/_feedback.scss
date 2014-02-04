@@ -1,10 +1,9 @@
 #right {
-	
+	padding: 10px;
+
 	width: 300px;
   	height: 100%;
   	float: right;
-
-  	background: #fff;
   	
   	overflow-x: hidden;
 	overflow-y: scroll;
@@ -24,43 +23,118 @@
 		margin-bottom: 10px;
 		padding: 0px 0px;
 	}
-
-	ul {
-		padding: 5px 15px;
-	}
-
-	ul li {
-		margin-bottom: 15px;
-	}
-	
-	ul li:hover .remove {
-		opacity: 0.5;
-	}
-	
-	.remove:hover{
-		opacity: 1;
-		color: red;
-	}
-
 }
 
-#feedback-header {
-	padding: 15px 0px;
-	border-bottom: 1px solid #e3e3e3;
+.comment-container {
+	margin: 10px 0px;
 	position: relative;
-	@include display-box;
-}
+	width: 100%;
 
-.feedback-content {
-	margin: 0;
 	opacity: 1;
-	padding: 10px;
 	background: #fff;
-	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.20);
+	
+	@include box-shadow(rgba(0, 0, 0, 0.2) 0px 1px 1px);
+	@include border-radius(5px);
 
 	&:hover {
 		opacity: 1 !important;
 	}
+	
+}
+.comment-number {
+	
+	background: #fff;
+	
+	margin: 0 auto;
+	vertical-align: middle;
+	display: block;
+	position: relative;
+	top: -10px;
+	width: 20px;
+	height: 20px;
+	
+	border: 5px solid white;
+	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 1px 1px, $background 0px 0px 0px 5px);
+
+	text-align: center;
+	color: $light;
+	font-size: 13px;
+	font-weight: bold;
+	vertical-align: middle;
+	line-height: 12px;
+
+	@include border-radius(50%);
+}
+
+.comment-first {
+	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 0px 3px);
+}
+.comment:not(:last-of-type) {
+	border-bottom: 1px solid #e2e6e8;
+	position: relative;
+}
+.comment-form {
+	
+	padding: 12px;
+
+	border-top: 1px dashed #c0cacf;
+	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 0px 3px);
+
+	.batch {
+		position: absolute;
+	}
+	
+	input {
+		border: 0;
+		width: 100%;
+		padding: 0px 0px 0px 20px;
+		display: inline;
+	}
+	::-webkit-input-placeholder {
+		font-style: italic;
+   		color: #999;
+	}
+	:-moz-placeholder {
+		font-style: italic;
+	    color: #999;
+	}
+	::-moz-placeholder {
+		font-style: italic;
+	    color: #999;
+	}
+	:-ms-input-placeholder {
+		font-style: italic;
+	    color: #999;
+	}
+}
+
+.comment-inner {
+	padding: 0px 12px 12px 12px;
+
+	p {
+		display: block;
+		font-family: $SERIF;
+		word-wrap: break-word;
+	}
+}
+
+.scroll-container {
+	background: #fafafa;
+}
+
+
+#feedback-header {
+	padding: 15px 0px;
+	margin-bottom: 45px;
+
+	h3 {
+		display: inline-block;
+		float: left;
+	}
+}
+
+.feedback-content {
+	
 }
 
 .feedback-title  {
@@ -78,60 +152,36 @@
 }
 
 .search {
+	float: right;
+	position: relative;
+	top: 3px;
+}
+.search .batch {
+	position: relative;
+	top: 6px;
+	left: 21px;
+	z-index: 999;
+	font-size:13px;
+
+}
+
+.search input {
 	background-color: #ffffff;
 	border: 1px solid #e0e0e0;
 	@include border-radius(100px);
-	position: relative;
 	
-	padding: 0px 4px 0px 8px;
+	padding: 0px 4px 0px 25px;
 	width: 130px;
 	height: 24px;
 	
-	float: right;
-	font-family: "Helvetica Neue", Arial;
+	font-family: $SANS;
+	font-size: 14px;
 
 	&:focus {
 		outline: 0;
 		border: 1px solid rgba(13, 180, 255, 1);
 		@include box-shadow(rgba(13, 180, 255, 1) 0px 0px 5px);
 	}
-}
-
-.bubble {
-
-	position: relative;
-	margin-top: 12px;
-	display: inline-block;
-
-	padding: 6px 20px 6px 6px;
-	
-	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 1px 0px);
-	border-radius: 8px;
-
-	line-height: 1.5em;
-
-	background-color: #fef0c0;
-
-	color: #5c5c5c;
-	font-family: "Georgia";
-	font-style: italic;
-
-	&:hover {
-		background: #fef0c0;
-	}
-
-	 &:before {
-	 	position: absolute;
-    	top: -7px;
-    	left: 10px;
-    
-    	content: '';
-    	display: block;
-	
-    	border-right: 10px solid transparent;
-    	border-left: 10px solid transparent;
-    	border-bottom: 10px solid #fef0c0;
-    }
 }
 
 .remove {

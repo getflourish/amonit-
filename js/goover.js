@@ -277,6 +277,21 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 		// })
 	}
 
+	$scope.addReply = function () {
+            	if ($scope.view.reply != "") {
+            		var newreply = {"text":$scope.view.reply, "user":$scope.username, "timestamp":new Date().getTime()};
+            		
+            		if ($scope.annotation.replies) {
+            			$scope.annotation.replies.push(newreply);
+            		} else {
+            			$scope.annotation.replies = [];
+            			$scope.annotation.replies.push(newreply);
+            		}
+            		$scope.view.reply = "";
+            		$scope.save();	
+            	}
+            }
+
 	/**
 	 * Function: blurTooltip
 	 *
@@ -965,6 +980,20 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             types: "=types",
             username: "=username"
         },
+        link: function (scope, elem, attrs, controller) {
+        	scope.focus = function () {
+        		setTimeout(function () {
+        			$(".open").find('textarea')[0].focus();
+        		   	$(".open").find('input')[0].focus();
+        		   	
+        		   	// scroll to the last comment
+
+        		   	var elm = $(".open").find('.scroll-container');
+        		   	elm.stop().animate({scrollTop: $(".comment:last-of-type").prop("offsetTop") }, "slow");
+
+        		}, 1);
+        	}
+        },
         controller: function($rootScope, $scope, $timeout) {
             $scope.view = {
                 editableValue: $scope.annotation.comment,
@@ -1011,7 +1040,9 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
             			$scope.annotation.replies.push(newreply);
             		}
             		$scope.view.reply = "";
-            		$scope.save();	
+
+            		$scope.save();
+            		$scope.focus();
             	}
             }
 
@@ -1027,12 +1058,6 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout', function ($rootScope
 
             $scope.remove = function () {
 				$rootScope.$emit('tooltip:remove', $scope.id);
-            }
-
-            $scope.focus = function () {
-            	$timeout(function () {
-                	$(".open").find('textarea')[0].focus();
-                })
             }
 
             $scope.save = function() {

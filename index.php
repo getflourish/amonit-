@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="js/angularfire.min.js"></script>
 	<script type="text/javascript" src="js/firebase-simple-login.js"></script>
 	
-	<script type="text/javascript" src="js/amonit.js"></script>
+	<script type="text/javascript" src="js/goover.js"></script>
 	<script type="text/javascript" src="js/trail.js"></script>
 
 	<script type="text/javascript" src="//use.typekit.net/qxg4wno.js"></script>
@@ -122,35 +122,42 @@
 	<!-- header -->
 	
 		<header>
-			<span class="logo space">Goover</span>
-			<div class="space button-group">
-				<a ng-click="showBrief()" class="button">Okay, let’s goover!</a>
-
+			<div class="header-left header-section">
+				<span class="logo space">Goover</span>
+				<div class="button-group">
+					<div id="login" ng-controller="AuthController">
+						<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
+					</div>
+				</div>
+				<div class="button-group">hello</div>
+				<div class="button-group">hello</div>
 			</div>
-			<div class="button-group">
-				<div id="login" ng-controller="AuthController">
-					<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
+
+			<div class="project-title header-section">
+				<h2 ng-show="project.images.length!=0"><a href="" class="header-link">{{project.images[currentIndex-1].filename}}</a></h2>
+				<h1 ng-show="project.images.length!=0" click-to-edit="project.images[currentIndex].filename"><a href="" class="header-link">{{project.images[currentIndex].filename}}</a></h1>
+				<h2 ng-show="project.images.length!=0"><a href="" class="header-link">{{project.images[currentIndex+1].filename}}</a></h2>
+			</div>
+
+			<div class="header-right header-section">
+				<ul>
+					<!--
+					<li><a href=""><h2 ng-click="prev()"></h2></a></li>	
+					<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}"></h2></a></li>	
+					<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
+				-->
+					<li><a class="" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></a></li>
+				</ul>
+				<div class="button-group">
+					<a ng-click="showBrief()" class="button btn-primary">Share & Get Feedback</a>
 				</div>
 			</div>
-	
-			<div class="center" ng-show="false">
-				<h5 ng-show="project.images.length!=0">{{project.images[currentIndex-1].filename}}</h5>
-				<h4 ng-show="project.images.length!=0" click-to-edit="current.filename">{{current.filename}}</h4>
-				<h5 ng-show="project.images.length!=0">{{project.images[currentIndex+1].filename}}</h5>
-			</div>
-	
-			<ul>
-				<li><a href=""><h2 ng-click="prev()">Previous</h2><span class="key">▲</span></a></li>	
-				<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}">Next</h2><span class="key">▼</span></a></li>	
-				<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
-				<li><a class="" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></a></li>
-			</ul>
 	
 		</header>
 	
 		<!-- // end of header -->
 
-	<div id="wrap">
+	<div class="wrap">
 
 		<!-- sidebar -->
 	
@@ -169,37 +176,86 @@
 		<!-- Comments -->
 		
 		<aside id="right" ng-hide="project.images.length == 0">
+
+			<!-- title, search -->
+
 			<div id="feedback-header">
-				<h3 class="spacing">Feedback</h3>
-				<input class="search" ng-model="search" placeholder="Search…">
+				<h3 class="spacing upper-title">Feedback</h3>
+				<div class="search">
+					<span class="batch search-icon light">&#xf097;</span>
+					<input class="search" ng-model="search">
+				</div>
 			</div>
+
+			<!-- list of users -->
+
+			<!--
 			<div id="users">
 				<button ng-show="me" class="btn btn-danger btn-sm" ng-click="logout()">Logout</button>
 				<span class="space" ng-hide="users.length == 0"><span class="icon before">E</span><span>On it now:&nbsp;</span><strong ng-repeat="user in users" ng-show="user.connections">{{user.name.first}}<span ng-show="!$last">, </span></strong></span>
-				<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
-				<span class="space" ng-hide="me"><span class="icon before">U</span><strong>Login</strong></span>
 			</div>
-			<ul class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
+			-->
+
+			<!-- feedback for the current image -->
+
+			<div class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
+				
+				<!-- image title for the following comments -->
+
+				<!-- 
+
 				<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
+
+				-->
+
+				<!-- the actual comments -->
+
 				<div class="feedback-content">
-					<li ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
-						<div class="brief-author">
-							<img src="images/me.png">
-							<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
+
+					<!-- the topic opener -->
+
+					<div class="comment-container" ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
+						<span class="comment-number">{{$index + 1}}</span>
+						<div class="comment">
+							<div class="comment-inner">
+								<div class="brief-author">
+									<img src="images/me.png">
+									<strong class="brief-name light">Florian{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
+								</div>
+								<div>
+									<!--
+									<span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">
+										{{annotation.typeLabel}}
+									</span>
+									-->
+									<p>
+										{{annotation.comment}}
+									</p>
+									<span class="remove" ng-click="removeAnnotation($index)">×</span>
+								</div>
+							</div>
 						</div>
-						<div class="bubble"><span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">{{annotation.typeLabel}}</span> {{annotation.comment}}<span class="remove" ng-click="removeAnnotation($index)">×</span></div>
-						<ul>
-							<li ng-repeat="reply in annotation.replies">
+						<!-- replies -->
+
+						<div class="comment" ng-repeat="reply in annotation.replies">
+							<div class="comment-inner">
 								<div class="brief-author">
 									<img src="images/me.png">
 									<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
 								</div>
-								{{reply.text}}
-							</li>
-						</ul>
-					</li>
+								<p>
+									{{reply.text}}
+								</p>
+							</div>
+						</div>
+
+						<form class="comment-form">
+							<span class="batch light">&#xf158;</span>
+							<input type="text" placeholder="Reply…" />
+						</form>
+					</div>
 				</div>
-			</ul>
+			</div>
 		</aside>
 		<!-- // end of comments -->
 	
@@ -251,5 +307,6 @@
 
 	<input type="file" id="filepicker" multiple uploader>
 	<!--<canvas id='world'></canvas>-->
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>

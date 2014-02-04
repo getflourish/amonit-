@@ -19,11 +19,14 @@
 	#overview {
 		width: 150px;
 		color: #fff;
+		padding: 10px;
 	}
 	
 	#overview li {
 		position: relative;
-		padding: 10px;
+		padding: 5px;
+		display: block;
+		list-style-type: none;
 
 		&:hover .removeimage {
 			display: block;
@@ -34,6 +37,7 @@
 		display: block;
 		width: 100%;
 		opacity: 0.8;
+		
 
 		&:hover {
 			display: block;
@@ -44,12 +48,10 @@
 }
 
 .add-image {
-	border: 1px dashed rgba(255, 255, 255, 0.20);
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
+	
 	padding: 10px 25px 10px 25px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.30);
+	list-style-type: none;
 }
 
 #filepicker {
@@ -81,7 +83,13 @@
 
 .selected {
 	color: #ffcc00;	
-	background: #000;
+	@include background-image(linear-gradient(lighten(#ffe030, 10%), #f1b903));
+
+	@include border-radius(3px);
+
+	@include box-shadow(rgba(0, 0, 0, 0.4) 0px 0px 6px);
+	max-width: 100%;
+
 }
 
 .selected img {
