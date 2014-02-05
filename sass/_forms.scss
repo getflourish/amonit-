@@ -1,0 +1,96 @@
+/* Forms */
+
+label {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 12px;
+}
+
+.form-inline {	
+	display: inline;
+}
+
+.form-block {
+	display: block;
+	margin-top: 10px;
+}
+
+.form-control-inline {
+	margin-right: 6px;
+	width: 100%;
+}
+
+.form-control
+{
+	padding: 6px 12px 6px 12px;
+	border: 1px solid rgba(0, 0, 0, 0.20);
+	font-size: 14px;
+	font-family: $SANS;
+	@include box-sizing(border-box);
+
+	&:focus {
+		outline: 0;
+		border: 1px solid rgba(13, 180, 255, 1);
+		@include box-shadow(rgba(13, 180, 255, 1) 0px 0px 5px);
+	}
+}
+.form-control-naked {
+	padding: 6px 12px 6px 12px;	
+	font-size: 14px;
+	font-family: $SANS;
+	@include box-sizing(border-box);
+	border: 0;
+
+	::-webkit-input-placeholder {
+		font-style: italic;
+   		color: #999;
+	}
+	:-moz-placeholder {
+		font-style: italic;
+	    color: #999;
+	}
+	::-moz-placeholder {
+		font-style: italic;
+	    color: #999;
+	}
+	:-ms-input-placeholder {
+		font-style: italic;
+	    color: #999;
+	}
+
+	&:focus {
+		outline: 0;
+		border: 0;
+	}
+
+}
+
+input[type="text"], 
+input[type="password"] 
+{
+	@include border-radius(3px);
+}
+
+input[type="search"] {
+	-webkit-appearance: none;
+	@include border-radius(100px);
+}
+
+fieldset.with-icon {
+	position: relative;
+}
+fieldset.with-icon input[type="search"] {
+	padding: 4px 0px 4px 18px;
+}
+fieldset.with-icon input[type="text"] {
+	padding: 4px 0px 4px 30px;
+}
+
+.input-icon {
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	font-size: 13px;
+}

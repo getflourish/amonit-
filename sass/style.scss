@@ -1,4 +1,5 @@
 @import "compass";
+@import "compass/reset";
 
 @import "_variables.scss";
 @import "_animations.scss";
@@ -6,6 +7,7 @@
 @import "_brief.scss";
 @import "_clicktoedit.scss";
 @import "_feedback.scss";
+@import "_forms.scss";
 @import "_header.scss";
 @import "_headings.scss";
 @import "_login.scss";
@@ -14,12 +16,6 @@
 @import "_navigation.scss";
 @import "_tooltip.scss";
 
-
-* {
-	margin: 0;
-	padding: 0;
-	@include box-sizing(border-box);
-}
 
 body {
 	
@@ -35,6 +31,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 
 	@include box-sizing(border-box);
+}
+strong {
+	font-weight: bold;
 }
 
 .wrap {

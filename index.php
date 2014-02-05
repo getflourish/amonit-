@@ -175,16 +175,16 @@
 		<!-- // end of sidebar -->
 		<!-- Comments -->
 		
-		<aside id="right" ng-hide="project.images.length == 0">
+		<aside class="feedback-container" ng-hide="project.images.length == 0">
 
 			<!-- title, search -->
 
 			<div id="feedback-header">
 				<h3 class="spacing upper-title">Feedback</h3>
-				<div class="search">
-					<span class="batch search-icon light">&#xf097;</span>
-					<input class="search" ng-model="search">
-				</div>
+				<fieldset class="with-icon">
+					<span class="icon input-icon icon-search">&#xf097;</span>
+					<input type="search" value="" ng-model="search" class="form-control">
+				</fieldset>
 			</div>
 
 			<!-- list of users -->
@@ -248,10 +248,11 @@
 								</p>
 							</div>
 						</div>
-
 						<form class="comment-form">
-							<span class="batch light">&#xf158;</span>
-							<input type="text" placeholder="Reply…" />
+							<fieldset class="with-icon">
+								<span class="icon input-icon">&#xf158;</span>
+								<input type="text" placeholder="Reply…" value="" class="form-control-inline form-control-naked">
+							</fieldset>
 						</form>
 					</div>
 				</div>

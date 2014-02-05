@@ -55,13 +55,15 @@ import compass
 	font-style:normal;
  }
 
- .batch {
-	font-family:"Batch";
-	font-size:16px;
-	line-height:1;
-	display:inline-block;
+ .icon {
+	font-family: "Batch";
+	font-size: 16px;
+	display: inline-block;
+	opacity: 0.75;
+	vertical-align: top;
+	width: 20px;
+	height: 20px;
 }
-
 
 /* Layout */
 
@@ -138,17 +140,17 @@ import compass
 
 /* Buttons */
 
-button, .button {
+.button {
 	vertical-align: middle;
 	@include border-radius(3px);
 	outline: 0;
-	border: 0px;
 	@include background-image(linear-gradient(#ffffff, #e8e8e8));
 	border: 1px solid #cfcfcf;
 	padding: 8px 12px;
 	font-family: "Helvetica Neue","Arial";
 	font-size: 13px;
 	font-weight: bold;
+
 	display: inline-block;
 	cursor: pointer;
 
@@ -158,9 +160,11 @@ button, .button {
 	@include transition-duration(0.2s);  
 
 	&:hover {
-		@include background-image(linear-gradient(#ffda0a, #ffcd29));
 		border: 1px solid #664f00;
-		@include box-shadow(rgba(245, 200, 0, 0.30) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px);
+		color: #242424;
+
+		@include background-image(linear-gradient(#ffda0a, #ffcd29));
+		@include box-shadow(rgba(245, 200, 0, 0.50) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px);
 	}
 
 	&:active {
@@ -226,55 +230,6 @@ button, .button {
 	height: 24px;
 	line-height: 13px;
 
-}
-
-/* Forms */
-
-.form-inline {	
-	display: inline;
-}
-
-.form-block {
-	display: block;
-	margin-top: 10px;
-}
-
-.form-control {
-	margin-right: 6px;
-}
-
-label {
-	display: block;
-	margin-bottom: 10px;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 12px;
-}
-
-input[type="text"], input[type="password"] {
-	border: 1px solid rgba(0, 0, 0, 0.20);
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	padding: 6px 12px 6px 12px;
-	font-size: 14px;
-	&:focus {
-		outline: 0;
-	}
-}
-
-/* Icons */
-
-.icon {
-	font-family: "pictos";
-	font-size: 16px;
-}
-.icon:hover {
-	opacity: 1;
-}
-
-.icon.before {
-	margin-right: 7px;
 }
 
 /* Inset */

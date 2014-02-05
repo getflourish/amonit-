@@ -1155,13 +1155,13 @@ feedbackApp.directive('fullscreen', ['$document', '$timeout', '$rootScope', func
 				// hide header, right sidebar
 				if (scope.isFullscreen) {
 					$("header").addClass("fs");
-					$("#right").addClass("fs");
+					$(".feedback-container").addClass("fs");
 					$("#main").addClass("fullscreen");
 					$("#wrap").addClass("fullscreen");
 					$("#imgwrapper").addClass("fullscreen");
 				} else {
 					$("header").removeClass("fs");
-					$("#right").removeClass("fs");
+					$(".feedback-container").removeClass("fs");
 					$("#main").removeClass("fullscreen");
 					$("#wrap").removeClass("fullscreen");
 					$("#imgwrapper").removeClass("fullscreen");

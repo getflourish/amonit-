@@ -1,4 +1,4 @@
-#right {
+.feedback-container {
 	padding: 10px;
 
 	width: 300px;
@@ -16,12 +16,6 @@
 
   	&.fs {
 		margin-right: -300px !important;
-	}
-
-
-	h5 {
-		margin-bottom: 10px;
-		padding: 0px 0px;
 	}
 }
 
@@ -50,8 +44,8 @@
 	display: block;
 	position: relative;
 	top: -10px;
-	width: 20px;
-	height: 20px;
+	width: 12px;
+	height: 12px;
 	
 	border: 5px solid white;
 	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 1px 1px, $background 0px 0px 0px 5px);
@@ -69,6 +63,10 @@
 .comment-first {
 	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 0px 3px);
 }
+.comment:first-of-type {
+	margin-top: -10px;
+
+}
 .comment:not(:last-of-type) {
 	border-bottom: 1px solid #e2e6e8;
 	position: relative;
@@ -79,33 +77,6 @@
 
 	border-top: 1px dashed #c0cacf;
 	@include box-shadow(rgba(0, 0, 0, 0.1) 0px 0px 3px);
-
-	.batch {
-		position: absolute;
-	}
-	
-	input {
-		border: 0;
-		width: 100%;
-		padding: 0px 0px 0px 20px;
-		display: inline;
-	}
-	::-webkit-input-placeholder {
-		font-style: italic;
-   		color: #999;
-	}
-	:-moz-placeholder {
-		font-style: italic;
-	    color: #999;
-	}
-	::-moz-placeholder {
-		font-style: italic;
-	    color: #999;
-	}
-	:-ms-input-placeholder {
-		font-style: italic;
-	    color: #999;
-	}
 }
 
 .comment-inner {
@@ -149,39 +120,6 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-}
-
-.search {
-	float: right;
-	position: relative;
-	top: 3px;
-}
-.search .batch {
-	position: relative;
-	top: 6px;
-	left: 21px;
-	z-index: 999;
-	font-size:13px;
-
-}
-
-.search input {
-	background-color: #ffffff;
-	border: 1px solid #e0e0e0;
-	@include border-radius(100px);
-	
-	padding: 0px 4px 0px 25px;
-	width: 130px;
-	height: 24px;
-	
-	font-family: $SANS;
-	font-size: 14px;
-
-	&:focus {
-		outline: 0;
-		border: 1px solid rgba(13, 180, 255, 1);
-		@include box-shadow(rgba(13, 180, 255, 1) 0px 0px 5px);
-	}
 }
 
 .remove {
