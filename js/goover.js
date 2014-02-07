@@ -880,7 +880,7 @@ feedbackApp.directive("clickToEdit", function() {
     var editorTemplate = '<div class="click-to-edit">' +
         '<div ng-hide="view.editorEnabled">' +
             '{{value}} ' +
-            '<a href="#" class="edit icon" ng-click="enableEditor()">p</a>' +
+            '<a href="#" class="edit icon" ng-click="enableEditor()">&#xf13a;</a>' +
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
             '<input ng-keydown="onKeypress($event)" ng-model="view.editableValue">' +

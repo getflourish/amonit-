@@ -1,8 +1,9 @@
 #left {
 	height: 100%;
-	position: fixed;
-	left: -120px;
-	z-index: 10;
+	
+	
+	float: left;
+
 	transition: left 0.3s;
 	-webkit-transition: left 0.2s ease-in-out;
 	overflow: scroll;
@@ -49,7 +50,7 @@
 
 .add-image {
 	
-	padding: 10px 25px 10px 25px;
+	padding: 0px 25px 10px 25px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.30);
 	list-style-type: none;
 }
@@ -71,7 +72,6 @@
 	line-height: 48px;
 	text-align: center;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.10);
-	margin: 20px;
 	-webkit-transition: color 0.2s;
 
 	cursor: pointer;

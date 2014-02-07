@@ -57,12 +57,16 @@ import compass
 
  .icon {
 	font-family: "Batch";
-	font-size: 16px;
+	font-size: 14px;
 	display: inline-block;
 	opacity: 0.75;
 	vertical-align: top;
 	width: 20px;
 	height: 20px;
+}
+
+.icon-before {
+	margin-right: 6px;
 }
 
 /* Layout */
@@ -118,6 +122,14 @@ import compass
 	left: -9999px; 
 	width: 1px; 
 	height: 1px;
+}
+.key {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background: #333;
+	border: 1px solid #292929;
+	@include border-radius(3px);
 }
 
 .semi {
@@ -177,10 +189,10 @@ import compass
 .btn-primary {
 
 	margin: 0 12px 0 0;
-	padding: 0px 15px;
+	padding: 0px 12px;
 
-	line-height: 36px;
-	height: 36px;
+	line-height: 32px;
+	height: 32px;
 	vertical-align: middle;
 	text-align: center;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.70);

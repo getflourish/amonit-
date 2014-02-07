@@ -106,7 +106,7 @@
 				<div class="brief-footer">
 					<form id="enter-name">
 						<label for="name">Please enter your name to leave some feedback.</label>
-						<input type="text" placeholder="Your Name" id="name" ng-model="username" capitalize-first autofocus />
+						<input type="text" placeholder="Your Name" id="name" ng-model="username" class="form-control-inline form-control-naked" capitalize-first autofocus />
 						<button type="submit" ng-class="{btnokay: username!='', btndisabled:username==''}" class="form-block" ng-click="briefRead=true">Okay, let’s do this!</button>
 					</form>
 				</div>
@@ -126,17 +126,30 @@
 				<span class="logo space">Goover</span>
 				<div class="button-group">
 					<div id="login" ng-controller="AuthController">
-						<span class="space" ng-show="username"><span class="icon before">U</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
+						<span class="space" ng-show="username"><span class="icon icon-before">&#xf043;</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
 					</div>
 				</div>
-				<div class="button-group">hello</div>
-				<div class="button-group">hello</div>
+				<div class="button-group">.</div>
 			</div>
 
-			<div class="project-title header-section">
-				<h2 ng-show="project.images.length!=0"><a href="" class="header-link">{{project.images[currentIndex-1].filename}}</a></h2>
-				<h1 ng-show="project.images.length!=0" click-to-edit="project.images[currentIndex].filename"><a href="" class="header-link">{{project.images[currentIndex].filename}}</a></h1>
-				<h2 ng-show="project.images.length!=0"><a href="" class="header-link">{{project.images[currentIndex+1].filename}}</a></h2>
+			<div class="project-title header-section" ng-show="project.images.length!=0">
+				
+				<h2 ng-show="currentIndex == 0"><a href="" class="header-link">—</a></h2>
+
+				<h2 ng-show="project.images[currentIndex-1].filename">
+					<a href="" class="header-link" ng-click="currentIndex = currentIndex-1">{{project.images[currentIndex-1].filename}}
+					</a>
+				</h2>
+
+				<h1 click-to-edit="project.images[currentIndex].filename">
+					<a href="" class="header-link">{{project.images[currentIndex].filename}}</a>
+				</h1>
+				
+				<h2 ng-show="project.images[currentIndex+1].filename">
+					<a href="" class="header-link" ng-click="currentIndex = currentIndex + 1">{{project.images[currentIndex+1].filename}}</a>
+				</h2>
+				<h2 ng-show="currentIndex == project.images.length - 1"><a href="" class="header-link">—</a></h2>
+				
 			</div>
 
 			<div class="header-right header-section">
@@ -146,10 +159,10 @@
 					<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}"></h2></a></li>	
 					<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
 				-->
-					<li><a class="" ng-click="toggleFullscreen()"><span class="icon before">`</span>Present<span class="key">P</span></a></li>
+					<li><a class="" ng-click="toggleFullscreen()"><span class="icon icon-before">&#xf0a4;</span>Present<span class="key">P</span></a></li>
 				</ul>
 				<div class="button-group">
-					<a ng-click="showBrief()" class="button btn-primary">Share & Get Feedback</a>
+					<a ng-click="showBrief()" class="button btn-primary">Share</a>
 				</div>
 			</div>
 	
@@ -163,13 +176,13 @@
 	
 		<aside id="left" class="animated" selectedscroll ng-hide="project.images.length == 0">
 			<div id="leftspacer"></div>
-		<ul>
-			<li class="add-image upload-icon" filepicker order="before">c</li>
-			<ul id="overview" ui-sortable ng-model="project.images" ng-class="{slideOut: !overviewShowing}">
-				<li ng-repeat="image in project.images" ng-click="setImage($index)" ng-class="{selected:$index==currentIndex}"><img ng-src="{{image.path}}" /><span ng-click="removeImage($index)" class="icon light removeimage">y</span></li>
+			<ul>
+				<li class="add-image upload-icon" filepicker order="before">c</li>
+				<ul id="overview" ui-sortable ng-model="project.images" ng-class="{slideOut: !overviewShowing}">
+					<li ng-repeat="image in project.images" ng-click="setImage($index)" ng-class="{selected:$index==currentIndex}"><img ng-src="{{image.path}}" /><span ng-click="removeImage($index)" class="icon removeimage">y</span></li>
+				</ul>
+				<li ng-hide="project.images.length == 0" class="add-image upload-icon" filepicker order="after">c</li>
 			</ul>
-			<li ng-hide="project.images.length == 0" class="add-image upload-icon" filepicker order="after">c</li>
-		</ul>
 		</aside>
 	
 		<!-- // end of sidebar -->
