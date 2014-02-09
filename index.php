@@ -123,47 +123,51 @@
 	
 		<header>
 			<div class="header-left header-section">
-				<span class="logo space">Goover</span>
-				<div class="button-group">
-					<div id="login" ng-controller="AuthController">
-						<span class="space" ng-show="username"><span class="icon icon-before">&#xf043;</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span>
-					</div>
-				</div>
-				<div class="button-group">.</div>
+				<ul class="nav-items">
+					<li class="nav-item nav-item-logo cfix">Goover</li>
+					<li class="nav-item nav-item-last cfix" id="login" ng-controller="AuthController" ng-show="username">
+						<a href="" class="nav-link"><span class="icon icon-before">&#xf043;</span><span class="light">Hello,&nbsp;</span><strong>{{username}}!</strong></span></a>
+					</li>
+				</ul>
 			</div>
 
 			<div class="project-title header-section" ng-show="project.images.length!=0">
 				
-				<h2 ng-show="currentIndex == 0"><a href="" class="header-link">—</a></h2>
+				<!--<h2 ng-show="currentIndex == 0"><a href="" class="header-link">—</a></h2>
 
 				<h2 ng-show="project.images[currentIndex-1].filename">
 					<a href="" class="header-link" ng-click="currentIndex = currentIndex-1">{{project.images[currentIndex-1].filename}}
 					</a>
 				</h2>
 
+			-->
+
 				<h1 click-to-edit="project.images[currentIndex].filename">
 					<a href="" class="header-link">{{project.images[currentIndex].filename}}</a>
 				</h1>
-				
+				<!--
 				<h2 ng-show="project.images[currentIndex+1].filename">
 					<a href="" class="header-link" ng-click="currentIndex = currentIndex + 1">{{project.images[currentIndex+1].filename}}</a>
 				</h2>
 				<h2 ng-show="currentIndex == project.images.length - 1"><a href="" class="header-link">—</a></h2>
-				
+				-->
 			</div>
 
 			<div class="header-right header-section">
-				<ul>
+
+				<ul class="nav-items">
 					<!--
 					<li><a href=""><h2 ng-click="prev()"></h2></a></li>	
 					<li><a href=""><h2 ng-click="next()" ng-class="{flash:flashnext}"></h2></a></li>	
 					<li><a href=""><span class="icon before">b</span><h2>New Set</h2></a></li>	
 				-->
-					<li><a class="" ng-click="toggleFullscreen()"><span class="icon icon-before">&#xf0a4;</span>Present<span class="key">P</span></a></li>
+					<li class="nav-item">
+						<a class="nav-link" ng-click="toggleFullscreen()"><span class="icon icon-before">&#xf0a4;</span>Present<span class="key">P</span></a>
+					</li>
+					<li class="nav-item">
+						<a ng-click="showBrief()" class="button btn-primary">Share</a>
+					</li>
 				</ul>
-				<div class="button-group">
-					<a ng-click="showBrief()" class="button btn-primary">Share</a>
-				</div>
 			</div>
 	
 		</header>
@@ -306,7 +310,7 @@
 
 			<div id="imgwrapper">
 				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
-				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseenter="setActive($index)" ng-mouseleave="setActive(-1)" annotationid="{{$index}}" a="annotation" image="imageElement">
+				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" ng-mouseleave="setActive(-1)" annotationid="{{$index}}" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}</div>
 					<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>

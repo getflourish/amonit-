@@ -251,44 +251,60 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   }
 }
 
+/* line 1, ../sass/_base.scss */
+.cfix {
+  zoom: 1;
+}
+
 /* line 5, ../sass/_base.scss */
-import compass
+.cfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  line-height: 0;
+  overflow: hidden;
+}
+
+/* Colors */
+/* line 17, ../sass/_base.scss */
 .blue {
   background: #36aad1;
 }
 
-/* line 9, ../sass/_base.scss */
+/* line 21, ../sass/_base.scss */
 .fill-brown {
   background: #38342b;
 }
 
-/* line 13, ../sass/_base.scss */
+/* line 25, ../sass/_base.scss */
 .green {
   background: #81d136;
 }
 
-/* line 17, ../sass/_base.scss */
+/* line 29, ../sass/_base.scss */
 .grey {
   color: #b7b7b7;
 }
 
-/* line 21, ../sass/_base.scss */
+/* line 33, ../sass/_base.scss */
 .light {
   color: #838f96;
 }
 
-/* line 25, ../sass/_base.scss */
+/* line 37, ../sass/_base.scss */
 .purple {
   background: #aa70e0;
 }
 
-/* line 29, ../sass/_base.scss */
+/* line 41, ../sass/_base.scss */
 .text-light {
   color: #d4d6d9;
   text-shadow: 0 -1px 0 black;
 }
 
-/* line 34, ../sass/_base.scss */
+/* line 46, ../sass/_base.scss */
 .yellow {
   color: #ffcc00;
 }
@@ -307,7 +323,7 @@ import compass
   font-style: normal;
 }
 
-/* line 58, ../sass/_base.scss */
+/* line 70, ../sass/_base.scss */
 .icon {
   font-family: "Batch";
   font-size: 14px;
@@ -318,67 +334,67 @@ import compass
   height: 20px;
 }
 
-/* line 68, ../sass/_base.scss */
+/* line 80, ../sass/_base.scss */
 .icon-before {
-  margin-right: 6px;
+  margin-right: 8px;
 }
 
 /* Layout */
-/* line 74, ../sass/_base.scss */
+/* line 86, ../sass/_base.scss */
 .center {
   text-align: center;
 }
 
-/* line 78, ../sass/_base.scss */
+/* line 90, ../sass/_base.scss */
 .left {
   float: left;
 }
 
-/* line 81, ../sass/_base.scss */
+/* line 93, ../sass/_base.scss */
 .right {
   float: right;
 }
 
-/* line 85, ../sass/_base.scss */
+/* line 97, ../sass/_base.scss */
 .space {
   margin-right: 15px;
 }
 
-/* line 89, ../sass/_base.scss */
+/* line 101, ../sass/_base.scss */
 .spacing {
   padding: 10px;
 }
 
 /* Dimensions */
-/* line 95, ../sass/_base.scss */
+/* line 107, ../sass/_base.scss */
 .sm {
   height: 24px;
   line-height: 24px;
 }
 
-/* line 100, ../sass/_base.scss */
+/* line 112, ../sass/_base.scss */
 .medium {
   height: 30px;
 }
 
 /* Style */
-/* line 106, ../sass/_base.scss */
+/* line 118, ../sass/_base.scss */
 .round {
   border-radius: 3px;
 }
 
-/* line 111, ../sass/_base.scss */
+/* line 123, ../sass/_base.scss */
 .edit {
   font-size: 11px;
   margin-left: 5px;
 }
 
-/* line 116, ../sass/_base.scss */
+/* line 128, ../sass/_base.scss */
 .first {
   margin-top: 0;
 }
 
-/* line 120, ../sass/_base.scss */
+/* line 132, ../sass/_base.scss */
 .hidden {
   position: absolute;
   left: -9999px;
@@ -386,36 +402,46 @@ import compass
   height: 1px;
 }
 
-/* line 126, ../sass/_base.scss */
+/* line 139, ../sass/_base.scss */
 .key {
-  width: 20px;
-  height: 20px;
+  margin-left: 8px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
   display: inline-block;
   background: #333;
   border: 1px solid #292929;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #222222));
+  background-image: -webkit-linear-gradient(#333333, #222222);
+  background-image: -moz-linear-gradient(#333333, #222222);
+  background-image: -o-linear-gradient(#333333, #222222);
+  background-image: linear-gradient(#333333, #222222);
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset;
+  -moz-box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 0px 0px inset;
 }
 
-/* line 135, ../sass/_base.scss */
+/* line 152, ../sass/_base.scss */
 .semi {
   opacity: 0.6 !important;
 }
 
-/* line 139, ../sass/_base.scss */
+/* line 156, ../sass/_base.scss */
 .opaque {
   opacity: 1 important;
 }
 
-/* line 143, ../sass/_base.scss */
+/* line 160, ../sass/_base.scss */
 .uppercase {
   text-transform: uppercase;
 }
 
-/* line 147, ../sass/_base.scss */
+/* line 164, ../sass/_base.scss */
 .upper-title {
   text-transform: uppercase;
   color: #838f96;
@@ -423,7 +449,7 @@ import compass
 }
 
 /* Buttons */
-/* line 155, ../sass/_base.scss */
+/* line 172, ../sass/_base.scss */
 .button {
   vertical-align: middle;
   -webkit-border-radius: 3px;
@@ -454,7 +480,7 @@ import compass
   -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
 }
-/* line 174, ../sass/_base.scss */
+/* line 191, ../sass/_base.scss */
 .button:hover {
   border: 1px solid #664f00;
   color: #242424;
@@ -467,7 +493,7 @@ import compass
   -moz-box-shadow: rgba(245, 200, 0, 0.5) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px;
   box-shadow: rgba(245, 200, 0, 0.5) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px;
 }
-/* line 182, ../sass/_base.scss */
+/* line 199, ../sass/_base.scss */
 .button:active {
   background-color: #ffcc00;
   border: 1px solid #423505;
@@ -476,7 +502,7 @@ import compass
   box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0, rgba(0, 0, 0, 0.49) 0 1px 10px inset;
 }
 
-/* line 189, ../sass/_base.scss */
+/* line 206, ../sass/_base.scss */
 .btn-primary {
   margin: 0 12px 0 0;
   padding: 0px 12px;
@@ -501,7 +527,7 @@ import compass
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
 }
 
-/* line 208, ../sass/_base.scss */
+/* line 225, ../sass/_base.scss */
 .btndisabled {
   background: #ccc;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -511,12 +537,12 @@ import compass
   font-weight: bold;
 }
 
-/* line 217, ../sass/_base.scss */
+/* line 234, ../sass/_base.scss */
 .btn-sm {
   height: 24px;
 }
 
-/* line 221, ../sass/_base.scss */
+/* line 238, ../sass/_base.scss */
 .btn-login {
   background: #ffcc00;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -525,7 +551,7 @@ import compass
   font-size: 13px;
 }
 
-/* line 229, ../sass/_base.scss */
+/* line 246, ../sass/_base.scss */
 .splitbutton-left {
   border-radius: 3px 0px 0px 3px !important;
   min-width: 250px;
@@ -534,12 +560,12 @@ import compass
   box-sizing: border-box;
 }
 
-/* line 235, ../sass/_base.scss */
+/* line 252, ../sass/_base.scss */
 .splitbutton-right {
   border-radius: 0px 3px 3px 0px;
 }
 
-/* line 239, ../sass/_base.scss */
+/* line 256, ../sass/_base.scss */
 .split-button {
   vertical-align: middle;
   display: inline-block;
@@ -548,7 +574,7 @@ import compass
 }
 
 /* Inset */
-/* line 249, ../sass/_base.scss */
+/* line 266, ../sass/_base.scss */
 .inset {
   padding: 0px 4px;
   border: rgba(0, 0, 0, 0.2);
@@ -573,7 +599,7 @@ import compass
   text-decoration: none;
 }
 
-/* line 265, ../sass/_base.scss */
+/* line 282, ../sass/_base.scss */
 .inset-button {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e8e8e8));
   background-image: -webkit-linear-gradient(#ffffff, #e8e8e8);
@@ -584,37 +610,37 @@ import compass
   border-left: none;
 }
 
-/* line 272, ../sass/_base.scss */
+/* line 289, ../sass/_base.scss */
 .indent {
   margin-top: 8px;
   border-top: 1px solid #ccc;
 }
 
 @-webkit-keyframes spin {
-  /* line 278, ../sass/_base.scss */
+  /* line 295, ../sass/_base.scss */
   0% {
     -webkit-transform: rotate(0deg);
   }
 
-  /* line 279, ../sass/_base.scss */
+  /* line 296, ../sass/_base.scss */
   100% {
     -webkit-transform: rotate(720deg);
   }
 }
 
 @keyframes spin {
-  /* line 282, ../sass/_base.scss */
+  /* line 299, ../sass/_base.scss */
   0% {
     transform: rotate(0deg);
   }
 
-  /* line 283, ../sass/_base.scss */
+  /* line 300, ../sass/_base.scss */
   100% {
     transform: rotate(720deg);
   }
 }
 
-/* line 285, ../sass/_base.scss */
+/* line 302, ../sass/_base.scss */
 .loading {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1125,25 +1151,54 @@ fieldset.with-icon input[type="text"] {
   font-size: 13px;
 }
 
-/* line 1, ../sass/_header.scss */
-.header-link {
-  color: #cccccc;
+/* line 5, ../sass/_header.scss */
+.nav-item {
+  float: left;
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  padding: 0px 15px;
+  border-left: 1px solid #333;
+  box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
 }
-/* line 24, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
-.header-link:hover {
-  color: white;
-}
-/* line 27, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
-.header-link:active {
-  color: white;
+/* line 24, ../sass/_header.scss */
+.nav-item:hover {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #333333), color-stop(100%, #444444));
+  background-image: -webkit-linear-gradient(#333333, #444444);
+  background-image: -moz-linear-gradient(#333333, #444444);
+  background-image: -o-linear-gradient(#333333, #444444);
+  background-image: linear-gradient(#333333, #444444);
 }
 
-/* line 5, ../sass/_header.scss */
+/* line 31, ../sass/_header.scss */
+.nav-item-logo {
+  font-size: 18px;
+  font-weight: bold;
+  vertical-align: middle;
+  color: #ffcc00;
+}
+
+/* line 38, ../sass/_header.scss */
+.nav-item-last {
+  border-right: 1px solid #333;
+  box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.07), 1px 0px 0px rgba(255, 255, 255, 0.07);
+}
+
+/* line 43, ../sass/_header.scss */
 header.fs {
   top: -60px !important;
 }
 
-/* line 8, ../sass/_header.scss */
+/* line 46, ../sass/_header.scss */
 header {
   color: #fff;
   top: 0px;
@@ -1177,70 +1232,41 @@ header {
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-/* line 32, ../sass/_header.scss */
-header .button-group {
-  display: inline-block;
-  line-height: 60px;
-  vertical-align: middle;
-  padding: 0px 15px;
-  border-left: 1px solid #333;
-  box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.07);
-}
-/* line 44, ../sass/_header.scss */
-header ul {
-  display: inline-block;
-}
-/* line 50, ../sass/_header.scss */
+/* line 71, ../sass/_header.scss */
 header a {
   text-decoration: none;
   color: #ddd;
   -webkit-transition: all 0.1s;
 }
-/* line 55, ../sass/_header.scss */
+/* line 76, ../sass/_header.scss */
 header a:hover {
   color: #fff;
 }
-/* line 60, ../sass/_header.scss */
-header .logo {
-  margin: 0px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  vertical-align: middle;
-  color: #ffcc00;
-}
-/* line 70, ../sass/_header.scss */
-header .logo em {
-  font-weight: normal;
-  font-style: normal;
-  padding-left: 5px;
-}
 
-/* line 78, ../sass/_header.scss */
+/* line 83, ../sass/_header.scss */
 .header-left {
   float: left;
 }
 
-/* line 82, ../sass/_header.scss */
+/* line 87, ../sass/_header.scss */
 .header-right {
   float: right;
   line-height: 1em;
 }
 
-/* line 87, ../sass/_header.scss */
+/* line 92, ../sass/_header.scss */
 .project-title {
   position: relative;
-  text-align: center;
-  margin: 0 auto;
-  padding: 5px 0px;
+  top: 22px;
 }
 
-/* line 95, ../sass/_header.scss */
+/* line 98, ../sass/_header.scss */
 .header-section {
   display: inline-block;
   height: 60px;
 }
 
-/* line 100, ../sass/_header.scss */
+/* line 103, ../sass/_header.scss */
 header .btn-primary {
   position: relative;
   top: -3px;
@@ -1341,12 +1367,13 @@ h2 {
 
 /* line 22, ../sass/_main.scss */
 #imgwrapper {
+  cursor: crosshair;
   display: inline-block;
   position: relative;
   max-width: 100%;
   white-space: nowrap;
 }
-/* line 29, ../sass/_main.scss */
+/* line 31, ../sass/_main.scss */
 #imgwrapper > img {
   display: inline-block;
   max-height: 100%;
@@ -1360,24 +1387,24 @@ h2 {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 38, ../sass/_main.scss */
+/* line 40, ../sass/_main.scss */
 #imgwrapper > img:hover {
   opacity: 1;
 }
 
-/* line 44, ../sass/_main.scss */
+/* line 46, ../sass/_main.scss */
 .emptystate {
   border-radius: 8px;
   color: #22262b;
   display: inline-block;
   cursor: pointer;
 }
-/* line 52, ../sass/_main.scss */
+/* line 54, ../sass/_main.scss */
 .emptystate .upload-icon {
   font-size: 120px;
   border: none;
 }
-/* line 57, ../sass/_main.scss */
+/* line 59, ../sass/_main.scss */
 .emptystate h2 {
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1);
 }
@@ -1529,8 +1556,8 @@ h2 {
 
 /* line 16, ../sass/_tooltip.scss */
 .handle {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   border-radius: 100px;
   background: rgba(0, 0, 0, 0.9);
   border: 2px solid #fff;
