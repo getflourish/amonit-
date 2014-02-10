@@ -267,9 +267,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
                 "timestamp": new Date().getTime()
             };
 
-            var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations");
+            var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/");
             var annotation = $firebase(annotationRef);
-            annotation.$add(newThread);
+            var foo = annotation.$add(newThread);
+            console.log(foo.name())
 
             // $scope.save();
 
