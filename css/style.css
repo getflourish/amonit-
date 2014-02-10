@@ -450,24 +450,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* Buttons */
 /* line 172, ../sass/_base.scss */
-.button {
+.btn {
   vertical-align: middle;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-  outline: 0;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e8e8e8));
-  background-image: -webkit-linear-gradient(#ffffff, #e8e8e8);
-  background-image: -moz-linear-gradient(#ffffff, #e8e8e8);
-  background-image: -o-linear-gradient(#ffffff, #e8e8e8);
-  background-image: linear-gradient(#ffffff, #e8e8e8);
-  border: 1px solid #cfcfcf;
-  padding: 8px 12px;
   font-family: "Helvetica Neue","Arial";
   font-size: 13px;
   font-weight: bold;
+  margin: 0;
   display: inline-block;
   cursor: pointer;
   color: #242424;
@@ -480,8 +468,33 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-transition-duration: 0.2s;
   transition-duration: 0.2s;
 }
-/* line 191, ../sass/_base.scss */
-.button:hover {
+
+/* line 188, ../sass/_base.scss */
+.btn-primary {
+  margin: 0 12px 0 0;
+  padding: 0px 12px;
+  line-height: 32px;
+  height: 32px;
+  vertical-align: middle;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  border: 1px solid #664f00;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe863), color-stop(100%, #f1b903));
+  background-image: -webkit-linear-gradient(#ffe863, #f1b903);
+  background-image: -moz-linear-gradient(#ffe863, #f1b903);
+  background-image: -o-linear-gradient(#ffe863, #f1b903);
+  background-image: linear-gradient(#ffe863, #f1b903);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
+}
+/* line 205, ../sass/_base.scss */
+.btn-primary:hover {
   border: 1px solid #664f00;
   color: #242424;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffda0a), color-stop(100%, #ffcd29));
@@ -493,8 +506,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -moz-box-shadow: rgba(245, 200, 0, 0.5) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px;
   box-shadow: rgba(245, 200, 0, 0.5) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px;
 }
-/* line 199, ../sass/_base.scss */
-.button:active {
+/* line 213, ../sass/_base.scss */
+.btn-primary:active {
   background-color: #ffcc00;
   border: 1px solid #423505;
   -webkit-box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0, rgba(0, 0, 0, 0.49) 0 1px 10px inset;
@@ -502,32 +515,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0, rgba(0, 0, 0, 0.49) 0 1px 10px inset;
 }
 
-/* line 206, ../sass/_base.scss */
-.btn-primary {
-  margin: 0 12px 0 0;
-  padding: 0px 12px;
-  line-height: 32px;
-  height: 32px;
-  vertical-align: middle;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-  border: 1px solid #664f00;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe863), color-stop(100%, #f1b903));
-  background-image: -webkit-linear-gradient(#ffe863, #f1b903);
-  background-image: -moz-linear-gradient(#ffe863, #f1b903);
-  background-image: -o-linear-gradient(#ffe863, #f1b903);
-  background-image: linear-gradient(#ffe863, #f1b903);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px;
-}
-
-/* line 225, ../sass/_base.scss */
+/* line 221, ../sass/_base.scss */
 .btndisabled {
   background: #ccc;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -537,12 +525,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-weight: bold;
 }
 
-/* line 234, ../sass/_base.scss */
+/* line 230, ../sass/_base.scss */
 .btn-sm {
   height: 24px;
 }
 
-/* line 238, ../sass/_base.scss */
+/* line 234, ../sass/_base.scss */
 .btn-login {
   background: #ffcc00;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -551,7 +539,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-size: 13px;
 }
 
-/* line 246, ../sass/_base.scss */
+/* line 242, ../sass/_base.scss */
 .splitbutton-left {
   border-radius: 3px 0px 0px 3px !important;
   min-width: 250px;
@@ -560,12 +548,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   box-sizing: border-box;
 }
 
-/* line 252, ../sass/_base.scss */
+/* line 248, ../sass/_base.scss */
 .splitbutton-right {
   border-radius: 0px 3px 3px 0px;
 }
 
-/* line 256, ../sass/_base.scss */
+/* line 252, ../sass/_base.scss */
 .split-button {
   vertical-align: middle;
   display: inline-block;
@@ -573,74 +561,31 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   line-height: 13px;
 }
 
-/* Inset */
-/* line 266, ../sass/_base.scss */
-.inset {
-  padding: 0px 4px;
-  border: rgba(0, 0, 0, 0.2);
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #484337), color-stop(100%, #3b372d));
-  background-image: -webkit-linear-gradient(#484337, #3b372d);
-  background-image: -moz-linear-gradient(#484337, #3b372d);
-  background-image: -o-linear-gradient(#484337, #3b372d);
-  background-image: linear-gradient(#484337, #3b372d);
-  -moz-border-radius-topleft: 3px;
-  -webkit-border-top-left-radius: 3px;
-  border-top-left-radius: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
-  -moz-box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
-  box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 0px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: normal;
-  text-align: center;
-  text-decoration: none;
-}
-
-/* line 282, ../sass/_base.scss */
-.inset-button {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e8e8e8));
-  background-image: -webkit-linear-gradient(#ffffff, #e8e8e8);
-  background-image: -moz-linear-gradient(#ffffff, #e8e8e8);
-  background-image: -o-linear-gradient(#ffffff, #e8e8e8);
-  background-image: linear-gradient(#ffffff, #e8e8e8);
-  border: 1px solid #cfcfcf;
-  border-left: none;
-}
-
-/* line 289, ../sass/_base.scss */
-.indent {
-  margin-top: 8px;
-  border-top: 1px solid #ccc;
-}
-
 @-webkit-keyframes spin {
-  /* line 295, ../sass/_base.scss */
+  /* line 261, ../sass/_base.scss */
   0% {
     -webkit-transform: rotate(0deg);
   }
 
-  /* line 296, ../sass/_base.scss */
+  /* line 262, ../sass/_base.scss */
   100% {
     -webkit-transform: rotate(720deg);
   }
 }
 
 @keyframes spin {
-  /* line 299, ../sass/_base.scss */
+  /* line 265, ../sass/_base.scss */
   0% {
     transform: rotate(0deg);
   }
 
-  /* line 300, ../sass/_base.scss */
+  /* line 266, ../sass/_base.scss */
   100% {
     transform: rotate(720deg);
   }
 }
 
-/* line 302, ../sass/_base.scss */
+/* line 268, ../sass/_base.scss */
 .loading {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -813,28 +758,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 129, ../sass/_brief.scss */
 #name {
   text-transform: capitalize;
-}
-
-/* line 1, ../sass/_clicktoedit.scss */
-.click-to-edit button {
-  width: 100%;
-  display: block;
-  float: left;
-  margin-top: 5px;
-  border: 0;
-  outline: 0;
-  height: 30px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 13px;
-  border-radius: 3px;
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
-}
-
-/* line 16, ../sass/_clicktoedit.scss */
-.click-to-edit button:hover {
-  background: #6671C7;
-  cursor: hand;
 }
 
 /* line 1, ../sass/_feedback.scss */
@@ -1565,7 +1488,7 @@ h2 {
   color: #ffcc00;
   text-align: center;
   position: relative;
-  top: 0px;
+  top: -10px;
   left: -13px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
   -webkit-transform: translate3d(0, 0, 0);
@@ -1603,7 +1526,7 @@ h2 {
   white-space: normal;
   width: 300px;
   display: inline-block;
-  top: 20px;
+  top: 10px;
   left: -150px;
   opacity: 0;
   visibility: hidden;
@@ -1629,9 +1552,8 @@ h2 {
   font-family: "ff-meta-serif-web-pro", "Meta Serif", "Georgia", serif;
   font-size: 14px;
   background-color: #ffffff;
-  border: 1px solid #ffffff;
 }
-/* line 94, ../sass/_tooltip.scss */
+/* line 93, ../sass/_tooltip.scss */
 .tooltip:before {
   position: absolute;
   top: -7px;
@@ -1642,41 +1564,74 @@ h2 {
   border-left: 10px solid transparent;
   border-bottom: 10px solid #fff;
 }
-/* line 107, ../sass/_tooltip.scss */
+/* line 106, ../sass/_tooltip.scss */
 .tooltip .scroll-container {
   max-height: 200px;
   overflow: scroll;
 }
 
-/* line 113, ../sass/_tooltip.scss */
+/* line 112, ../sass/_tooltip.scss */
 .tooltip:focus {
   outline: 0;
 }
 
-/* line 118, ../sass/_tooltip.scss */
+/* line 117, ../sass/_tooltip.scss */
 .large {
   width: 50px;
   height: 50px;
 }
 
-/* line 122, ../sass/_tooltip.scss */
+/* line 121, ../sass/_tooltip.scss */
 .note-handle:hover {
   opacity: 1;
 }
 
-/* line 126, ../sass/_tooltip.scss */
+/* line 125, ../sass/_tooltip.scss */
 .ui-draggable {
   cursor: move;
 }
 
-/* line 128, ../sass/_tooltip.scss */
+/* line 127, ../sass/_tooltip.scss */
 .open {
   opacity: 1 !important;
   visibility: visible;
   margin-top: 13px;
 }
 
-/* line 20, ../sass/style.scss */
+/* line 133, ../sass/_tooltip.scss */
+.btn-split {
+  width: 34px;
+  height: 38px;
+  display: inline-block;
+  border: 0;
+  border-right: 1px solid #fadf72;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe863), color-stop(100%, #f1b903));
+  background-image: -webkit-linear-gradient(#ffe863, #f1b903);
+  background-image: -moz-linear-gradient(#ffe863, #f1b903);
+  background-image: -o-linear-gradient(#ffe863, #f1b903);
+  background-image: linear-gradient(#ffe863, #f1b903);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) -1px 0 0 inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) -1px 0 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.1) -1px 0 0 inset;
+}
+/* line 144, ../sass/_tooltip.scss */
+.btn-split:first-of-type {
+  -webkit-border-radius: 4px 0px 0px 4px;
+  -moz-border-radius: 4px 0px 0px 4px;
+  -ms-border-radius: 4px 0px 0px 4px;
+  -o-border-radius: 4px 0px 0px 4px;
+  border-radius: 4px 0px 0px 4px;
+}
+/* line 148, ../sass/_tooltip.scss */
+.btn-split:last-of-type {
+  -webkit-border-radius: 0px 4px 4px 0px;
+  -moz-border-radius: 0px 4px 4px 0px;
+  -ms-border-radius: 0px 4px 4px 0px;
+  -o-border-radius: 0px 4px 4px 0px;
+  border-radius: 0px 4px 4px 0px;
+}
+
+/* line 19, ../sass/style.scss */
 body {
   margin: 0 auto;
   background: #f2f2f2;
@@ -1689,12 +1644,12 @@ body {
   box-sizing: border-box;
 }
 
-/* line 35, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 strong {
   font-weight: bold;
 }
 
-/* line 39, ../sass/style.scss */
+/* line 37, ../sass/style.scss */
 .wrap {
   position: absolute;
   top: 50px;
@@ -1714,12 +1669,12 @@ strong {
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-/* line 52, ../sass/style.scss */
+/* line 50, ../sass/style.scss */
 .wrap.fullscreen {
   top: 0px !important;
 }
 
-/* line 58, ../sass/style.scss */
+/* line 56, ../sass/style.scss */
 canvas {
   background: transparent;
   opacity: 1;
@@ -1729,13 +1684,13 @@ canvas {
   pointer-events: none;
 }
 
-/* line 68, ../sass/style.scss */
+/* line 66, ../sass/style.scss */
 body.dragOver #dropzone {
   display: block;
 }
 
 /* During drag */
-/* line 69, ../sass/style.scss */
+/* line 67, ../sass/style.scss */
 body #dropzone {
   z-index: 1000;
   position: fixed;
@@ -1751,18 +1706,18 @@ body #dropzone {
   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* line 91, ../sass/style.scss */
+/* line 89, ../sass/style.scss */
 .fullscreen {
   margin: 0px !important;
   border: 0px !important;
 }
 
-/* line 96, ../sass/style.scss */
+/* line 94, ../sass/style.scss */
 .clickable {
   cursor: pointer;
 }
 
-/* line 100, ../sass/style.scss */
+/* line 98, ../sass/style.scss */
 #mouseTracker {
   top: 0px;
   position: fixed;

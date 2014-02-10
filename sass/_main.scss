@@ -3,13 +3,13 @@
 
 	overflow-x: hidden;
 	overflow-y: scroll;
-  	
+
   	text-align:center;
 
   	@include transition-property(all);
   	@include transition-duration(0.5s);
   	@include transition-timing-function(ease-in-out);
-  
+
 	.current-screen {
 		max-width: 100%;
 	}
@@ -26,12 +26,12 @@
 	display: inline-block;
 	position: relative;
 	max-width: 100%;
-	white-space: nowrap;	
+	white-space: nowrap;
 
 	> img {
 		display: inline-block;
 		max-height: 100%;
-		
+
 		background: #fff;
 
 		@include transition-property(all);
@@ -46,7 +46,7 @@
 .emptystate {
 	border-radius: 8px;
 	color: #22262b;
-	
+
 	display: inline-block;
 
 	cursor: pointer;

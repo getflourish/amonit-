@@ -169,16 +169,12 @@
 
 /* Buttons */
 
-.button {
+.btn {
 	vertical-align: middle;
-	@include border-radius(3px);
-	outline: 0;
-	@include background-image(linear-gradient(#ffffff, #e8e8e8));
-	border: 1px solid #cfcfcf;
-	padding: 8px 12px;
 	font-family: "Helvetica Neue","Arial";
 	font-size: 13px;
 	font-weight: bold;
+	margin: 0;
 
 	display: inline-block;
 	cursor: pointer;
@@ -186,21 +182,7 @@
 	color: #242424;
 
 	@include transition-property(all);
-	@include transition-duration(0.2s);  
-
-	&:hover {
-		border: 1px solid #664f00;
-		color: #242424;
-
-		@include background-image(linear-gradient(#ffda0a, #ffcd29));
-		@include box-shadow(rgba(245, 200, 0, 0.50) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px);
-	}
-
-	&:active {
-		background-color: #ffcc00;
-		border: 1px solid #423505;
-		@include box-shadow(rgba(255, 255, 255, 0.15) 0 1px 0, rgba(0, 0, 0, 0.49) 0 1px 10px inset);
-	}
+	@include transition-duration(0.2s);
 }
 
 .btn-primary {
@@ -216,9 +198,23 @@
 
 	border: 1px solid #664f00;
 
-	@include background-image(linear-gradient(lighten(#ffe030, 10%), #f1b903));
 	@include border-radius(4px);
+	@include gradient-primary;
 	@include box-shadow(rgba(0, 0, 0, 0.4) 0px 2px 3px);
+
+	&:hover {
+		border: 1px solid #664f00;
+		color: #242424;
+
+		@include background-image(linear-gradient(#ffda0a, #ffcd29));
+		@include box-shadow(rgba(245, 200, 0, 0.50) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px);
+	}
+
+	&:active {
+		background-color: #ffcc00;
+		border: 1px solid #423505;
+		@include box-shadow(rgba(255, 255, 255, 0.15) 0 1px 0, rgba(0, 0, 0, 0.49) 0 1px 10px inset);
+	}
 
 }
 
@@ -259,36 +255,6 @@
 	height: 24px;
 	line-height: 13px;
 
-}
-
-/* Inset */
-
-.inset {
-	padding: 0px 4px;
-	
-	border: rgba(0, 0, 0, 0.2);
-
-	@include background-image(linear-gradient(#484337, #3b372d));
-	@include border-left-radius(3px);
-	@include box-shadow(rgba(255, 255, 255, 0.5) 0px 1px 0px);
-
-	color: #fff;
-	font-size: 13px;
-	font-weight: normal;
-	text-align: center;
-	text-decoration: none;
-}
-
-.inset-button {
-
-	@include background-image(linear-gradient(#ffffff, #e8e8e8));
-	border: 1px solid #cfcfcf;
-	border-left: none;
-}
-
-.indent {
-	margin-top: 8px;
-	border-top: 1px solid #ccc;
 }
 
 @-webkit-keyframes spin{

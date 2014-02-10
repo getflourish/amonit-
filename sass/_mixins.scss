@@ -2,3 +2,7 @@
 	@include transition-property(all);
 	@include transition-duration(0.5s); 
 }
+
+@mixin gradient-primary {
+	@include background-image(linear-gradient(lighten(#ffe030, 10%), #f1b903));
+}

@@ -1,9 +1,9 @@
 <div class="click-to-edit">
     <div ng-hide="view.editorEnabled || annotation.comment">
-        <button ng-repeat="type in types" ng-click="enableEditor(type)" class="{{type.class}}">
-            {{type.label}}
+        <button ng-repeat="type in types" ng-click="enableEditor(type)" class="{{type.class}} btn btn-split">
+            <span class="icon" ng-bind-html="{{type.label}}"></span>
         </button>
-    </div> 
+    </div>
     <div ng-show="view.editorEnabled">
         <textarea ng-keydown="onKeypress($event)" ng-model="annotation.comment" ng-blur="onBlur(id)"></textarea>
         <button class="green" ng-click="save()">Save</button>
@@ -15,7 +15,7 @@
             <div class="comment-inner">
                 <div class="brief-author">
                     <img src="images/me.png">
-                    <strong class="brief-name light">Florian{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
+                    <strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
                 </div>
                 <div>
                     <!--
@@ -49,7 +49,7 @@
             <input type="text" ng-model="view.reply" placeholder="Reply…" class="form-control-inline form-control-naked" />
             <button class="btn-okay hidden" ng-click="reply()" type="submit">
                 Reply
-            </button> 
+            </button>
         </form>
 
         <!--
@@ -57,7 +57,7 @@
         <a href="#" class="right edit icon" ng-click="remove()">#</a>
         -->
 
-        
+
     </div>
-    
+
 </div>

@@ -15,19 +15,19 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     // comment types
     $scope.commentTypes = [{
         "type": "idea",
-        "label": "I like it, but…",
+        "label": "&#xf043;",
         "typeLabel": "Idea",
         "show": true,
         "class": "green"
     }, {
         "type": "question",
-        "label": "What’s that?",
+        "label": "&#xf15a;",
         "typeLabel": "Question",
         "show": true,
         "class": "purple"
     }, {
         "type": "onit",
-        "label": "Right on!",
+        "label": "&#xf164;",
         "typeLabel": "Right on",
         "show": true,
         "class": "blue"

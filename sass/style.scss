@@ -1,24 +1,23 @@
 @import "compass";
 @import "compass/reset";
+@import "_mixins.scss";
 
 @import "_variables.scss";
 @import "_animations.scss";
 @import "_base.scss";
 @import "_brief.scss";
-@import "_clicktoedit.scss";
 @import "_feedback.scss";
 @import "_forms.scss";
 @import "_header.scss";
 @import "_headings.scss";
 @import "_login.scss";
 @import "_main.scss";
-@import "_mixins.scss";
 @import "_navigation.scss";
 @import "_tooltip.scss";
 
 
 body {
-	
+
 	margin: 0 auto;
 
 	background: #f2f2f2;
@@ -27,7 +26,6 @@ body {
 	font-size: $font_size_normal;
 	font-family: $SANS;
 
-	
 	-webkit-font-smoothing: antialiased;
 
 	@include box-sizing(border-box);
@@ -42,7 +40,7 @@ strong {
   	bottom: 0;
 
   	width: 100%;
-  	
+
   	overflow: hidden;
 
   	@include transition-property(all);
