@@ -75,7 +75,7 @@ directive('comments', [
                 },
 
                 $scope.save = function () {
-                    $rootScope.$emit("comment:added");
+                    $rootScope.$emit("comment:added", $scope.id, $scope.view.reply);
                 }
             }
         };

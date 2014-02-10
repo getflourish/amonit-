@@ -70,7 +70,7 @@ timeSinceModule.directive("timeSince", function($timeout) {
                 timeoutId = $timeout(function() {
                     updateTimeSince();
                     updateLater();
-                }, 1000);
+                }, 60000);
             }
 
             element.bind('$destroy', function() {

@@ -219,7 +219,7 @@
 			<!-- feedback for the current image -->
 
 			<div class="feedback-body">
-                <div ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
+                <div>
 
                     <!-- image title for the following comments -->
 

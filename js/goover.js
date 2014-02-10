@@ -197,9 +197,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     /**
      * Comments
      */
-    
-     $rootScope.$on('comment:added', function(event) {
-        $scope.save();
+
+     $rootScope.$on('comment:added', function(event, annotationId, reply) {
+        $scope.saveReply(annotationId, reply);
     });
 
     /**
@@ -210,9 +210,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         $scope.editing = true;
     });
 
-    $rootScope.$on('tooltip:stopedit', function(event, index) {
+    $rootScope.$on('tooltip:stopedit', function(event, id, annotation) {
         $scope.editing = false;
-        $scope.save();
+        $scope.saveAnnotation(id, annotation);
     });
 
     $rootScope.$on('tooltip:blur', function(event, index) {
@@ -239,8 +239,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
     $scope.addAnnotation = function(event) {
 
-        console.log("add")
-
         if ($scope.selectedAnnotation == -1) {
             // convert coordinates to local space
 
@@ -253,14 +251,13 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
             var y = (globalY) / $scope.imageElement.prop("height");
             console.log(globalX);
 
-            // save annotation 	
+            // save annotation
 
             if (!$scope.project.images[$scope.currentIndex].annotations) {
-                console.log("new shit");
                 $scope.project.images[$scope.currentIndex].annotations = [];
             }
 
-            $scope.project.images[$scope.currentIndex].annotations.push({
+            var newThread = {
                 "x": x,
                 "y": y,
                 "author": $scope.username,
@@ -268,9 +265,13 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
                 "comment": "",
                 "replies": [],
                 "timestamp": new Date().getTime()
-            })
+            };
 
-            $scope.save();
+            var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations");
+            var annotation = $firebase(annotationRef);
+            annotation.$add(newThread);
+
+            // $scope.save();
 
             // select annotation to open it
 
@@ -284,6 +285,37 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
             $scope.save();
             $scope.selectedAnnotation = -1;
         }
+    }
+
+    $scope.saveAnnotation = function (id, a) {
+
+        // use firebase $add to add the new comment thread to images.annotations
+        // todo: rename annotations, comments, …
+
+        var annotationsRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations");
+        var annotations = $firebase(annotationsRef);
+
+        var hash = annotations.$getIndex()[id];
+
+        var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/" + hash);
+        var annotation = $firebase(annotationRef);
+
+        annotation.$set(a);
+
+    }
+
+    $scope.saveReply = function (annotationId, r) {
+        var annotationsRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations");
+        var annotations = $firebase(annotationsRef);
+
+        var hash = annotations.$getIndex()[annotationId];
+        console.log(annotationId);
+
+        var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/" + hash + "/replies");
+        var replies = $firebase(annotationRef);
+
+        replies.$add(r);
+
     }
 
     /**
@@ -315,7 +347,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
         // use timeout before scrolling to the recently added image
 
-        // todo: remove if scrolling works with directive 
+        // todo: remove if scrolling works with directive
 
         // $timeout(function () {
         // 	$("#left").animate({scrollTop: $(".selected").prop("offsetTop")}, "slow");
@@ -360,7 +392,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
                 $scope.removeAnnotation(index);
             }
 
-            // todo: test whether this should be if/else and save is 
+            // todo: test whether this should be if/else and save is
             // only necessary when there is a comment
 
             // save
@@ -438,7 +470,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         // get the file
         var file = $scope.uploadedFile;
 
-        // add order 
+        // add order
         $scope.addOrder = "after";
 
         // upload file via XHR + PHP
@@ -461,24 +493,21 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
     $scope.load = function() {
 
-        var foo = 'load.php?image_directory=' + $scope.image_directory;
-        console.log(foo)
-
         $http.get('load.php?image_directory=' + $scope.image_directory).success(function(data) {
 
             if (data.images == undefined) {
-                // 	
+                //
                 // 	// this is a new stack
-                // 
+                //
                 $scope.path = data;
                 $scope.data.path = data;
                 $scope.id = data;
                 console.log("dont exist")
-                // 
+                //
             } else {
-                // 
+                //
                 // 	// this is an existing stack
-                // 
+                //
                 $scope.data.path = data.path;
                 $scope.path = data.path;
                 $scope.id = data.path;
@@ -571,11 +600,17 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     /**
      * Function: removeAnnotation
      *
-     * Removes the annotation at the given index form the array of annotations
+     * Removes the annotation at the given index from the array of annotations
      */
 
     $scope.removeAnnotation = function(index) {
-        $scope.project.images[$scope.currentIndex].annotations.splice(index, 1);
+
+        // remove annotation from firebase
+
+        var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/index");
+        var annotation = $firebase(annotationRef);
+        annotation.$remove();
+
         $scope.setActive(-1);
         $scope.save();
     }
@@ -604,8 +639,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         // todo: check whether there is another empty annotation
         // if so, remove it
 
-        $scope.data.images = $scope.project.images;
-        $scope.project.$save();
+        // $scope.data.images = $scope.project.images;
+        // $scope.project.$save();
 
         $http.post('save.php?path=' + $scope.path, $scope.data).success(function(data) {});
     }
@@ -759,7 +794,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         var connectedRef = new Firebase('https://feedbacktool.firebaseio.com/.info/connected');
     }
 
-    /** 
+    /**
      * Function: updateCursor
      */
 
@@ -1076,7 +1111,7 @@ feedbackApp.directive("tooltip", ['$rootScope', '$timeout',
 
                 $scope.disableEditor = function() {
                     $scope.view.editorEnabled = false;
-                    $rootScope.$emit('tooltip:stopedit', $scope.id);
+                    $rootScope.$emit('tooltip:stopedit', $scope.id, $scope.annotation);
                 };
 
                 $scope.onKeypress = function(event) {
