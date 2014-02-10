@@ -10,47 +10,8 @@
         <button ng-click="revert()">Cancel</button>
     </div>
 
-    <div ng-show="annotation.comment && !view.editorEnabled">
-        <div class="comment comment-first">
-            <div class="comment-inner">
-                <div class="brief-author">
-                    <img src="images/me.png">
-                    <strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
-                </div>
-                <div>
-                    <!--
-                    <span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">
-                        {{annotation.typeLabel}}
-                    </span>
-                    -->
-                    <p>
-                        {{annotation.comment}}
-                    </p>
-                    <span class="remove" ng-click="removeAnnotation($index)">×</span>
-                </div>
-            </div>
-        </div>
-        <!-- replies -->
-        <div class="scroll-container">
-            <div class="comment" ng-repeat="reply in annotation.replies">
-                <div class="comment-inner">
-                    <div class="brief-author">
-                        <img src="images/me.png">
-                        <strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
-                    </div>
-                    <p>
-                        {{reply.text}}
-                    </p>
-                </div>
-            </div>
-        </div>
-        <form class="comment-form">
-            <span class="batch light">&#xf158;</span>
-            <input type="text" ng-model="view.reply" placeholder="Reply…" class="form-control-inline form-control-naked" />
-            <button class="btn-okay hidden" ng-click="reply()" type="submit">
-                Reply
-            </button>
-        </form>
+    <div ng-show="annotation.comment && !view.editorEnabled" class="tooltip-comment">
+        <thread thread-data="annotation" username="username" scroll="true"></thread>
 
         <!--
         <a href="#" class="right edit icon" ng-click="enableEditor()">p</a>

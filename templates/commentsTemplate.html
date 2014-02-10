@@ -1,0 +1,3 @@
+<div class="comment-container" ng-repeat="thread in comments | typeFilter:commentTypes | filter:search">
+    <thread thread-data="thread" id="$index + 1" username="username"></thread>
+</div>

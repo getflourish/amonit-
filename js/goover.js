@@ -1,4 +1,4 @@
-var feedbackApp = angular.module('feedbackApp', ['authModule', 'monospaced.elastic', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'imagedropModule', 'stretchModule', 'timeSince', 'ui.sortable', ]);
+var feedbackApp = angular.module('feedbackApp', ['authModule', 'monospaced.elastic', 'centerModule', 'contenteditableModule', 'draggableModule', 'firebase', 'focusModule', 'goover.comments', 'imagedropModule', 'stretchModule', 'timeSince', 'ui.sortable', ]);
 
 feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, $rootScope, $timeout, uploadService) {
 
@@ -15,19 +15,19 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     // comment types
     $scope.commentTypes = [{
         "type": "idea",
-        "label": "&#xf043;",
+        "label": "Idea",
         "typeLabel": "Idea",
         "show": true,
         "class": "green"
     }, {
         "type": "question",
-        "label": "&#xf15a;",
+        "label": "Question",
         "typeLabel": "Question",
         "show": true,
         "class": "purple"
     }, {
         "type": "onit",
-        "label": "&#xf164;",
+        "label": "Approval",
         "typeLabel": "Right on",
         "show": true,
         "class": "blue"
@@ -44,6 +44,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         "images": "",
         "path": ""
     };
+
+    $scope.foo = [{"foo":"bar"}, {"foo":"mooh"}];
 
     // flag used to indicate whether a tooltip is being edited
     $scope.editing = false;
@@ -190,6 +192,14 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
         $scope.cursorRef = new Firebase("https://feedbacktool.firebaseio.com/cursors/" + user.id);
         $scope.mycursor = $firebase($scope.cursorRef);
+    });
+
+    /**
+     * Comments
+     */
+    
+     $rootScope.$on('comment:added', function(event) {
+        $scope.save();
     });
 
     /**

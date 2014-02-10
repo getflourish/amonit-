@@ -41,7 +41,7 @@ timeSinceModule.directive("timeSince", function($timeout) {
 
                 } else {
                     unit = "second";
-                    interval = getIntervalBy(timeSinceModule.ONE_SECOND_IN_MILLISECONDS);
+                    return "now";
                 }
 
                 // pluralize if not 1
@@ -54,7 +54,7 @@ timeSinceModule.directive("timeSince", function($timeout) {
 
             function updateTimeSince() {
                 try {
-                    element.text(timeSince(when));   
+                    element.text(timeSince(when));
                 } catch (error) {
                     console.log(error);
                     element.text("in the future");

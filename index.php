@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="js/angular.js"></script>
 
 	<script type="text/javascript" src="js/modules/center.js"></script>
+    <script type="text/javascript" src="js/modules/comments.js"></script>
 	<script type="text/javascript" src="js/modules/contenteditable.js"></script>
 	<script type="text/javascript" src="js/modules/draggable.js"></script>
 	<script type="text/javascript" src="js/modules/elastic.js"></script>
@@ -192,17 +193,19 @@
 		<!-- // end of sidebar -->
 		<!-- Comments -->
 
-		<aside class="feedback-container" ng-hide="project.images.length == 0">
+		<aside class="feedback" ng-hide="project.images.length == 0">
+
 
 			<!-- title, search -->
 
-			<div id="feedback-header">
+			<div class="feedback-header">
 				<h3 class="spacing upper-title">Feedback</h3>
 				<fieldset class="with-icon">
 					<span class="icon input-icon icon-search">&#xf097;</span>
 					<input type="search" value="" ng-model="search" class="form-control">
 				</fieldset>
 			</div>
+
 
 			<!-- list of users -->
 
@@ -215,65 +218,24 @@
 
 			<!-- feedback for the current image -->
 
-			<div class="feedback-container" ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
+			<div class="feedback-body">
+                <div ng-class="{semi:$index!=currentIndex}" ng-hide="image.annotations==null" ng-repeat="image in project.images | filter:search" ng-click="setImage($index)">
 
-				<!-- image title for the following comments -->
+                    <!-- image title for the following comments -->
 
-				<!--
+                    <!--
 
-				<div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
+                    <div class="clickable feedback-title" ng-mouseenter="disableAnnotationTransition()" ng-mousemove="$index==currentIndex && showAllAnnotations()" ng-mouseleave="$index==currentIndex && hideAllAnnotations()">{{image.filename}}</div>
 
-				-->
+                    -->
 
-				<!-- the actual comments -->
+                    <!-- the actual comments -->
 
-				<div class="feedback-content">
-
-					<!-- the topic opener -->
-
-					<div class="comment-container" ng-repeat="annotation in image.annotations | typeFilter:commentTypes | filter:search" ng-mouseenter="$parent.$index==currentIndex && setActive($index)" ng-mouseleave="$parent.$index==currentIndex && setActive(-1)">
-						<span class="comment-number">{{$index + 1}}</span>
-						<div class="comment">
-							<div class="comment-inner">
-								<div class="brief-author">
-									<img src="images/me.png">
-									<strong class="brief-name light">{{annotation.author}}</strong><span class="brief-date light" time-since="annotation.timestamp"></span>
-								</div>
-								<div>
-									<!--
-									<span class="tag" ng-class="{green: annotation.type=='idea', purple:annotation.type=='question', blue: annotation.type=='onit'}">
-										{{annotation.typeLabel}}
-									</span>
-									-->
-									<p>
-										{{annotation.comment}}
-									</p>
-									<span class="remove" ng-click="removeAnnotation($index)">×</span>
-								</div>
-							</div>
-						</div>
-						<!-- replies -->
-
-						<div class="comment" ng-repeat="reply in annotation.replies">
-							<div class="comment-inner">
-								<div class="brief-author">
-									<img src="images/me.png">
-									<strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
-								</div>
-								<p>
-									{{reply.text}}
-								</p>
-							</div>
-						</div>
-						<form class="comment-form">
-							<fieldset class="with-icon">
-								<span class="icon input-icon">&#xf158;</span>
-								<input type="text" placeholder="Reply…" value="" class="form-control-inline form-control-naked">
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
+                    <div class="feedback-content">
+                        <comments comments-data="project.images[currentIndex].annotations" username="username"></comments>
+                    </div>
+                </div>
+            </div>
 		</aside>
 		<!-- // end of comments -->
 
@@ -313,7 +275,7 @@
 				<div draggable handle=".handle" annotation ng-repeat="annotation in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive($index)" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}</div>
-					<span class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></span>
+					<div class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></div>
 				</div>
 			</div>
 		</div>

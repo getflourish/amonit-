@@ -1,4 +1,4 @@
-/* line 17, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../Applications/LiveReload.app/Contents/Resources/SASS.lrplugin/lib/compass/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -761,13 +761,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 /* line 1, ../sass/_feedback.scss */
-.feedback-container {
-  padding: 10px;
-  width: 300px;
+.feedback {
   height: 100%;
+  -webkit-box-sizing: border-box;
+  padding-bottom: 50px;
+  padding-right: 15px;
+  width: 300px;
   float: right;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  position: relative;
   color: #242424;
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -782,14 +783,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -o-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-/* line 17, ../sass/_feedback.scss */
-.feedback-container.fs {
+/* line 19, ../sass/_feedback.scss */
+.feedback.fs {
   margin-right: -300px !important;
 }
 
-/* line 22, ../sass/_feedback.scss */
+/* line 24, ../sass/_feedback.scss */
 .comment-container {
-  margin: 10px 0px;
+  margin-bottom: 20px;
   position: relative;
   width: 100%;
   opacity: 1;
@@ -802,15 +803,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+  white-space: normal;
 }
-/* line 33, ../sass/_feedback.scss */
+/* line 37, ../sass/_feedback.scss */
 .comment-container:hover {
   opacity: 1 !important;
 }
 
-/* line 38, ../sass/_feedback.scss */
+/* line 42, ../sass/_feedback.scss */
 .comment-number {
-  background: #fff;
+  background: #424242;
   margin: 0 auto;
   vertical-align: middle;
   display: block;
@@ -818,13 +820,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   top: -10px;
   width: 12px;
   height: 12px;
-  border: 5px solid white;
+  border: 5px solid #424242;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, #f2f2f2 0px 0px 0px 5px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, #f2f2f2 0px 0px 0px 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px, #f2f2f2 0px 0px 0px 5px;
   text-align: center;
-  color: #838f96;
-  font-size: 13px;
+  color: #ffcc00;
+  font-size: 15px;
   font-weight: bold;
   vertical-align: middle;
   line-height: 12px;
@@ -835,61 +837,76 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   border-radius: 50%;
 }
 
-/* line 63, ../sass/_feedback.scss */
+/* line 67, ../sass/_feedback.scss */
 .comment-first {
-  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
-}
-
-/* line 66, ../sass/_feedback.scss */
-.comment:first-of-type {
-  margin-top: -10px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
 }
 
 /* line 70, ../sass/_feedback.scss */
+.comment-after-number {
+  margin-top: -10px;
+}
+
+/* line 73, ../sass/_feedback.scss */
 .comment:not(:last-of-type) {
   border-bottom: 1px solid #e2e6e8;
   position: relative;
 }
 
-/* line 74, ../sass/_feedback.scss */
+/* line 77, ../sass/_feedback.scss */
 .comment-form {
   padding: 12px;
+  white-space: normal;
   border-top: 1px dashed #c0cacf;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px;
 }
 
-/* line 82, ../sass/_feedback.scss */
+/* line 86, ../sass/_feedback.scss */
 .comment-inner {
   padding: 0px 12px 12px 12px;
 }
-/* line 85, ../sass/_feedback.scss */
+/* line 89, ../sass/_feedback.scss */
 .comment-inner p {
   display: block;
   font-family: "ff-meta-serif-web-pro", "Meta Serif", "Georgia", serif;
   word-wrap: break-word;
 }
 
-/* line 92, ../sass/_feedback.scss */
+/* line 96, ../sass/_feedback.scss */
 .scroll-container {
   background: #fafafa;
 }
 
-/* line 97, ../sass/_feedback.scss */
-#feedback-header {
-  padding: 15px 0px;
-  margin-bottom: 45px;
-}
 /* line 101, ../sass/_feedback.scss */
-#feedback-header h3 {
+.feedback-header {
+  position: relative;
+  z-index: 99;
+  background: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 2px 0px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 2px 0px;
+  padding: 10px 10px;
+}
+/* line 109, ../sass/_feedback.scss */
+.feedback-header h3 {
   display: inline-block;
   float: left;
 }
 
-/* line 111, ../sass/_feedback.scss */
+/* line 115, ../sass/_feedback.scss */
+.feedback-body {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  padding: 20px 0px 0px 0px;
+  position: relative;
+  overflow: scroll;
+}
+
+/* line 130, ../sass/_feedback.scss */
 .feedback-title {
   -webkit-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 white;
   -moz-box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -903,7 +920,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   overflow: hidden;
 }
 
-/* line 125, ../sass/_feedback.scss */
+/* line 144, ../sass/_feedback.scss */
 .remove {
   color: #000;
   opacity: 0;
@@ -917,7 +934,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   background: #fff;
 }
 
-/* line 138, ../sass/_feedback.scss */
+/* line 157, ../sass/_feedback.scss */
 .tag {
   background: #38342b;
   border-radius: 100px;
@@ -930,13 +947,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-family: "Helvetica Neue";
 }
 
-/* line 150, ../sass/_feedback.scss */
+/* line 169, ../sass/_feedback.scss */
 input[type="checkbox"] {
   visibility: hidden;
   display: none;
 }
 
-/* line 155, ../sass/_feedback.scss */
+/* line 174, ../sass/_feedback.scss */
 input[type="checkbox"] + label {
   opacity: 0.5;
   margin-right: 5px;
@@ -944,7 +961,7 @@ input[type="checkbox"] + label {
   display: inline-block;
 }
 
-/* line 161, ../sass/_feedback.scss */
+/* line 180, ../sass/_feedback.scss */
 input[type="checkbox"]:checked + label {
   opacity: 1;
 }
@@ -1081,7 +1098,7 @@ fieldset.with-icon input[type="text"] {
   height: 60px;
   line-height: 60px;
   padding: 0px 15px;
-  border-left: 1px solid #333;
+  border-left: 1px solid #333333;
   box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.07);
   cursor: pointer;
   -webkit-transition-property: all;
@@ -1112,7 +1129,7 @@ fieldset.with-icon input[type="text"] {
 
 /* line 38, ../sass/_header.scss */
 .nav-item-last {
-  border-right: 1px solid #333;
+  border-right: 1px solid #333333;
   box-shadow: -1px 0px 0px rgba(255, 255, 255, 0.07), 1px 0px 0px rgba(255, 255, 255, 0.07);
 }
 
@@ -1263,7 +1280,7 @@ h2 {
 #main {
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   text-align: center;
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -1290,16 +1307,17 @@ h2 {
 
 /* line 22, ../sass/_main.scss */
 #imgwrapper {
-  cursor: crosshair;
   display: inline-block;
   position: relative;
   max-width: 100%;
   white-space: nowrap;
+  margin: 0px 20px;
 }
 /* line 31, ../sass/_main.scss */
 #imgwrapper > img {
   display: inline-block;
   max-height: 100%;
+  cursor: crosshair;
   background: #fff;
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -1310,24 +1328,24 @@ h2 {
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-/* line 40, ../sass/_main.scss */
+/* line 42, ../sass/_main.scss */
 #imgwrapper > img:hover {
   opacity: 1;
 }
 
-/* line 46, ../sass/_main.scss */
+/* line 48, ../sass/_main.scss */
 .emptystate {
   border-radius: 8px;
   color: #22262b;
   display: inline-block;
   cursor: pointer;
 }
-/* line 54, ../sass/_main.scss */
+/* line 56, ../sass/_main.scss */
 .emptystate .upload-icon {
   font-size: 120px;
   border: none;
 }
-/* line 59, ../sass/_main.scss */
+/* line 61, ../sass/_main.scss */
 .emptystate h2 {
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1);
 }
@@ -1341,62 +1359,62 @@ h2 {
   overflow: scroll;
   background: #242424;
 }
-/* line 12, ../sass/_navigation.scss */
+/* line 11, ../sass/_navigation.scss */
 #left ul {
   background: #242424;
 }
-/* line 16, ../sass/_navigation.scss */
+/* line 15, ../sass/_navigation.scss */
 #left:hover {
   left: 0px;
 }
-/* line 20, ../sass/_navigation.scss */
+/* line 19, ../sass/_navigation.scss */
 #left #overview {
   width: 150px;
   color: #fff;
   padding: 10px;
 }
-/* line 26, ../sass/_navigation.scss */
+/* line 25, ../sass/_navigation.scss */
 #left #overview li {
   position: relative;
   padding: 5px;
   display: block;
   list-style-type: none;
 }
-/* line 32, ../sass/_navigation.scss */
+/* line 31, ../sass/_navigation.scss */
 #left #overview li:hover .removeimage {
   display: block;
 }
-/* line 37, ../sass/_navigation.scss */
+/* line 36, ../sass/_navigation.scss */
 #left #overview li img {
   display: block;
   width: 100%;
   opacity: 0.8;
 }
-/* line 43, ../sass/_navigation.scss */
+/* line 42, ../sass/_navigation.scss */
 #left #overview li img:hover {
   display: block;
   width: 100%;
   opacity: 1;
 }
 
-/* line 51, ../sass/_navigation.scss */
+/* line 50, ../sass/_navigation.scss */
 .add-image {
   padding: 0px 25px 10px 25px;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
   list-style-type: none;
 }
 
-/* line 58, ../sass/_navigation.scss */
+/* line 57, ../sass/_navigation.scss */
 #filepicker {
   display: none;
 }
 
-/* line 62, ../sass/_navigation.scss */
+/* line 61, ../sass/_navigation.scss */
 #leftspacer {
   height: 40px;
 }
 
-/* line 66, ../sass/_navigation.scss */
+/* line 65, ../sass/_navigation.scss */
 .upload-icon {
   color: #101314;
   font-family: "pictos";
@@ -1409,12 +1427,12 @@ h2 {
   -webkit-transition: color 0.2s;
   cursor: pointer;
 }
-/* line 79, ../sass/_navigation.scss */
+/* line 78, ../sass/_navigation.scss */
 .upload-icon:hover {
   color: #ffcc00;
 }
 
-/* line 84, ../sass/_navigation.scss */
+/* line 83, ../sass/_navigation.scss */
 .selected {
   color: #ffcc00;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe863), color-stop(100%, #f1b903));
@@ -1433,12 +1451,12 @@ h2 {
   max-width: 100%;
 }
 
-/* line 95, ../sass/_navigation.scss */
+/* line 94, ../sass/_navigation.scss */
 .selected img {
   opacity: 1 !important;
 }
 
-/* line 99, ../sass/_navigation.scss */
+/* line 98, ../sass/_navigation.scss */
 .removeimage {
   display: none;
   position: absolute;
@@ -1473,8 +1491,8 @@ h2 {
 /* line 10, ../sass/_tooltip.scss */
 .note {
   opacity: 1;
-  left: 2000px;
-  top: 200px;
+  left: 0px;
+  top: 2000px;
 }
 
 /* line 16, ../sass/_tooltip.scss */
@@ -1483,7 +1501,7 @@ h2 {
   height: 20px;
   border-radius: 100px;
   background: rgba(0, 0, 0, 0.9);
-  border: 2px solid #fff;
+  border: 2px solid white;
   font-weight: bold;
   color: #ffcc00;
   text-align: center;
@@ -1520,14 +1538,10 @@ h2 {
 
 /* line 56, ../sass/_tooltip.scss */
 .tooltip {
-  position: absolute;
+  position: relative;
   z-index: 101;
   text-align: left;
-  white-space: normal;
-  width: 300px;
   display: inline-block;
-  top: 10px;
-  left: -150px;
   opacity: 0;
   visibility: hidden;
   -webkit-transition-property: all;
@@ -1551,54 +1565,64 @@ h2 {
   color: #5c5c5c;
   font-family: "ff-meta-serif-web-pro", "Meta Serif", "Georgia", serif;
   font-size: 14px;
+  margin-top: -20px;
+  margin-left: -100%;
   background-color: #ffffff;
 }
-/* line 93, ../sass/_tooltip.scss */
+/* line 90, ../sass/_tooltip.scss */
 .tooltip:before {
   position: absolute;
   top: -7px;
-  left: 138px;
+  left: -11px;
+  margin-left: 50%;
+  z-index: -1;
   content: '';
   display: block;
   border-right: 10px solid transparent;
   border-left: 10px solid transparent;
-  border-bottom: 10px solid #fff;
+  border-bottom: 10px solid white;
 }
-/* line 106, ../sass/_tooltip.scss */
+/* line 107, ../sass/_tooltip.scss */
 .tooltip .scroll-container {
   max-height: 200px;
   overflow: scroll;
 }
 
-/* line 112, ../sass/_tooltip.scss */
+/* line 113, ../sass/_tooltip.scss */
 .tooltip:focus {
   outline: 0;
 }
 
 /* line 117, ../sass/_tooltip.scss */
+.tooltip-comment {
+  width: 300px;
+}
+
+/* line 122, ../sass/_tooltip.scss */
 .large {
   width: 50px;
   height: 50px;
 }
 
-/* line 121, ../sass/_tooltip.scss */
+/* line 126, ../sass/_tooltip.scss */
 .note-handle:hover {
   opacity: 1;
 }
 
-/* line 125, ../sass/_tooltip.scss */
+/* line 130, ../sass/_tooltip.scss */
 .ui-draggable {
   cursor: move;
 }
 
-/* line 127, ../sass/_tooltip.scss */
+/* line 132, ../sass/_tooltip.scss */
 .open {
   opacity: 1 !important;
   visibility: visible;
-  margin-top: 13px;
+  margin-left: -100%;
+  margin-top: 0;
 }
 
-/* line 133, ../sass/_tooltip.scss */
+/* line 139, ../sass/_tooltip.scss */
 .btn-split {
   width: 34px;
   height: 38px;
@@ -1614,7 +1638,7 @@ h2 {
   -moz-box-shadow: rgba(0, 0, 0, 0.1) -1px 0 0 inset;
   box-shadow: rgba(0, 0, 0, 0.1) -1px 0 0 inset;
 }
-/* line 144, ../sass/_tooltip.scss */
+/* line 150, ../sass/_tooltip.scss */
 .btn-split:first-of-type {
   -webkit-border-radius: 4px 0px 0px 4px;
   -moz-border-radius: 4px 0px 0px 4px;
@@ -1622,7 +1646,7 @@ h2 {
   -o-border-radius: 4px 0px 0px 4px;
   border-radius: 4px 0px 0px 4px;
 }
-/* line 148, ../sass/_tooltip.scss */
+/* line 154, ../sass/_tooltip.scss */
 .btn-split:last-of-type {
   -webkit-border-radius: 0px 4px 4px 0px;
   -moz-border-radius: 0px 4px 4px 0px;
@@ -1652,7 +1676,7 @@ strong {
 /* line 37, ../sass/style.scss */
 .wrap {
   position: absolute;
-  top: 50px;
+  top: 60px;
   bottom: 0;
   width: 100%;
   overflow: hidden;

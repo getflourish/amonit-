@@ -9,8 +9,8 @@
 }
 .note {
 	opacity: 1;
-	left: 2000px;
-	top: 200px;
+	left: 0px;
+	top: 2000px;
 }
 
 .handle {
@@ -54,17 +54,11 @@
 }
 
 .tooltip {
-    position: absolute;
+    position: relative;
     z-index: 101;
     text-align: left;
-    white-space: normal;
-
-	width: 300px;
 
     display: inline-block;
-
-    top: 10px;
-    left: -150px;
 
     opacity: 0;
     visibility: hidden;
@@ -84,6 +78,9 @@
 	font-family: $SERIF;
 	font-size: 14px;
 
+    margin-top: -20px;
+    margin-left: -100%;
+
 	background-color: #ffffff;
 
 	&:hover {
@@ -93,7 +90,11 @@
 	&:before {
 	 	position: absolute;
     	top: -7px;
-    	left: 138px;
+    	left: -11px;
+
+        margin-left: 50%;
+
+        z-index: -1;
 
     	content: '';
     	display: block;
@@ -113,6 +114,10 @@
  	outline: 0;
  }
 
+ .tooltip-comment {
+    width: 300px;
+ }
+
 
 .large {
 	width: 50px;
@@ -127,7 +132,8 @@
 .open {
 	opacity: 1 !important;
 	visibility: visible;
-	margin-top: 13px;
+    margin-left: -100%;
+    margin-top: 0;
 }
 
 .btn-split {

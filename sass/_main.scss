@@ -2,7 +2,7 @@
 	height: 100%;
 
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: hidden;
 
   	text-align:center;
 
@@ -21,16 +21,18 @@
 
 #imgwrapper {
 
-	cursor: crosshair;
 
 	display: inline-block;
 	position: relative;
 	max-width: 100%;
 	white-space: nowrap;
+    margin: 0px 20px;
 
 	> img {
 		display: inline-block;
 		max-height: 100%;
+
+        cursor: crosshair;
 
 		background: #fff;
 
