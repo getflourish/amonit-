@@ -238,6 +238,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      */
 
     $scope.addAnnotation = function(event) {
+        console.log($scope.project.images);
 
         if ($scope.selectedAnnotation == -1) {
             // convert coordinates to local space
