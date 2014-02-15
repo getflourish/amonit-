@@ -143,8 +143,8 @@
 
 			-->
 
-				<h1 click-to-edit="project.images[currentIndex].filename">
-					<a href="" class="header-link">{{project.images[currentIndex].filename}}</a>
+				<h1 click-to-edit="currentImage.filename">
+					<a href="" class="header-link">{{currentImage.filename}}</a>
 				</h1>
 				<!--
 				<h2 ng-show="project.images[currentIndex+1].filename">
@@ -184,7 +184,7 @@
 			<ul>
 				<li class="add-image upload-icon" filepicker order="before">c</li>
 				<ul id="overview" ui-sortable ng-model="project.images" ng-class="{slideOut: !overviewShowing}">
-					<li ng-repeat="image in project.images" ng-click="setImage($index)" ng-class="{selected:$index==currentIndex}"><img ng-src="{{image.path}}" /><span ng-click="removeImage($index)" class="icon removeimage">y</span></li>
+					<li ng-repeat="(id, image) in project.images" ng-click="setImage(image)" ng-class="{selected:image.path==currentImage.path}"><img ng-src="{{image.path}}" /><span ng-click="removeImage(id)" class="icon removeimage">y</span></li>
 				</ul>
 				<li ng-hide="project.images.length == 0" class="add-image upload-icon" filepicker order="after">c</li>
 			</ul>
@@ -271,7 +271,7 @@
 			</div>
 
 			<div id="imgwrapper">
-				<img annotatable ng-src="{{project.images[currentIndex].path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
+				<img annotatable ng-src="{{currentImage.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
 				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive($index)" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}{{id}}</div>

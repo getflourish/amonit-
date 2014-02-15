@@ -45,7 +45,11 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         "path": ""
     };
 
-    $scope.foo = [{"foo":"bar"}, {"foo":"mooh"}];
+    $scope.foo = [{
+        "foo": "bar"
+    }, {
+        "foo": "mooh"
+    }];
 
     // flag used to indicate whether a tooltip is being edited
     $scope.editing = false;
@@ -198,7 +202,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * Comments
      */
 
-     $rootScope.$on('comment:added', function(event, annotationId, reply) {
+    $rootScope.$on('comment:added', function(event, annotationId, reply) {
         $scope.saveReply(annotationId, reply);
     });
 
@@ -238,7 +242,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      */
 
     $scope.addAnnotation = function(event) {
-        console.log($scope.project.images);
 
         if ($scope.selectedAnnotation == -1) {
             // convert coordinates to local space
@@ -254,21 +257,20 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
             // save annotation
 
-            if (!$scope.project.images[$scope.currentIndex].annotations) {
-                $scope.project.images[$scope.currentIndex].annotations = [];
+            if (!$scope.currentImage.annotations) {
+                $scope.currentImage.annotations = [];
             }
 
             var newThread = {
                 "x": x,
                 "y": y,
                 "author": $scope.username,
-                "id": $scope.project.images[$scope.currentIndex].annotations.length + 1,
                 "comment": "",
                 "replies": [],
                 "timestamp": new Date().getTime()
             };
 
-            var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/");
+            var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentImage + "/annotations/");
             var annotation = $firebase(annotationRef);
             var foo = annotation.$add(newThread);
             console.log(foo.name())
@@ -289,7 +291,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         }
     }
 
-    $scope.saveAnnotation = function (id, a) {
+    $scope.saveAnnotation = function(id, a) {
 
         // use firebase $add to add the new comment thread to images.annotations
         // todo: rename annotations, comments, …
@@ -306,7 +308,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
     }
 
-    $scope.saveReply = function (annotationId, r) {
+    $scope.saveReply = function(annotationId, r) {
         var annotationsRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations");
         var annotations = $firebase(annotationsRef);
 
@@ -332,20 +334,31 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         var newImage = {
             "filename": file.name,
             "path": $scope.path + "/" + file.name,
-            "id": $scope.project.images.length,
             "annotations": []
         };
 
-        // add to images array
-        if (index == 0) {
-            $scope.project.images.unshift(newImage);
-        } else {
-            $scope.project.images.push(newImage);
-        }
+        // // add to images array
+        // if (index == 0) {
+        //     $scope.project.images.unshift(newImage);
+        // } else {
+        //     $scope.project.images.push(newImage);
+        // }
 
         // set the new image as current
-        $scope.setImage(index);
-        $scope.save();
+
+        var imageRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/');
+        var images = $firebase(imageRef);
+
+        var newRef = images.$add(newImage);
+
+        $scope.setImage(newImage);
+
+        /**
+         * FILENAME GETS OVERRIDEN, PATH GETS REMOVED :/
+         * check click to edit directive
+         */
+
+        //$scope.save();
 
         // use timeout before scrolling to the recently added image
 
@@ -624,10 +637,11 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * and sets the current image to the next one in the array.
      */
 
-    $scope.removeImage = function(index) {
-        $scope.project.images.splice(index, 1);
-        if (index == $scope.project.images.length) index = index - 1;
-        $scope.setImage(index);
+    $scope.removeImage = function(id) {
+
+        var imageRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + id);
+        var image = $firebase(imageRef);
+        image.$remove();
     }
 
     /**
@@ -759,9 +773,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * Jumps to the given image with the given id
      */
 
-    $scope.setImage = function(index) {
-        $scope.currentIndex = index;
-        $scope.save();
+    $scope.setImage = function(image) {
+        $scope.currentImage.$set(image);
+        // $scope.save();
         $scope.resize();
     };
 
@@ -783,14 +797,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         // $scope.imagesFirebase.$bind($scope, "images");
 
         // manage index
-        var con = new Firebase('https://feedbacktool.firebaseio.com/currentIndex');
-        $scope.indexFirebase = $firebase(con);
-        $scope.indexFirebase.$bind($scope, "currentIndex");
-
-        // set image after change
-        $scope.indexFirebase.$on("change", function() {
-            $scope.setImage($scope.indexFirebase.$value);
-        });
+        $scope.currentImage = $firebase(new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/currentImage'));
 
         // get connected id
         var connectedRef = new Firebase('https://feedbacktool.firebaseio.com/.info/connected');
