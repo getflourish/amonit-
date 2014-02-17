@@ -211,6 +211,15 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         $scope.saveReply(annotationId, reply);
     });
 
+    $rootScope.$on('comment:select', function(event, id) {
+        $scope.setActive(id);
+    });
+
+
+    $rootScope.$on('comment:remove', function(event, annotationId) {
+        $scope.removeAnnotation(annotationId);
+    });
+
     /**
      * Tooltips
      */
@@ -248,10 +257,10 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      */
 
     $scope.addAnnotation = function(event) {
+        console.log("add")
 
         if ($scope.selectedAnnotation == -1) {
             // convert coordinates to local space
-
 
             var globalX = (event.offsetX || event.clientX - $(event.target).offset().left);
             var globalY = (event.offsetY || event.clientY - $(event.target).offset().top);
@@ -259,7 +268,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
             var x = (globalX) / $scope.imageElement.prop("width");
             var y = (globalY) / $scope.imageElement.prop("height");
-            console.log(globalX);
 
             // save annotation
 
@@ -277,15 +285,21 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
             };
 
             $scope.annotations = $scope.selectedImage.$child("annotations");
-            var newAnnotation = $firebase($scope.annotations.$add(data));
+            console.log("before $add")
+            var newAnnotation = $scope.annotations.$add(data);
 
-            // $scope.save();
+            newAnnotation.then(function(e) {
+                console.log(e)
+                $scope.setActive(e.name());
+            });
 
             // select annotation to open it
+
 
             $scope.setActive(newAnnotation);
 
         } else {
+            $scope.setActive(-1);
             // close currently open annotation
             // if ($scope.selectedAnnotation.comment === "") {
             //     $scope.removeAnnotation($scope.project.images[$scope.currentIndex].annotations.length - 1)
@@ -295,31 +309,28 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         }
     }
 
-    $scope.saveAnnotation = function(id, a) {
+    $scope.saveAnnotation = function(key, a) {
 
         // use firebase $add to add the new comment thread to images.annotations
         // todo: rename annotations, comments, …
 
-        var annotationsRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations");
-        var annotations = $firebase(annotationsRef);
-
-        var hash = annotations.$getIndex()[id];
-
-        var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/" + hash);
-        var annotation = $firebase(annotationRef);
-
-        annotation.$set(a);
+        // get firebase reference for annotation
+        console.log(key);
+        $scope.selectedAnnotation = $scope.firebase.$child($scope.id + "/images/" + $scope.selectedImageKey + "/annotations/" + key);
+        var path = $scope.id + "/images/" + $scope.selectedImageKey + "/annotations/" + key;
+        console.log(path)
+        $scope.selectedAnnotation.$set(a);
 
     }
 
-    $scope.saveReply = function(annotationId, r) {
+    $scope.saveReply = function(key, r) {
 
         // add reply to selected annotation
         // get to firebase/project/images/annotation/replies/ and save it!
-        var childNode = $scope.id + "/images/" + $scope.selectedImageKey + "/annotations/" + annotationId + "/replies";
-        var repliesRef = $scope.firebase.$child(childNode);
-        
-        repliesRef.$add(r);
+        $scope.replies = $scope.firebase.$child($scope.id + "/images/" + $scope.selectedImageKey + "/annotations/" + key + "/replies");
+        console.log("reply")
+        console.log(r)
+        $scope.replies.$add(r);
 
 
     }
@@ -601,16 +612,13 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * Removes the annotation at the given index from the array of annotations
      */
 
-    $scope.removeAnnotation = function(index) {
+    $scope.removeAnnotation = function(key) {
 
         // remove annotation from firebase
 
-        var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.currentIndex + "/annotations/index");
+        var annotationRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + $scope.selectedImageKey + "/annotations/" + key);
         var annotation = $firebase(annotationRef);
         annotation.$remove();
-
-        $scope.setActive(-1);
-        $scope.save();
     }
 
     /**
@@ -718,9 +726,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * Expects an index that will be used to store the selected annotation
      */
 
-    $scope.setActive = function(annotation) {
+    $scope.setActive = function(key) {
         if (!$scope.editing) {
-            $scope.selectedAnnotation = annotation;
+            $scope.selectedAnnotation = key;
             // todo: is this necessary? Should be enought to remove it from the selected one?
             $timeout(function() {
                 $scope.disableAnnotationTransition();
@@ -750,6 +758,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      */
 
     $scope.selectImage = function(key) {
+        console.log("selecting image");
         $scope.selectedImage = $firebase(new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/' + key));
         $scope.selectedImageKey = key;
 
@@ -776,10 +785,19 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         // $scope.imagesFirebase.$bind($scope, "images");
 
         // manage index
-        // $scope.selectedImage = $firebase(new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/selectedImage'));
+        $scope.selectedImage = $firebase(new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/selectedImage'));
 
         // get connected id
         var connectedRef = new Firebase('https://feedbacktool.firebaseio.com/.info/connected');
+
+        // get first image
+        // todo: how to do it once?
+        $scope.images = $scope.project.$child("images");
+        $scope.images.$on("child_added", function(event) {
+            $scope.selectImage(event.snapshot.name);
+            $scope.images.$off();
+        });
+
     }
 
     /**

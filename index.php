@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/keymaster.min.js"></script>
-	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
 
 	<script type="text/javascript" src="js/modules/center.js"></script>
     <script type="text/javascript" src="js/modules/comments.js"></script>
@@ -25,8 +25,8 @@
 	<script type="text/javascript" src="js/modules/ui-sortable.js"></script>
 	<script type="text/javascript" src="js/modules/auth.js"></script>
 
-	<script type="text/javascript" src="js/firebase.js"></script>
-	<script type="text/javascript" src="js/angularfire.min.js"></script>
+	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
+	<script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
 	<script type="text/javascript" src="js/firebase-simple-login.js"></script>
 
 	<script type="text/javascript" src="js/goover.js"></script>
@@ -232,7 +232,7 @@
                     <!-- the actual comments -->
 
                     <div class="feedback-content">
-                        <comments comments-data="annotations" username="username"></comments>
+                        <comments comments-data="selectedImage.annotations" username="username"></comments>
                     </div>
                 </div>
             </div>
@@ -272,10 +272,10 @@
 
 			<div id="imgwrapper">
 				<img annotatable ng-src="{{selectedImage.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
-				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in selectedImage.annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive(annotation)" a="annotation" image="imageElement">
+				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in selectedImage.annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive(id)" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}</div>
-					<div tooltip class="tooltip" ng-class="{open: annotation==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="id" types="commentTypes"></div>
+					<div tooltip class="tooltip" ng-class="{open: id==selectedAnnotation|| showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="id" types="commentTypes"></div>
 				</div>
 			</div>
 		</div>

@@ -38,6 +38,10 @@
 		opacity: 1 !important;
 	}
 
+    &:hover .remove-comment-link {
+        opacity: 1;
+    }
+
 }
 .comment-number {
 
@@ -90,6 +94,8 @@
 		display: block;
 		font-family: $SERIF;
 		word-wrap: break-word;
+        font-size: $font_size_normal;
+        line-height: 1.3em;
 	}
 }
 
@@ -152,6 +158,15 @@
 	right: 4px;
 	border-radius: 50%;
 	background: #fff;
+}
+
+.remove-comment-link {
+    margin-right: 5px;
+    color: $light !important;
+    opacity: 0;
+    @include transition-property(all);
+    @include transition-duration(0.2s);
+    @include transition-timing-function(ease-in-out);
 }
 
 .tag {

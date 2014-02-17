@@ -29,14 +29,14 @@ directive('comments', [
                 thread: '=threadData',
                 scroll: '=',
                 id: '=id',
-                username: '='
+                username: '=',
+                index: '=index'
             },
 
-            link: function(scope, iElement, iAttrs) {
+            link: function(scope, element, iAttrs) {
                 scope.focus = function() {
                     setTimeout(function() {
-                        console.log(iElement)
-                        iElement.find('input')[0].focus();
+                        element.find('input')[0].focus();
 
                         // scroll to the last comment
 
@@ -50,32 +50,34 @@ directive('comments', [
             },
             controller: function($rootScope, $scope, $timeout) {
                 $scope.view = {
-                    reply: ""
-                };
+                    reply: "",
+                    replyObject: {}
+                }
+
+                $scope.select = function (id) {
+                    $rootScope.$emit("comment:select", id);
+                }
+
+                $scope.removeReply = function (id) {
+                    $rootScope.$emit("comment:remove", $scope.id);
+                }
 
                 $scope.reply = function(comment) {
                     console.log($scope.thread);
                     if ($scope.view.reply != "") {
-                        var newreply = {
+                        $scope.view.replyObject = {
                             "text": $scope.view.reply,
                             "user": $scope.username,
                             "timestamp": new Date().getTime()
                         };
-
-                        if (comment.replies) {
-                            comment.replies.push(newreply);
-                        } else {
-                            comment.replies = [];
-                            comment.replies.push(newreply);
-                        }
-                        $scope.view.reply = "";
                         $scope.save();
+                        $scope.view.reply = "";
                         $scope.focus();
                     }
                 },
 
                 $scope.save = function () {
-                    $rootScope.$emit("comment:added", $scope.id, $scope.view.reply);
+                    $rootScope.$emit("comment:added", $scope.id, $scope.view.replyObject);
                 }
             }
         };

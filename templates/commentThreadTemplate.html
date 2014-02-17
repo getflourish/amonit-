@@ -1,21 +1,35 @@
-<span class="comment-number">{{id}}</span>
-<div class="comment comment-after-number">
-    <div class="comment-inner">
-        <div class="brief-author">
-            <img src="images/me.png">
-            <strong class="brief-name light">{{thread.author}}</strong><span class="brief-date light" time-since="thread.timestamp"></span>
-        </div>
-        <div>
-            <p>
-                {{thread.comment}}
-            </p>
-            <span class="remove" ng-click="removeAnnotation($index)">×</span>
+<span class="comment-number" ng-hide="scroll">{{index}}</span>
+<div  ng-click="select(id)">
+    <div class="comment comment-after-number">
+        <a href="" class="right remove-comment-link" ng-click="removeReply(id)">Remove</a>
+        <div class="comment-inner">
+            <div class="brief-author">
+                <img src="images/me.png">
+                <strong class="brief-name light">{{thread.author}}</strong><span class="brief-date light" time-since="thread.timestamp"></span>
+            </div>
+            <div>
+                <p>
+                    {{thread.comment}}
+                </p>
+            </div>
         </div>
     </div>
-</div>
-<!-- replies -->
-<div class="scroll-container" ng-show="scroll">
-    <div class="comment" ng-repeat="reply in thread.replies">
+    <!-- replies -->
+    <div class="scroll-container" ng-show="scroll">
+        <div class="comment" ng-repeat="reply in thread.replies">
+            <div class="comment-inner">
+                <div class="brief-author">
+                    <img src="images/me.png">
+                    <strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
+                </div>
+                <p>
+                    {{reply.text}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div ng-hide="scroll" class="comment" ng-repeat="reply in thread.replies">
         <div class="comment-inner">
             <div class="brief-author">
                 <img src="images/me.png">
@@ -26,24 +40,12 @@
             </p>
         </div>
     </div>
-</div>
 
-<div ng-hide="scroll" class="comment" ng-repeat="reply in thread.replies">
-    <div class="comment-inner">
-        <div class="brief-author">
-            <img src="images/me.png">
-            <strong class="brief-name light">{{reply.user}}</strong><span class="brief-date light" time-since="reply.timestamp"></span>
-        </div>
-        <p>
-            {{reply.text}}
-        </p>
-    </div>
-</div>
-
-<form class="comment-form">
-    <fieldset class="with-icon">
-        <span class="icon input-icon">&#xf158;</span>
-        <input type="text" placeholder="Reply…" ng-model="view.reply" value="" class="form-control-inline form-control-naked">
-    </fieldset>
-    <button class="btn" type="submit" ng-click="reply(thread)">Reply</button>
-</form>
+    <form class="comment-form">
+        <fieldset class="with-icon">
+            <span class="icon input-icon">&#xf158;</span>
+            <input type="text" placeholder="Reply…" ng-model="view.reply" value="" class="form-control-inline form-control-naked">
+        </fieldset>
+        <button class="btn invisible" type="submit" ng-click="reply(thread)">Reply</button>
+    </form>
+<div>

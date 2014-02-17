@@ -55,7 +55,7 @@
 
 .tooltip {
     position: relative;
-    z-index: 101;
+    z-index: 3333;
     text-align: left;
 
     display: inline-block;
@@ -75,8 +75,6 @@
 	background-color: #fff;
 
 	color: #5c5c5c;
-	font-family: $SERIF;
-	font-size: 14px;
 
     margin-top: -20px;
     margin-left: -100%;
@@ -106,7 +104,7 @@
 
     .scroll-container {
     	max-height: 200px;
-    	overflow: scroll;
+    	overflow-y: scroll;
     }
  }
 
@@ -116,6 +114,8 @@
 
  .tooltip-comment {
     width: 300px;
+    overflow-y: scroll;
+    word-wrap: break-word;
  }
 
 

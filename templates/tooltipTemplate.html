@@ -5,9 +5,23 @@
         </button>
     </div>
     <div ng-show="view.editorEnabled">
-        <textarea ng-keydown="onKeypress($event)" ng-model="annotation.comment" ng-blur="onBlur(id)"></textarea>
-        <button class="green" ng-click="save()">Save</button>
-        <button ng-click="revert()">Cancel</button>
+        <div class="comment-inner">
+            <div class="brief-author">
+                <img src="images/me.png">
+                <strong class="brief-name light">Leave feedback</strong>
+            </div>
+            <div>
+                <form>
+                    <fieldset>
+                        <div>
+                            <textarea ng-keydown="onKeypress($event)" ng-model="annotation.comment" ng-blur="onBlur(id)" msd-elastic></textarea>
+                        </div>
+                        <button class="btn btn-primary" ng-click="save()">Save</button>
+                        <button type="submit" ng-click="revert()">Cancel</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div ng-show="annotation.comment && !view.editorEnabled" class="tooltip-comment">
