@@ -79,11 +79,11 @@
 
 	<!-- start read brief -->
 
-	<div id="overlay" ng-hide="briefRead">
+	<div id="overlay" ng-hide="true">
 		<div id="brief">
 			<div class="brief-content">
 				<div class="brief-author">
-					<img src="images/me.png">
+					<img src="images/me.png">2
 					<strong class="brief-name light">{{project.owner}}</strong> (Online)<span class="brief-date light">Yesterday</span>
 				</div>
 
@@ -143,8 +143,8 @@
 
 			-->
 
-				<h1 click-to-edit="currentImage.filename">
-					<a href="" class="header-link">{{currentImage.filename}}</a>
+				<h1 click-to-edit="selectedImage.filename">
+					<a href="" class="header-link">{{selectedImage.filename}}</a>
 				</h1>
 				<!--
 				<h2 ng-show="project.images[currentIndex+1].filename">
@@ -184,7 +184,7 @@
 			<ul>
 				<li class="add-image upload-icon" filepicker order="before">c</li>
 				<ul id="overview" ui-sortable ng-model="project.images" ng-class="{slideOut: !overviewShowing}">
-					<li ng-repeat="(id, image) in project.images" ng-click="setImage(image)" ng-class="{selected:image.path==currentImage.path}"><img ng-src="{{image.path}}" /><span ng-click="removeImage(id)" class="icon removeimage">y</span></li>
+					<li ng-repeat="(id, image) in project.images" ng-click="selectImage(id)" ng-class="{selected:image.path==selectedImage.path}"><img ng-src="{{image.path}}" /><span ng-click="removeImage(id)" class="icon removeimage">y</span></li>
 				</ul>
 				<li ng-hide="project.images.length == 0" class="add-image upload-icon" filepicker order="after">c</li>
 			</ul>
@@ -193,7 +193,7 @@
 		<!-- // end of sidebar -->
 		<!-- Comments -->
 
-		<aside class="feedback" ng-hide="project.images.length == 0">
+		<aside class="feedback">
 
 
 			<!-- title, search -->
@@ -232,7 +232,7 @@
                     <!-- the actual comments -->
 
                     <div class="feedback-content">
-                        <comments comments-data="project.images[currentIndex].annotations" username="username"></comments>
+                        <comments comments-data="annotations" username="username"></comments>
                     </div>
                 </div>
             </div>
@@ -271,11 +271,11 @@
 			</div>
 
 			<div id="imgwrapper">
-				<img annotatable ng-src="{{currentImage.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
-				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in project.images[currentIndex].annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive($index)" a="annotation" image="imageElement">
+				<img annotatable ng-src="{{selectedImage.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
+				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in selectedImage.annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive(annotation)" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
-					<div class="handle">{{$index + 1}}{{id}}</div>
-					<div class="tooltip" ng-class="{open: $index==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="$index" types="commentTypes" tooltip></div>
+					<div class="handle">{{$index + 1}}</div>
+					<div tooltip class="tooltip" ng-class="{open: annotation==selectedAnnotation || showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="id" types="commentTypes"></div>
 				</div>
 			</div>
 		</div>
