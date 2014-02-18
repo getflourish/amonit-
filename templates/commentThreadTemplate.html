@@ -1,11 +1,11 @@
 <span class="comment-number" ng-hide="scroll">{{index}}</span>
-<div  ng-click="select(id)">
+<div ng-click="select(id)">
     <div class="comment comment-after-number">
         <a href="" class="right remove-comment-link" ng-click="removeReply(id)">Remove</a>
         <div class="comment-inner">
             <div class="brief-author">
                 <img src="images/me.png">
-                <strong class="brief-name light">{{thread.author}}</strong><span class="brief-date light" time-since="thread.timestamp"></span>
+                <strong ng-show="thread.author" class="brief-name light">{{thread.author}}</strong><strong ng-hide="thread.author" class="brief-name light">You</strong><span class="brief-date light" time-since="thread.timestamp"></span>
             </div>
             <div>
                 <p>

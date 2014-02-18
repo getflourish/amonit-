@@ -332,7 +332,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         console.log(r)
         $scope.replies.$add(r);
 
-
+vere
     }
 
     /**
@@ -359,12 +359,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
 
         // set the new image as current
 
-        var imageRef = new Firebase('https://feedbacktool.firebaseio.com/' + $scope.id + '/images/');
-        var images = $firebase(imageRef);
+        $scope.images.$add(newImage)
 
-        var newRef = images.$add(newImage);
-
-        $scope.setImage(newImage);
 
         /**
          * FILENAME GETS OVERRIDEN, PATH GETS REMOVED :/
@@ -795,7 +791,6 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         $scope.images = $scope.project.$child("images");
         $scope.images.$on("child_added", function(event) {
             $scope.selectImage(event.snapshot.name);
-            $scope.images.$off();
         });
 
     }
