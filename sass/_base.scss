@@ -123,6 +123,7 @@
 .edit {
 	font-size: 11px;
 	margin-left: 5px;
+    cursor: pointer;
 }
 
 .first {
@@ -211,6 +212,7 @@
 	&:hover {
 		border: 1px solid #664f00;
 		color: #242424;
+        text-decoration: none;
 
 		@include background-image(linear-gradient(#ffda0a, #ffcd29));
 		@include box-shadow(rgba(245, 200, 0, 0.50) 0px 0px 10px, rgba(0, 0, 0, 0.4) 0px 2px 3px);

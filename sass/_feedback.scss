@@ -96,6 +96,7 @@
 		word-wrap: break-word;
         font-size: $font_size_normal;
         line-height: 1.3em;
+        margin-top: 15px;
 	}
 }
 
@@ -161,9 +162,10 @@
 }
 
 .remove-comment-link {
-    margin-right: 5px;
+    margin-right: 10px;
     color: $light !important;
     opacity: 0;
+    font-size: $font_size_small;
     @include transition-property(all);
     @include transition-duration(0.2s);
     @include transition-timing-function(ease-in-out);

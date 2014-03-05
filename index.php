@@ -272,7 +272,7 @@
 
 			<div id="imgwrapper">
 				<img annotatable ng-src="{{selectedImage.path}}" class="current-screen" ng-keypress="setActive(-1)" ng-click="addAnnotation($event)"  />
-				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in selectedImage.annotations" ng-if="imageLoaded" class="circle note" annotationid="{{$index}}" ng-click="setActive(id)" a="annotation" image="imageElement">
+				<div draggable handle=".handle" annotation ng-repeat="(id, annotation) in selectedImage.annotations" ng-if="imageLoaded" class="circle note" annotationid="id" ng-click="setActive(id)" a="annotation" image="imageElement">
 					<!--<div ng-class="{pulsegreen:annotation.type=='idea', pulseblue:annotation.type=='onit', pulsepurple:annotation.type=='question'}" class="handle"></div>-->
 					<div class="handle">{{$index + 1}}</div>
 					<div tooltip class="tooltip" ng-class="{open: id==selectedAnnotation|| showingAll==true}" ng-keydown="blurTooltip($event, $index)" a="annotation" username="username" id="id" types="commentTypes"></div>

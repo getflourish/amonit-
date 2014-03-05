@@ -121,6 +121,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         $scope.isFullscreen = !$scope.isFullscreen;
     }
 
+    key('r', function() {
+        $scope.resize();
+        $scope.$apply();
+        return false;
+    });
+
     key('up', function() {
         $scope.prev();
         $scope.$apply();
@@ -162,8 +168,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * Save
      */
 
-    $rootScope.$on('dragstop', function() {
-        $scope.save();
+    $rootScope.$on('dragstop', function(event, id) {
+        $scope.updateAnnotation(id)
     });
 
     /**
@@ -320,6 +326,7 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         var path = $scope.id + "/images/" + $scope.selectedImageKey + "/annotations/" + key;
         console.log(path)
         $scope.selectedAnnotation.$set(a);
+        console.log("called save")
 
     }
 
@@ -331,8 +338,12 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         console.log("reply")
         console.log(r)
         $scope.replies.$add(r);
+    }
 
-vere
+    $scope.updateAnnotation = function(key) {
+
+        $scope.selectedAnnotation.$save();
+
     }
 
     /**
@@ -759,8 +770,6 @@ vere
         $scope.selectedImageKey = key;
 
         $scope.comments = $scope.selectedImage.$child("annotations");
-
-        $scope.resize();
     };
 
     /**
@@ -791,8 +800,19 @@ vere
         $scope.images = $scope.project.$child("images");
         $scope.images.$on("child_added", function(event) {
             $scope.selectImage(event.snapshot.name);
+            $scope.updateImageIndex();
         });
 
+
+    }
+
+    $scope.updateImageIndex = function () {
+        // todo: get firebase image index, loop through and convert to array, that holds all image keys so it can be accessed using prev / next / index++ / index--
+        var keys = $scope.images.$getIndex();
+        $scope.imageArray = [];
+        keys.forEach(function(key, i) {
+            $scope.imageArray.push($scope.images[key])
+        });
     }
 
     /**
@@ -974,7 +994,7 @@ feedbackApp.directive("clickToEdit", function() {
     var editorTemplate = '<div class="click-to-edit">' +
         '<div ng-hide="view.editorEnabled">' +
         '{{value}} ' +
-        '<a href="#" class="edit icon" ng-click="enableEditor()">&#xf13a;</a>' +
+        '<span class="edit icon" ng-click="enableEditor()">&#xf13a;</span>' +
         '</div>' +
         '<div ng-show="view.editorEnabled">' +
         '<input ng-keydown="onKeypress($event)" ng-model="view.editableValue">' +

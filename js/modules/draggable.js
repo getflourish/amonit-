@@ -4,7 +4,8 @@ directive('draggable', ['$document', '$rootScope' , function($document, $rootSco
         restrict: 'A',
         scope: {
             annotation: "=a",
-            imageElement: "=image"
+            imageElement: "=image",
+            id: "=annotationid"
         },
         link: function(scope, elm, attrs) {
             var startX, startY, initialMouseX, initialMouseY;
@@ -44,7 +45,7 @@ directive('draggable', ['$document', '$rootScope' , function($document, $rootSco
             function mouseup($event) {
                 $document.unbind('mousemove', mousemove);
                 $document.unbind('mouseup', mouseup);
-                $rootScope.$emit("dragstop");
+                $rootScope.$emit("dragstop", scope.id);
             }
         }
     };
