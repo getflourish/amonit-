@@ -39,13 +39,15 @@ directive('draggable', ['$document', '$rootScope' , function($document, $rootSco
                 scope.annotation.x = x / scope.imageElement.prop("width");
                 scope.annotation.y = y / scope.imageElement.prop("height");
 
+                console.log(scope.annotation.x)
+
                 return false;
             }
 
             function mouseup($event) {
                 $document.unbind('mousemove', mousemove);
                 $document.unbind('mouseup', mouseup);
-                $rootScope.$emit("dragstop", scope.id);
+                $rootScope.$emit("dragstop", scope.id, scope.annotation);
             }
         }
     };

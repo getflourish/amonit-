@@ -168,8 +168,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
      * Save
      */
 
-    $rootScope.$on('dragstop', function(event, id) {
-        $scope.updateAnnotation(id)
+    $rootScope.$on('dragstop', function(event, id, annotation) {
+        $scope.updateAnnotation(id, annotation)
     });
 
     /**
@@ -340,10 +340,9 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
         $scope.replies.$add(r);
     }
 
-    $scope.updateAnnotation = function(key) {
-
-        $scope.selectedAnnotation.$save();
-
+    $scope.updateAnnotation = function(key, annotation) {
+        var selectedAnnotation = $scope.firebase.$child($scope.id + "/images/" + $scope.selectedImageKey + "/annotations/" + key);
+        selectedAnnotation.$update({"x":annotation.x, "y": annotation.y});
     }
 
     /**
@@ -736,6 +735,8 @@ feedbackApp.controller("FeedbackController", function($firebase, $http, $scope, 
     $scope.setActive = function(key) {
         if (!$scope.editing) {
             $scope.selectedAnnotation = key;
+            // this is 3242329832342
+            // so I can’t do selectedAnnotation.$update() or so…
             // todo: is this necessary? Should be enought to remove it from the selected one?
             $timeout(function() {
                 $scope.disableAnnotationTransition();

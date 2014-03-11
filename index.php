@@ -25,8 +25,8 @@
 	<script type="text/javascript" src="js/modules/ui-sortable.js"></script>
 	<script type="text/javascript" src="js/modules/auth.js"></script>
 
-	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
-	<script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.6.0/angularfire.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/1.0.5/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.0/angularfire.js"></script>
 	<script type="text/javascript" src="js/firebase-simple-login.js"></script>
 
 	<script type="text/javascript" src="js/goover.js"></script>
